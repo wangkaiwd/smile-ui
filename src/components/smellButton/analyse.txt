@@ -1,0 +1,8 @@
+常用功能
+
+* type: Primary Secondary Success Warning Danger Info
+* active
+* icon -> iconPosition
+* loading
+* disabled
+* click
