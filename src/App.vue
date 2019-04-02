@@ -1,6 +1,8 @@
 <template>
   <div class="app">
     hello smell-ui
+    <smell-icon></smell-icon>
+    <smell-button></smell-button>
   </div>
 </template>
 
