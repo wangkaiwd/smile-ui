@@ -3,7 +3,16 @@
  * 命名规范：xs < sm < md < lg < xl < xxl
  */
 
+// 颜色
 $white: #fff;
+$primary: #0069d9;
+$secondary: #6c757d;
+$success: #28a745;
+$warning: #ffc107;
+$danger: #c82333;
+$box-shadow: 0 0 0 2px rgba(130, 138, 145, .5);
+
+// 字体
 $font-xs: 10px;
 $font-sm: 12px;
 $font-md: 14px;
