@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     hello smell-ui
-    <smell-icon></smell-icon>
+    <smell-icon icon="upload"></smell-icon>
     <smell-button></smell-button>
   </div>
 </template>
@@ -17,7 +17,6 @@
   };
 </script>
 <style lang="scss" scoped>
-  .content {
-    height: 100vh;
+  .app {
   }
 </style>
