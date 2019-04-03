@@ -1,6 +1,6 @@
 <template>
-  <div class="smile-button" @click="$emit('click')">
-    <button :class={[type]:type,disabled} :disabled="disabled">
+  <div class="smile-button" @click="onClick">
+    <button :class="buttonClasses" :disabled="disabled||loading">
       <div class="smile-button-wrapper" :class="`icon-${iconPosition}`">
         <smile-icon class="smile-button-loading" icon="loading" v-if="loading"></smile-icon>
         <smile-icon class="smile-button-icon" :icon="icon" v-if="icon && !loading"></smile-icon>
@@ -33,6 +33,21 @@
       },
       loading: { type: Boolean, default: false },
       disabled: { type: Boolean, default: false }
+    },
+    computed: {
+      buttonClasses () {
+        const { type, disabled, loading } = this;
+        return {
+          [type]: type,
+          disabled: disabled || loading
+        };
+      }
+    },
+    methods: {
+      onClick () {
+        if (this.disabled || this.loading) return;
+        this.$emit('click');
+      }
     }
   };
 </script>
