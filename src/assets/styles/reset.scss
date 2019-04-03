@@ -41,11 +41,13 @@ ul {
   list-style: none;
 }
 
+// user agent stylesheet 默认的字体大小会有问题
 button,
 input,
 select,
 textarea {
   margin: 0;
+  font-size: inherit;
 }
 
 html {

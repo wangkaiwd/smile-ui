@@ -1,8 +1,12 @@
 <template>
   <div class="app">
-    hello smell-ui
-    <smell-icon icon="upload"></smell-icon>
-    <smell-button></smell-button>
+    <div class="component-wrapper">
+      <smile-button class="btn">primary</smile-button>
+      <smile-button class="btn" type="secondary">secondary</smile-button>
+      <smile-button class="btn" type="success">success</smile-button>
+      <smile-button class="btn" type="warning">warning</smile-button>
+      <smile-button class="btn" type="danger">danger</smile-button>
+    </div>
   </div>
 </template>
 
@@ -18,5 +22,11 @@
 </script>
 <style lang="scss" scoped>
   .app {
+    .component-wrapper {
+      margin-top: 20px;
+    }
+    .btn {
+      margin-left: 20px;
+    }
   }
 </style>
