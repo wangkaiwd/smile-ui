@@ -1,8 +1,10 @@
 <template>
   <div class="smile-button" @click="$emit('click')">
     <button :class={[type]:type,disabled} :disabled="disabled">
-      <smile-icon class="smile-button-loading" icon="loading" v-if="loading"></smile-icon>
-      <smile-icon class="smile-button-icon" :icon="icon" v-if="icon && !loading"></smile-icon>
+      <div class="smile-button-wrapper" :class="`icon-${iconPosition}`">
+        <smile-icon class="smile-button-loading" icon="loading" v-if="loading"></smile-icon>
+        <smile-icon class="smile-button-icon" :icon="icon" v-if="icon && !loading"></smile-icon>
+      </div>
       <div class="smile-button-text">
         <slot></slot>
       </div>
@@ -74,8 +76,17 @@
       @include btn-type(danger, $danger);
       @include btn-type(info, $info);
     }
-    &-icon, &-loading {
+    &-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin-right: 4px;
+      /*order: 定义项目的排列顺序。数值越小，排列越靠前，默认为0*/
+      &.icon-right {
+        margin-left: 4px;
+        margin-right: 0;
+        order: 1;
+      }
     }
     &-loading {@include spin(1s)}
   }

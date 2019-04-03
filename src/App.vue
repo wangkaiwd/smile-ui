@@ -6,7 +6,7 @@
       <smile-button class="btn" type="success">success</smile-button>
       <smile-button class="btn" type="warning">warning</smile-button>
       <smile-button class="btn" disabled type="danger">danger</smile-button>
-      <smile-button class="btn" icon="thumbs-up" type="danger">danger</smile-button>
+      <smile-button class="btn" icon-position="right" icon="thumbs-up" type="danger">danger</smile-button>
     </div>
   </div>
 </template>
