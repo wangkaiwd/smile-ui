@@ -1,12 +1,12 @@
 <template>
   <div class="app">
     <div class="component-wrapper">
-      <smile-button class="btn">primary</smile-button>
+      <smile-button class="btn" :loading="true" icon="upload">primary</smile-button>
       <smile-button class="btn" type="secondary">secondary</smile-button>
       <smile-button class="btn" type="success">success</smile-button>
       <smile-button class="btn" type="warning">warning</smile-button>
       <smile-button class="btn" disabled type="danger">danger</smile-button>
-      <smile-button class="btn" type="danger">danger</smile-button>
+      <smile-button class="btn" icon="thumbs-up" type="danger">danger</smile-button>
     </div>
   </div>
 </template>

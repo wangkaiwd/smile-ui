@@ -1,14 +1,21 @@
 <template>
   <div class="smile-button" @click="$emit('click')">
     <button :class={[type]:type,disabled} :disabled="disabled">
-      <slot></slot>
+      <smile-icon class="smile-button-loading" icon="loading" v-if="loading"></smile-icon>
+      <smile-icon class="smile-button-icon" :icon="icon" v-if="icon && !loading"></smile-icon>
+      <div class="smile-button-text">
+        <slot></slot>
+      </div>
     </button>
   </div>
 </template>
 
 <script>
+  import SmileIcon from '../smileIcon';
+
   export default {
     name: 'SmileButton',
+    components: { SmileIcon },
     props: {
       type: {
         type: String,
@@ -29,8 +36,6 @@
 </script>
 
 <style lang="scss" scoped>
-  $border-radius: 4px;
-  $list: primary secondary success info warning danger;
   @mixin btn-type($class,$color) {
     &.#{$class} {
       background-color: $color;
@@ -51,12 +56,17 @@
 
   .smile-button {
     display: inline-flex;
+    vertical-align: top;
     button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       padding: 0.5em 1em;
       outline: none;
       color: $white;
       cursor: pointer;
-      border-radius: $border-radius;
+      border-radius: $border-radius-md;
+      /*这里的代码该如何优化？*/
       @include btn-type(primary, $primary);
       @include btn-type(secondary, $secondary);
       @include btn-type(success, $success);
@@ -64,5 +74,9 @@
       @include btn-type(danger, $danger);
       @include btn-type(info, $info);
     }
+    &-icon, &-loading {
+      margin-right: 4px;
+    }
+    &-loading {@include spin(1s)}
   }
 </style>
