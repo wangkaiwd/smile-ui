@@ -1,6 +1,6 @@
 <template>
   <div class="smile-button" @click="$emit('click')">
-    <button :class={[type]:type}>
+    <button :class={[type]:type,disabled} :disabled="disabled">
       <slot></slot>
     </button>
   </div>
@@ -40,6 +40,12 @@
       }
       &:hover {background-color: darken($color, 5%);}
       &:focus {box-shadow: 0 0 0 4px lighten($color, 30%);}
+    }
+    &.#{$class}.disabled {
+      cursor: default;
+      border: 1px solid lighten($color, 15%);
+      background-color: lighten($color, 15%);
+      &:hover {background-color: lighten($color, 15%);}
     }
   }
 
