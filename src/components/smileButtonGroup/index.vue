@@ -6,7 +6,18 @@
 
 <script>
   export default {
-    name: 'SmileButtonGroup'
+    name: 'SmileButtonGroup',
+    mounted () {
+      this.validatorChild();
+    },
+    methods: {
+      validatorChild () {
+        for (let i = 0; i < this.$children.length; i++) {
+          const child = this.$children[i];
+          if (child.$options.name !== 'SmileButton') {return console.warn('button-group组件里的元素必须都是button组件，否则可能会产生奇怪的bug!');}
+        }
+      }
+    }
   };
 </script>
 
