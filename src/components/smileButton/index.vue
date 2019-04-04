@@ -60,7 +60,7 @@
       @if $class == warning {
         color: $dark;
       }
-      &:hover {background-color: darken($color, 5%);}
+      &:hover {background-color: darken($color, 10%);}
       &:focus {box-shadow: 0 0 0 4px lighten($color, 30%);}
     }
     &.#{$class}.disabled {

@@ -19,8 +19,14 @@
     </div>
     <div class="component-wrapper">
       <smile-button-group class="btn">
-        <smile-button type="secondary">前进</smile-button>
-        <smile-button type="secondary">后退</smile-button>
+        <smile-button type="secondary" icon="left">left</smile-button>
+        <smile-button type="secondary">middle</smile-button>
+        <smile-button type="secondary" icon="right">right</smile-button>
+      </smile-button-group>
+      <smile-button-group class="btn">
+        <smile-button icon="left">left</smile-button>
+        <smile-button>middle</smile-button>
+        <smile-button icon="right">right</smile-button>
       </smile-button-group>
     </div>
   </div>
