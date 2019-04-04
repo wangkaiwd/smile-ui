@@ -1,5 +1,7 @@
 <template>
-  <div class="smile-button-group"></div>
+  <div class="smile-button-group">
+    <slot></slot>
+  </div>
 </template>
 
 <script>

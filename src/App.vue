@@ -17,6 +17,12 @@
         danger
       </smile-button>
     </div>
+    <div class="component-wrapper">
+      <smile-button-group class="btn">
+        <smile-button type="secondary">前进</smile-button>
+        <smile-button type="secondary">后退</smile-button>
+      </smile-button-group>
+    </div>
   </div>
 </template>
 
