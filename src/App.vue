@@ -32,7 +32,8 @@
     <div class="component-wrapper">
       <!-- v-model: 相当于为子组件传递了 :value="msg" 并且监听了子组件的input事件 @input="msg=$event" -->
       <smile-input v-model="msg" class="item" suffix="thumbs-up"></smile-input>
-      <h2 class="item" style="margin-top: 10px">{{msg}}</h2>
+      <h2 class="item" style="margin-top: 10px;margin-bottom: 10px">{{msg}}</h2>
+      <smile-input value="" class="item" allowClear></smile-input>
     </div>
   </div>
 </template>

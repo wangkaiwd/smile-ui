@@ -1,7 +1,14 @@
 <template>
   <div class="smile-input">
-    <input :value="value" @input="$emit('input',$event.target.value)" type="text" placeholder="Recipient's username">
+    <input
+      ref="smileInput"
+      :value="value"
+      @input="onInput"
+      type="text"
+      placeholder="Recipient's username"
+    >
     <smile-icon v-if="suffix" class="smile-input-suffix" :icon="suffix"></smile-icon>
+    <!--    <smile-icon v-if="allowClear" class="smile-input-clear" icon="delete"></smile-icon>-->
   </div>
 </template>
 
@@ -13,7 +20,23 @@
     components: { SmileIcon },
     props: {
       suffix: String,
-      value: String
+      value: String,
+      allowClear: {
+        type: Boolean,
+        default: true
+      }
+    },
+    data () {
+      return {};
+    },
+    computed: {},
+    mounted () {
+    },
+    methods: {
+      onInput (e) {
+        const value = e.target.value;
+        this.$emit('input', value);
+      }
     }
   };
 </script>
@@ -35,12 +58,14 @@
       }
       &:focus {box-shadow: 0 0 0 4px lighten($primary, 30%);}
     }
-    &-suffix {
+    &-suffix,
+    &-clear {
       position: absolute;
       top: 50%;
       right: 10px;
       transform: translateY(-50%);
       color: $gray;
     }
+    &-clear {cursor: pointer;}
   }
 </style>
