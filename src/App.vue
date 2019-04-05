@@ -30,7 +30,9 @@
       </smile-button-group>
     </div>
     <div class="component-wrapper">
-      <smile-input class="item"></smile-input>
+      <!-- v-model: 相当于为子组件传递了 :value="msg" 并且监听了子组件的input事件 @input="msg=$event" -->
+      <smile-input v-model="msg" class="item" suffix="thumbs-up"></smile-input>
+      <h2 class="item" style="margin-top: 10px">{{msg}}</h2>
     </div>
   </div>
 </template>
@@ -40,7 +42,7 @@
     name: 'App',
     data () {
       return {
-        title: '',
+        msg: '123',
         loading: false
       };
     },
