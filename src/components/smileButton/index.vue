@@ -103,6 +103,6 @@
         order: 1;
       }
     }
-    &-loading {@include spin(1s)}
+    &-loading {@include spin(1s);}
   }
 </style>
