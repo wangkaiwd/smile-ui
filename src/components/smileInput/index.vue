@@ -1,12 +1,14 @@
 <template>
   <div class="smile-input">
-    <input
-      ref="smileInput"
-      :value="value"
-      @input="onInput"
-      type="text"
-      placeholder="Recipient's username"
-    >
+    <div class="smile-input-wrapper">
+      <input
+        ref="smileInput"
+        :value="value"
+        @input="onInput"
+        type="text"
+        placeholder="Recipient's username"
+      >
+    </div>
     <smile-icon v-if="suffix" class="smile-input-suffix" :icon="suffix"></smile-icon>
     <!--    <smile-icon v-if="allowClear" class="smile-input-clear" icon="delete"></smile-icon>-->
   </div>
@@ -24,6 +26,9 @@
       allowClear: {
         type: Boolean,
         default: true
+      },
+      errorMsg: {
+        type: String
       }
     },
     data () {
