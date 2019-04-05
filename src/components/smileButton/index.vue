@@ -95,10 +95,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-right: 4px;
+      margin-right: $space-xs;
       /*order: 定义项目的排列顺序。数值越小，排列越靠前，默认为0*/
       &.icon-right {
-        margin-left: 4px;
+        margin-left: $space-xs;
         margin-right: 0;
         order: 1;
       }
