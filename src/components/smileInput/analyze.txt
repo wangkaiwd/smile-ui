@@ -1,9 +1,9 @@
 需求分析：
-1. 基础样式
-2. 带有图标(前缀图标和后缀图标)
+1. 基础样式(ok)
+2. 带有图标(前缀图标和后缀图标) (后缀图标ok)
 3. 可以点击清空图标按钮进行清除内容
-4. 双向数据绑定
+4. 双向数据绑定(ok)
 5. 错误提示(应该怎么处理？)
-6. 支持原生属性(type: text,number,password,placeholder等)
+6. 支持原生属性级方法(type: text,number,password,placeholder, onchange,onfocus等)
 
 value的三种情况：1.直接传入 2.通过v-model进行双向数据绑定 3.不传
