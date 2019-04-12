@@ -43,9 +43,17 @@
       <smile-input v-model="msg2" placeholder="输入测试文字2" class="item"></smile-input>
       <smile-input
         placeholder="输入测试文字1"
-        prefix="thumbs-up"
+        prefix="password"
         v-model="msg"
         class="item"
+      >
+      </smile-input>
+      <smile-input
+        placeholder="输入测试文字1"
+        prefix="user"
+        v-model="msg"
+        class="item"
+        error-msg="用户名错误"
       >
       </smile-input>
     </div>

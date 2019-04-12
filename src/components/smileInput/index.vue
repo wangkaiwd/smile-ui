@@ -23,6 +23,10 @@
       @click="$emit('input','')"
     >
     </smile-icon>
+    <template v-if="errorMsg">
+      <smile-icon class="smile-input-error-icon" icon="error"></smile-icon>
+      <span class="smile-input-error-text">{{errorMsg}}</span>
+    </template>
   </div>
 </template>
 
@@ -61,7 +65,8 @@
         default: false
       },
       errorMsg: {
-        type: String
+        type: String,
+        required: false
       }
     },
     data () {
@@ -104,6 +109,7 @@
   .smile-input {
     position: relative;
     display: inline-flex;
+    align-items: center;
     vertical-align: top;
     input {
       min-height: 32px;
@@ -141,5 +147,12 @@
       cursor: pointer;
       /*display: none;*/
     }
+    &-error-icon {
+      margin-left: 6px;
+      margin-right: 4px;
+      color: $danger;
+      font-size: 14px;
+    }
+    &-error-text {color: $danger; font-size: 14px;}
   }
 </style>
