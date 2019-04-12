@@ -2,7 +2,12 @@
   <div class="smile-input">
     <div class="smile-input-wrapper">
       <!--value:控件的初始值，此属性是可选的-->
-      <smile-icon v-if="prefix" class="smile-input-prefix-icon" :icon="prefix"></smile-icon>
+      <smile-icon
+        v-if="prefix"
+        class="smile-input-prefix-icon"
+        :icon="prefix"
+      >
+      </smile-icon>
       <input
         :class="inputClasses"
         ref="smileInput"
