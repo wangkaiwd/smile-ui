@@ -1,6 +1,5 @@
 <template>
   <div class="smile-input">
-    <!--    <smile-icon v-if="prefix" class="smile-input-suffix" :icon="prefix"></smile-icon>-->
     <div class="smile-input-wrapper">
       <!--value:控件的初始值，此属性是可选的-->
       <input
@@ -11,7 +10,13 @@
       >
     </div>
     <smile-icon v-if="suffix" class="smile-input-suffix" :icon="suffix"></smile-icon>
-    <!--    <smile-icon v-if="allowClear" class="smile-input-clear" icon="delete"></smile-icon>-->
+    <smile-icon
+      v-if="isShowClear"
+      class="smile-input-clear"
+      icon="delete"
+      @click="$emit('input','')"
+    >
+    </smile-icon>
   </div>
 </template>
 
@@ -20,7 +25,7 @@
 
   /**
    * 封装组件使用：
-   * 这些选项都不会影响到 class 和 style，在react中可以使用 ...this.props会将剩余的props参数进行解构
+   * 这些选项都不会影响到 class 和 style，在react中可以使用 ...this.props会将剩余的props参数进行扩展
    *  1. inheritAttrs:
    *    默认情况下，父作用域的不被认作props的特性的绑定(attribute bindings)将会“回退”且作为普通的html特性
    *    应用在子组件的根元素上。
@@ -41,7 +46,10 @@
     components: { SmileIcon },
     props: {
       suffix: String,
-      value: String,
+      value: {
+        type: String,
+        required: true
+      },
       allowClear: {
         type: Boolean,
         default: true
@@ -59,13 +67,17 @@
           ...this.$listeners,
           input: this.onInput
         };
+      },
+      isShowClear () {
+        const { allowClear, value } = this;
+        return allowClear && (value || value === 0);
       }
     },
     mounted () {
       // 父组件中传入的所有没有被子组件props接收的属性
-      console.log('attrs', this.$attrs);
+      // console.log('attrs', this.$attrs);
       // 父组件中传入的所有没有被子组件props接收的方法
-      console.log('listeners', this.$listeners);
+      // console.log('listeners', this.$listeners);
     },
     methods: {
       onInput (e) {
@@ -85,6 +97,7 @@
       min-height: 32px;
       outline: none;
       padding-left: 10px;
+      padding-right: 28px;
       border-radius: $border-radius-md;
       border: 1px solid lighten($gray, 30%);
       color: $gray;
