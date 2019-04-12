@@ -31,9 +31,23 @@
     </div>
     <div class="component-wrapper">
       <!-- v-model: 相当于为子组件传递了 :value="msg" 并且监听了子组件的input事件 @input="msg=$event" -->
-      <smile-input type="password" placeholder="测试文字" v-model="msg" class="item"></smile-input>
+      <smile-input
+        placeholder="输入测试文字1"
+        prefix="thumbs-up"
+        v-model="msg"
+        class="item"
+        allowClear
+      >
+      </smile-input>
       <h2 class="item" style="margin-top: 10px;margin-bottom: 10px">{{msg}}</h2>
-      <smile-input value="" class="item" allowClear></smile-input>
+      <smile-input v-model="msg2" placeholder="输入测试文字2" class="item"></smile-input>
+      <smile-input
+        placeholder="输入测试文字1"
+        prefix="thumbs-up"
+        v-model="msg"
+        class="item"
+      >
+      </smile-input>
     </div>
   </div>
 </template>
@@ -44,6 +58,7 @@
     data () {
       return {
         msg: '123',
+        msg2: '',
         loading: false
       };
     },

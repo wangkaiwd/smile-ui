@@ -2,17 +2,18 @@
   <div class="smile-input">
     <div class="smile-input-wrapper">
       <!--value:控件的初始值，此属性是可选的-->
+      <smile-icon v-if="prefix" class="smile-input-prefix-icon" :icon="prefix"></smile-icon>
       <input
+        :class="inputClasses"
         ref="smileInput"
         :value="value"
         v-bind="$attrs"
         v-on="inputListeners"
       >
     </div>
-    <smile-icon v-if="suffix" class="smile-input-suffix" :icon="suffix"></smile-icon>
     <smile-icon
       v-if="isShowClear"
-      class="smile-input-clear"
+      class="smile-input-clear-icon"
       icon="delete"
       @click="$emit('input','')"
     >
@@ -45,14 +46,14 @@
     inheritAttrs: false,
     components: { SmileIcon },
     props: {
-      suffix: String,
+      prefix: String,
       value: {
         type: String,
         required: true
       },
       allowClear: {
         type: Boolean,
-        default: true
+        default: false
       },
       errorMsg: {
         type: String
@@ -62,6 +63,12 @@
       return {};
     },
     computed: {
+      inputClasses () {
+        return {
+          'smile-input-prefix': this.prefix,
+          'smile-input-clear': this.allowClear
+        };
+      },
       inputListeners () {
         return {
           ...this.$listeners,
@@ -97,21 +104,33 @@
       min-height: 32px;
       outline: none;
       padding-left: 10px;
-      padding-right: 28px;
+      padding-right: 10px;
       border-radius: $border-radius-md;
       border: 1px solid lighten($gray, 30%);
       color: $gray;
       &::placeholder {color: lighten($gray, 14%);}
       &:focus {box-shadow: 0 0 0 4px lighten($primary, 30%);}
+      &.smile-input-prefix {
+        padding-left: 22px;
+      }
+      &.smile-input-clear {
+        padding-right: 28px;
+      }
     }
-    &-suffix,
-    &-clear {
+    &-prefix-icon {
+      position: absolute;
+      top: 50%;
+      left: 6px;
+      transform: translateY(-50%);
+      color: lighten($gray, 14%);
+    }
+    &-clear-icon {
       position: absolute;
       top: 50%;
       right: 10px;
       transform: translateY(-50%);
       color: $gray;
+      cursor: pointer;
     }
-    &-clear {cursor: pointer;}
   }
 </style>
