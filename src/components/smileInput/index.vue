@@ -116,6 +116,9 @@
       &.smile-input-clear {
         padding-right: 28px;
       }
+      /*&:focus {
+        .smile-input-clear-icon {display: block;}
+      }*/
     }
     &-prefix-icon {
       position: absolute;
@@ -131,6 +134,7 @@
       transform: translateY(-50%);
       color: $gray;
       cursor: pointer;
+      /*display: none;*/
     }
   }
 </style>
