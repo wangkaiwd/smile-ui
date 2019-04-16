@@ -3,9 +3,10 @@ import App from './App.vue';
 import 'styles/reset';
 import 'styles/base';
 import './registerServiceWorker';
+import message from './plugins';
 
 Vue.config.productionTip = false;
-
+Vue.use(message, { text: '测试文字' });
 const requireComponent = require.context(
   // 其组件目录的相对路径
   './components',

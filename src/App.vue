@@ -70,6 +70,9 @@
         loading: false
       };
     },
+    mounted () {
+      this.$message({ text: '测试message文字' });
+    },
     methods: {
       onClick () {
         this.loading = true;
