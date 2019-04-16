@@ -35,7 +35,16 @@
         this.$message({ text: '测试文字', duration: 2000, position: 'bottom', type: 'error' });
       },
       showMessage3 () {
-        this.$message({ text: '测试文字', duration: 2000, position: 'bottom' });
+        this.$message({
+          text: '测试文字',
+          duration: 2000,
+          position: 'bottom',
+          autoClose: false,
+          confirmClose: this.onClose
+        });
+      },
+      onClose () {
+        console.log('message关闭了');
       }
     }
   };

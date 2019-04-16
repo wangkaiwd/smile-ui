@@ -2,8 +2,11 @@
   <div class="smile-message" :class="[position,type]">
     <div class="smile-message-wrapper">
       <smile-icon class="smile-message-icon" :icon="type"></smile-icon>
-      <slot></slot>
+      <div class="smile-message-content">
+        <slot></slot>
+      </div>
     </div>
+    <smile-icon class="smile-message-delete" icon="delete" @click="onClose" v-if="!autoClose"></smile-icon>
   </div>
 </template>
 
@@ -23,6 +26,10 @@
       },
       duration: { type: Number, default: 3000 },
       showClose: { type: Boolean, default: false },
+      confirmClose: {
+        type: Function,
+        default: () => {}
+      }
     },
     data () {
       return {
@@ -43,6 +50,10 @@
       close () {
         this.$destroy();
         this.$el.remove();
+      },
+      onClose () {
+        this.close();
+        this.confirmClose();
       }
     }
   };
@@ -51,11 +62,19 @@
 <style lang="scss" scoped>
   .smile-message {
     position: fixed;
+    display: flex;
+    justify-content: space-between;
     left: 50%;
     transform: translateX(-50%);
     padding: 15px 15px 15px 20px;
     border-radius: $border-radius-md;
     min-width: 380px;
+    &-wrapper {display: flex;}
+    &-content {
+      line-height: 1.2;
+      word-break: break-all;
+    }
+    &-delete {cursor: pointer;}
     &.info {
       background-color: lighten($info, 38%);
       color: $info;
