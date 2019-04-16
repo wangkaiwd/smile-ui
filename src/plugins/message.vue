@@ -1,6 +1,7 @@
 <template>
-  <div class="smile-message" :class="position">
+  <div class="smile-message" :class="[position,type]">
     <div class="smile-message-wrapper">
+      <smile-icon class="smile-message-icon" :icon="type"></smile-icon>
       <slot></slot>
     </div>
   </div>
@@ -10,6 +11,7 @@
   export default {
     name: 'SmileMessage',
     props: {
+      type: { type: String, default: 'info' },
       text: { type: String, required: true },
       autoClose: { type: Boolean, default: true },
       position: {
@@ -51,19 +53,40 @@
     position: fixed;
     left: 50%;
     transform: translateX(-50%);
-    &.top {
-      top: 20px;
-    }
-    &.bottom {
-      bottom: 20px;
-    }
-    &.middle {
-      top: 50%;
-      transform: translate(-50%, -50%);
-    }
     padding: 15px 15px 15px 20px;
     border-radius: $border-radius-md;
     min-width: 380px;
-    background-color: pink;
+    &.info {
+      background-color: lighten($info, 38%);
+      color: $info;
+    }
+    &.success {
+      background-color: lighten($success, 38%);
+      color: $success;
+    }
+    &.warning {
+      background-color: lighten($warning, 38%);
+      color: $warning;
+    }
+    &.error {
+      background-color: lighten($danger, 38%);
+      color: $danger;
+    }
+    &.top {top: 20px; animation: slide-top .4s;}
+    &.bottom {bottom: 20px;animation: slide-bottom .4s;}
+    &.middle {top: 50%;transform: translate(-50%, -50%); animation: slide-middle .4s;}
+    &-icon {margin-right: $space-xs;}
+    @keyframes slide-top {
+      0% {top: 0;}
+      100% {top: 20px;}
+    }
+    @keyframes slide-bottom {
+      0% {bottom: 0;}
+      100% {bottom: 20px;}
+    }
+    @keyframes slide-middle {
+      0% {opacity: 0}
+      100% {opacity: 1;}
+    }
   }
 </style>

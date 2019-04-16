@@ -6,6 +6,7 @@
       <smile-button @click="showMessage1">中</smile-button>
       <br>
       <smile-button @click="showMessage2">下</smile-button>
+      <smile-button @click="showMessage3">info</smile-button>
       <br>
     </div>
   </div>
@@ -25,12 +26,15 @@
     },
     methods: {
       showMessage () {
-        this.$message({ text: '测试message文字', duration: 2000 });
+        this.$message({ text: '测试message文字', duration: 2000, type: 'success' });
       },
       showMessage1 () {
-        this.$message({ text: '测试文字', duration: 2000, position: 'middle' });
+        this.$message({ text: '测试文字', duration: 2000, position: 'middle', type: 'warning' });
       },
       showMessage2 () {
+        this.$message({ text: '测试文字', duration: 2000, position: 'bottom', type: 'error' });
+      },
+      showMessage3 () {
         this.$message({ text: '测试文字', duration: 2000, position: 'bottom' });
       }
     }
