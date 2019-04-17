@@ -1,10 +1,10 @@
 需求分析：
-1. 要通过Vue.use(plugin,options)来进行插件的安装（完成）
+1. 要通过Vue.use(plugin,options)来进行插件的安装（ok）
 2. 调用方式 this.$message(options)或this.$message('提示内容')
 3. options:
     1. type: 提示类型
-    2. showClose,closeText: 关闭按钮，关闭文字并不需要，可以只是一个icon
-    3. duration: 持续时间
-    4. position: 出现位置以及出现和消失动画
+    2. showClose,closeText: 关闭按钮，关闭文字并不需要，可以只是一个icon(ok)
+    3. duration: 持续时间（ok）
+    4. position: 出现位置以及出现和消失动画(出现动画ok)
     5. enableHtml: 开启html支持
-    6. autoClose: 是否自动关闭
+    6. autoClose: 是否自动关闭(ok)

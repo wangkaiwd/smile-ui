@@ -1,17 +1,18 @@
 <template>
-  <div class="smile-content">
+  <div class="smile-layout">
     <slot></slot>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'SmileContent'
+    name: 'SmileLayout'
   };
 </script>
 
 <style lang="scss" scoped>
-  .smile-content {
-
+  .smile-layout {
+    display: flex;
+    flex-direction: column;
   }
 </style>

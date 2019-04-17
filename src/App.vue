@@ -1,13 +1,20 @@
 <template>
   <div class="app">
     <div class="component-wrapper">
-      <smile-button @click="showMessage">上</smile-button>
-      <br>
-      <smile-button @click="showMessage1">中</smile-button>
-      <br>
-      <smile-button @click="showMessage2">下</smile-button>
-      <smile-button @click="showMessage3">info</smile-button>
-      <br>
+      <smile-layout class="layout">
+        <smile-header class="header">header</smile-header>
+        <smile-content class="content">content</smile-content>
+        <smile-footer class="footer">footer</smile-footer>
+      </smile-layout>
+      <smile-layout class="layout">
+        <smile-header class="header">header</smile-header>
+        <smile-layout class="layout">
+          <smile-aside>aside</smile-aside>
+          <smile-content>content</smile-content>
+        </smile-layout>
+        <smile-content class="content">content</smile-content>
+        <smile-footer class="footer">footer</smile-footer>
+      </smile-layout>
     </div>
   </div>
 </template>
@@ -16,46 +23,31 @@
   export default {
     name: 'App',
     data () {
-      return {
-        msg: '123',
-        msg2: '',
-        loading: false
-      };
+      return {};
     },
     mounted () {
     },
-    methods: {
-      showMessage () {
-        this.$message({ text: '测试message文字', duration: 2000, type: 'success' });
-      },
-      showMessage1 () {
-        this.$message({ text: '测试文字', duration: 2000, position: 'middle', type: 'warning' });
-      },
-      showMessage2 () {
-        this.$message({ text: '测试文字', duration: 2000, position: 'bottom', type: 'error' });
-      },
-      showMessage3 () {
-        this.$message({
-          text: '测试文字',
-          duration: 2000,
-          position: 'bottom',
-          autoClose: false,
-          confirmClose: this.onClose
-        });
-      },
-      onClose () {
-        console.log('message关闭了');
-      }
-    }
+    methods: {}
   };
 </script>
 <style lang="scss" scoped>
   .app {
-    .component-wrapper {
-      margin: 20px;
+    .component-wrapper {margin: 20px;}
+    .layout {
+      border: 1px solid red;
+      height: 400px;
+      &:not(:first-child) {
+        margin-top: 20px;
+      }
     }
-    .item {
-
+    .header {
+      border: 1px solid blue;
+    }
+    .content {
+      border: 1px solid orange;
+    }
+    .footer {
+      border: 1px solid pink;
     }
   }
 </style>
