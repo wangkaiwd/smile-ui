@@ -25,8 +25,7 @@ const mountComponent = (Vue, message, options) => {
 const plugin = {
   install (Vue) {
     Vue.prototype.$message = (options) => {
-      console.log('组件实例', vm);
-      if (vm) {
+      if (vm) { // 创建新实例之前先删除旧有组件和dom
         vm.$destroy();
         vm.$el.remove();
       }
