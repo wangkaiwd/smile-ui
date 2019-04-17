@@ -1,12 +1,29 @@
 <template>
-  <div class="smile-layout">
+  <div class="smile-layout" :class="{hasAside}">
     <slot></slot>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'SmileLayout'
+    name: 'SmileLayout',
+    data () {
+      return {
+        hasAside: false
+      };
+    },
+    mounted () {
+      this.init();
+    },
+    methods: {
+      init () {
+        this.$children.map(vm => {
+          if (vm.$options.name === 'SmileAside') {
+            this.hasAside = true;
+          }
+        });
+      }
+    }
   };
 </script>
 
@@ -14,5 +31,9 @@
   .smile-layout {
     display: flex;
     flex-direction: column;
+    flex: 1;
+    &.hasAside {
+      flex-direction: row;
+    }
   }
 </style>

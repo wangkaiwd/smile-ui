@@ -12,6 +12,6 @@
 
 <style lang="scss" scoped>
   .smile-header {
-
+    height: 60px;
   }
 </style>

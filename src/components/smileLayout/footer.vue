@@ -12,6 +12,6 @@
 
 <style lang="scss" scoped>
   .smile-footer {
-
+    height: 60px;
   }
 </style>

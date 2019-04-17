@@ -8,12 +8,20 @@
       </smile-layout>
       <smile-layout class="layout">
         <smile-header class="header">header</smile-header>
-        <smile-layout class="layout">
-          <smile-aside>aside</smile-aside>
-          <smile-content>content</smile-content>
+        <smile-layout>
+          <smile-aside class="aside">aside</smile-aside>
+          <smile-content class="content">content</smile-content>
         </smile-layout>
-        <smile-content class="content">content</smile-content>
         <smile-footer class="footer">footer</smile-footer>
+      </smile-layout>
+
+      <smile-layout class="layout">
+        <smile-aside class="aside">aside</smile-aside>
+        <smile-layout>
+          <smile-header class="header">header</smile-header>
+          <smile-content class="content">content</smile-content>
+          <smile-footer class="footer">footer</smile-footer>
+        </smile-layout>
       </smile-layout>
     </div>
   </div>
@@ -44,10 +52,13 @@
       border: 1px solid blue;
     }
     .content {
-      border: 1px solid orange;
+      border: 4px solid orange;
     }
     .footer {
       border: 1px solid pink;
+    }
+    .aside {
+      border: 1px solid black;
     }
   }
 </style>

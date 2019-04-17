@@ -12,6 +12,6 @@
 
 <style lang="scss" scoped>
   .smile-aside {
-
+    width: 200px;
   }
 </style>

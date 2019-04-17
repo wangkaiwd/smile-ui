@@ -6,7 +6,10 @@
 
 <script>
   export default {
-    name: 'SmileContent'
+    name: 'SmileContent',
+    mounted () {
+
+    }
   };
 </script>
 
