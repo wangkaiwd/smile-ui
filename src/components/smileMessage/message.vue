@@ -29,7 +29,8 @@
       confirmClose: {
         type: Function,
         default: () => {}
-      }
+      },
+      // enableHtml: { type: Boolean, default: false } // 此功能谨慎开启
     },
     data () {
       return {

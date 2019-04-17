@@ -1,28 +1,14 @@
 <template>
   <div class="app">
     <div class="component-wrapper">
-      <smile-layout class="layout">
-        <smile-header class="header">header</smile-header>
-        <smile-content class="content">content</smile-content>
-        <smile-footer class="footer">footer</smile-footer>
-      </smile-layout>
-      <smile-layout class="layout">
-        <smile-header class="header">header</smile-header>
-        <smile-layout>
-          <smile-aside class="aside">aside</smile-aside>
-          <smile-content class="content">content</smile-content>
-        </smile-layout>
-        <smile-footer class="footer">footer</smile-footer>
-      </smile-layout>
-
-      <smile-layout class="layout">
-        <smile-aside class="aside">aside</smile-aside>
-        <smile-layout>
-          <smile-header class="header">header</smile-header>
-          <smile-content class="content">content</smile-content>
-          <smile-footer class="footer">footer</smile-footer>
-        </smile-layout>
-      </smile-layout>
+      <smile-row>
+        <smile-col :span="4">1</smile-col>
+        <smile-col :span="4">2</smile-col>
+        <smile-col :span="4">3</smile-col>
+        <smile-col :span="4">4</smile-col>
+        <smile-col :span="4">5</smile-col>
+        <smile-col :span="4">6</smile-col>
+      </smile-row>
     </div>
   </div>
 </template>
