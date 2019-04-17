@@ -14,9 +14,7 @@ const mountComponent = (Vue, message, options) => {
   const { text } = options;
   const Message = Vue.extend(message);
   vm = new Message({
-    propsData: {
-      ...options
-    }
+    propsData: options
   });
   vm.$slots.default = [text];
   vm.$mount(); // vm.$mount()会返回实例自身，可以进行链式调用
