@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <div class="component-wrapper">
-      <smile-row class="row-demo" type="flex" justify="center" align="center" :gutter="8">
+      <smile-row class="row-demo" :gutter="8">
         <smile-col class="row-col" :span="4">
           1
         </smile-col>

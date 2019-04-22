@@ -31,7 +31,7 @@
 
 <style lang="scss" scoped>
   .smile-col {
-    /*flex: 0 0 auto;*/
+    display: inline-block;
     @for $i from 1 through 24 {
       &.smile-col-#{$i} {
         width: ($i/24)*100%;
