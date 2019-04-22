@@ -1,5 +1,5 @@
 <template>
-  <div class="smile-col" :class="`col-${span}`" :style="{paddingLeft: `${gutter}px`}">
+  <div class="smile-col" :class="`smile-col-${span}`" :style="colStyles">
     <slot></slot>
   </div>
 </template>
@@ -15,18 +15,25 @@
     },
     data () {
       return {
-        gutter: 0 // 这里要加初始值，否则会提示没有定义但是已经使用了的错误
+        gutter: 0, // 这里要加初始值，否则会提示没有定义但是已经使用了的错误
+        flexStyle: {}
       };
+    },
+    computed: {
+      colStyles () {
+        return {
+          paddingLeft: `${this.gutter}px`,
+        };
+      }
     }
   };
 </script>
 
 <style lang="scss" scoped>
   .smile-col {
-    display: inline-block;
-    width: 100%;
+    /*flex: 0 0 auto;*/
     @for $i from 1 through 24 {
-      &.col-#{$i} {
+      &.smile-col-#{$i} {
         width: ($i/24)*100%;
       }
     }
