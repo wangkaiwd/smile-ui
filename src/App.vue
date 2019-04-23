@@ -2,7 +2,7 @@
   <div class="app">
     <div class="component-wrapper">
       <smile-row class="row-demo" :gutter="8">
-        <smile-col class="row-col" :span="4" :offset="4">
+        <smile-col class="row-col" :span="4" :lg="12" :offset="4">
           1
         </smile-col>
         <smile-col class="row-col" :span="4">
@@ -20,6 +20,9 @@
 </template>
 
 <script>
+  // xs sm md lg xl xxl
+  // phone ipad narrowPc pc widePc largePc
+  // 通过媒体查询，用对应屏幕宽度的样式来应用对应的样式，将默认的span覆盖掉
   export default {
     name: 'App',
     data () {
