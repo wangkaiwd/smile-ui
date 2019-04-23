@@ -1,20 +1,10 @@
 <template>
   <div class="app">
     <div class="component-wrapper">
-      <smile-row class="row-demo" :gutter="8">
-        <smile-col class="row-col" :span="4" :ipad="{span:8,offset:2}">
-          1
-        </smile-col>
-        <smile-col class="row-col" :span="4">
-          2
-        </smile-col>
-        <smile-col class="row-col" :span="4">
-          3
-        </smile-col>
-        <smile-col class="row-col" :span="4">
-          4
-        </smile-col>
-      </smile-row>
+      <smile-tab>
+        <smile-tab-item title="tab1" name="tab1">内容1</smile-tab-item>
+        <smile-tab-item title="tab2" name="tab2">内容2</smile-tab-item>
+      </smile-tab>
     </div>
   </div>
 </template>
@@ -36,22 +26,5 @@
 <style lang="scss" scoped>
   .app {
     .component-wrapper {margin: 20px;}
-    .row-demo {
-      border: 1px solid blue;
-    }
-    .row-col {
-      height: 32px;
-      line-height: 32px;
-      &:first-child {
-        height: 80px;
-        line-height: 80px;
-      }
-      &:nth-child(odd) {
-        background-color: pink;
-      }
-      &:nth-child(even) {
-        background-color: red;
-      }
-    }
   }
 </style>
