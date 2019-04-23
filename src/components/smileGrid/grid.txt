@@ -1,6 +1,8 @@
 需求梳理：
 1. span 分栏
-2. 响应式
+2. 响应式：
+    a. css:通过媒体查询来设置不同屏幕尺寸下添加的class  媒体查询阅读链接：https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Media_queries
+    b. js:通过传入参数的不同，动态设置类名，在对应屏幕尺寸的样式会直接覆盖原有样式
 3. row组件：
     gutter
     type
