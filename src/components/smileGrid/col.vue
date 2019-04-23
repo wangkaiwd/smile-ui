@@ -22,7 +22,7 @@
       return isValid;
     }
   };
-  const devices = ['phone', 'ipad', 'narrowPc'];
+  const devices = ['phone', 'ipad', 'narrowPc', 'pc', 'widePc', 'largePc'];
   export default {
     name: 'SmileCol',
     props: {
@@ -36,7 +36,10 @@
       },
       phone: responseType,
       ipad: responseType,
-      narrowPc: responseType
+      narrowPc: responseType,
+      pc: responseType,
+      widePc: responseType,
+      largePc: responseType
     },
     data () {
       return {
@@ -52,16 +55,19 @@
       },
       colClasses () {
         const classes = [`span-${this.span}`, `offset-${this.offset}`];
-        return devices.map(device => [...classes, ...this.createResponseClass(device)]);
+        devices.forEach(device => classes.push(...this.createResponseClass(device)));
+        return classes;
       }
     },
     methods: {
       createResponseClass (device) {
+        let classes = [];
         if (this[device]) {
           const { span, offset } = this[device];
-          return [`${device}-span-${span}`, `${device}-offset-${offset}`];
+          span && classes.push(`${device}-span-${span}`);
+          offset && classes.push(`${device}-offset-${offset}`);
         }
-        return [];
+        return classes;
       }
     }
   };
@@ -78,18 +84,42 @@
         margin-left: ($i/24)*100%;
       }
     }
-    @each $item in 576px 768px 992px 1200px 1600px {
-      @media screen and (min-width: #{$item}) {
-        @for $i from 1 through 24 {
-          @each $device in phone ipad narrowPc pc widePc largePc {
-            &.#{$device}-span-#{$i} {
-              width: ($i/24)*100%;
-            }
-            &.#{$device}-offset-#{$i} {
-              width: ($i/24)*100%;
-            }
-          }
-        }
+    /*width <= 576生效*/
+    @media screen and (max-width: 576px) {
+      @for $i from 1 through 24 {
+        &.phone-span-#{$i} {width: ($i/24)*100%;}
+        &.phone-offset-#{$i} {margin-left: ($i/24)*100%;}
+      }
+    }
+    /*width >= 576生效*/
+    @media screen and (min-width: 576px) {
+      @for $i from 1 through 24 {
+        &.ipad-span-#{$i} {width: ($i/24)*100%;}
+        &.ipad-offset-#{$i} {margin-left: ($i/24)*100%;}
+      }
+    }
+    @media screen and (min-width: 768px) {
+      @for $i from 1 through 24 {
+        &.narrowPc-span-#{$i} {width: ($i/24)*100%;}
+        &.narrowPc-offset-#{$i} {margin-left: ($i/24)*100%;}
+      }
+    }
+    @media screen and (min-width: 992px) {
+      @for $i from 1 through 24 {
+        &.pc-span-#{$i} {width: ($i/24)*100%;}
+        &.pc-offset-#{$i} {margin-left: ($i/24)*100%;}
+      }
+    }
+    @media screen and (min-width: 1200px) {
+      @for $i from 1 through 24 {
+        &.widePc-span-#{$i} {width: ($i/24)*100%;}
+        &.widePc-offset-#{$i} {margin-left: ($i/24)*100%;}
+      }
+    }
+    @media screen and (min-width: 1600px) {
+      @for $i from 1 through 24 {
+        &.largePc-span-#{$i} {width: ($i/24)*100%;}
+        &.largePc-offset-#{$i} {margin-left: ($i/24)*100%;}
       }
     }
   }
