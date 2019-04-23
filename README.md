@@ -16,3 +16,33 @@
 2. `slot`父子组件通信： 1. 通过`$children`操作子元素 2. 通过`$parent`操作父元素
 3. 对应的`flex`属性开启后`css`写法优化：
     ![row-flex](./shotscreen/row-flex.png)
+
+
+#### 之后计划
+1. grid响应式布局
+2. 优化现有代码
+##### 中级组件
+* `collapse`组件
+* `tabs`组件
+* `popover`组件
+* `sticky`组件
+* `pagination`分页
+
+##### 高级组件
+* `upload`组件
+* `table`组件(这里可能要先做好`checkbox`组件)
+* `cascader`组件
+* `menu`组件
+
+##### 实现困难的组件
+* `datePicker`组件
+* 高级`table`组件
+* `scroll`组件
+
+##### 娱乐组件
+* `splitPanel`组件
+* 抽奖
+* 刮刮卡
+
+##### 进阶
+尝试写测试覆盖率

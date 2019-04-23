@@ -2,7 +2,7 @@
   <div class="app">
     <div class="component-wrapper">
       <smile-row class="row-demo" :gutter="8">
-        <smile-col class="row-col" :span="4">
+        <smile-col class="row-col" :span="4" :offset="4">
           1
         </smile-col>
         <smile-col class="row-col" :span="4">

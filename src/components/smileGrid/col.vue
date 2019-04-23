@@ -1,5 +1,9 @@
 <template>
-  <div class="smile-col" :class="`smile-col-${span}`" :style="colStyles">
+  <div
+    class="smile-col"
+    :class="colClasses"
+    :style="colStyles"
+  >
     <slot></slot>
   </div>
 </template>
@@ -11,6 +15,10 @@
       span: {
         type: Number,
         default: 24
+      },
+      offset: {
+        type: Number,
+        default: 0
       }
     },
     data () {
@@ -24,6 +32,12 @@
         return {
           paddingLeft: `${this.gutter}px`,
         };
+      },
+      colClasses () {
+        return [
+          `smile-col-${this.span}`,
+          `smile-col-offset-${this.offset}`
+        ];
       }
     }
   };
@@ -35,6 +49,9 @@
     @for $i from 1 through 24 {
       &.smile-col-#{$i} {
         width: ($i/24)*100%;
+      }
+      &.smile-col-offset-#{$i} {
+        margin-left: ($i/24)*100%;
       }
     }
   }
