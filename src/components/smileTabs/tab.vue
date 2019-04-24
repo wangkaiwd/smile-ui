@@ -21,7 +21,11 @@
   export default {
     name: 'tab',
     props: {
-      select: { type: String }
+      select: { type: String },
+      isOpenAnimation: {
+        type: Boolean,
+        default: true
+      }
     },
     watch: {
       select (newVal) {

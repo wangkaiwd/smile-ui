@@ -1,7 +1,11 @@
 <template>
   <div class="app">
     <div class="component-wrapper">
-      <smile-tab :select.sync="name">
+      <smile-tab
+        :select.sync="name"
+        @on-change="onChange"
+        :is-open-animation="false"
+      >
         <smile-tab-item title="tab1" name="tab1">内容1</smile-tab-item>
         <smile-tab-item title="tab2" name="tab2">内容2</smile-tab-item>
         <smile-tab-item title="tab3" name="tab3">内容3</smile-tab-item>
@@ -27,7 +31,11 @@
     },
     mounted () {
     },
-    methods: {}
+    methods: {
+      onChange (name) {
+        console.log('切换', name);
+      }
+    }
   };
 </script>
 <style lang="scss" scoped>
