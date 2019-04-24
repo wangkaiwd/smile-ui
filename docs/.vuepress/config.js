@@ -14,11 +14,27 @@ module.exports = {
       { text: 'Home', link: '/' },
       { text: 'Github', link: 'https://github.com/wangkaiwd' },
     ],
-    sidebar: {
-      '/demo/': [
-        'test1', 'test2'
-      ]
-    }
+    sidebar: [
+      {
+        title: '通用组件',
+        collapsable: false,
+        children: [
+          '/common/icon',
+          '/common/layout',
+          '/common/grid',
+          '/common/button',
+          '/common/input'
+        ]
+      },
+      {
+        title: '视图组件',
+        collapsable: false,
+        children: [
+          '/views/message',
+          '/views/tabs'
+        ]
+      }
+    ]
   },
   chainWebpack: (config) => {
     // vuePress中的别名
