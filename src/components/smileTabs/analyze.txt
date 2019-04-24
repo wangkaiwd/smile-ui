@@ -1,10 +1,10 @@
 需求分析：
     1. 当前选中项(ok)
     2. 点击tab进行对应切换(ok)
-    3. 可以添加图标
-    4. 在页签右边添加附加内容
+    3. 可以添加图标：图标也会通过插槽插入，但是怎么插入到父组件中
+    4. 在页签右边添加附加内容: 使用插槽的话不知道在哪里插入，这个时候体现出了jsx语法的优点
     5. 页头下方滑动条(ok)
-    6. tab切换动画(是否使用动画)
+    6. tab切换动画(是否使用动画)(ok)
 样式模仿 ant design
 html使用结构：
     <smile-tab>
@@ -26,4 +26,4 @@ html使用结构：
     1. 访问元素、组件： $parent,$children,$root   依赖注入：provide inject
     2. 循环引用: 递归组件
 
-slot组件通讯方案： 1. $parent或$children 2. 依赖注入 3. eventBus 4. vuex
+slot组件通讯方案： 1. $parent或$children或$ref 2. 依赖注入 3. eventBus 4. vuex

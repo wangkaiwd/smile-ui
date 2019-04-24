@@ -19,9 +19,6 @@
 </template>
 
 <script>
-  // xs sm md lg xl xxl
-  // phone ipad narrowPc pc widePc largePc
-  // 通过媒体查询，用对应屏幕宽度的样式来应用对应的样式，将默认的span覆盖掉
   export default {
     name: 'App',
     data () {
