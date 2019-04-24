@@ -19,5 +19,11 @@ html使用结构：
         <TabPanel title="标题1">内容1</TabPanel>
         <TabPanel title="标题2">内容2</TabPanel>
     </Tab>
-第一种实现方案小节：
 
+阅读推荐：https://cn.vuejs.org/v2/guide/components-edge-cases.html
+
+知识点：
+    1. 访问元素、组件： $parent,$children,$root   依赖注入：provide inject
+    2. 循环引用: 递归组件
+
+slot组件通讯方案： 1. $parent或$children 2. 依赖注入 3. eventBus 4. vuex
