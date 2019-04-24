@@ -1,7 +1,11 @@
 需求分析：
     1. 当前选中项
     2. 点击tab进行对应切换
-
+    3. 可以添加图标
+    4. 在页签右边添加附加内容
+    5. 页头下方滑动条
+    6. tab切换动画(是否使用动画)
+样式模仿 ant design
 html使用结构：
     <smile-tab>
         <smile-tab-header>标题1</smile-tab-header>
