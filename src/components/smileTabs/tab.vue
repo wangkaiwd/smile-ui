@@ -11,9 +11,6 @@
       >
         {{header.title}}
       </li>
-      <li class="action-wrapper">
-        <slot name="action"></slot>
-      </li>
       <span class="smile-tab-header-line" ref="headerLine"></span>
     </ul>
     <slot></slot>
