@@ -80,6 +80,7 @@
       position: relative;
       display: flex;
       border-bottom: 1px solid lighten($gray, 40%);
+      overflow: auto;
     }
     &-header-line {
       position: absolute;
