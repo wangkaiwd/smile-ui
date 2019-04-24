@@ -7,7 +7,7 @@ module.exports = {
   description: 'Enjoy what you are doing',
   base: '/smile-ui/',
   head: [
-    ['link', { rel: 'icon', href: '/icon.png' }]
+    ['link', { rel: 'icon', href: './icon.png' }]
   ],
   chainWebpack: (config) => {
     // vuePress中的别名
