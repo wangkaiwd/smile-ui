@@ -13,7 +13,11 @@
       </button>
     </div>
     <div class="show-component-body-wrapper">
-      <slot name="component-body"></slot>
+      <header class="show-component-body-header">DEMO</header>
+      <div class="show-component-body-placeholder">
+        <slot name="component-body"></slot>
+      </div>
+      <footer class="show-component-body-footer">design by wangkaiwd</footer>
     </div>
     <div class="show-component-code-wrapper">
       <slot name="component-code"></slot>
@@ -22,11 +26,9 @@
 </template>
 
 <script>
-  import SmileIcon from '@/components/smileIcon';
 
   export default {
     name: 'ShowComponent',
-    components: { SmileIcon },
     data () {
       return {
         expanded: false
@@ -61,6 +63,41 @@
       transition: all .2s;
       margin-right: 4px;
       &.expanded {transform: rotate(90deg);}
+    }
+    &-body-wrapper {
+      position: relative;
+      border: 2px solid #ddd;
+      background: #fff;
+      margin: 40px 0 40px 0;
+      padding: 40px 24px 16px;
+    }
+    &-body-placeholder {
+      margin-top: -10px;
+    }
+    &-body-content {
+      margin-top: 0;
+      margin-bottom: 24px;
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+    &-body-header {
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      display: inline-block;
+      padding: 4px 8px;
+      background-color: #bbb;
+      color: #fff;
+      font-size: 80%;
+    }
+    &-body-footer {
+      display: inline-block;
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      font-size: 70%;
+      color: #bbb;
     }
   }
 </style>

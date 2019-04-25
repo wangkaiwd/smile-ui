@@ -1,6 +1,6 @@
 <template>
-  <div class="show-component-item">
-    <header class="show-component-item-header">DEMO</header>
+  <div class="show-component-item" :class="position">
+    <h4 v-if="label">{{label}}</h4>
     <slot>
     </slot>
   </div>
@@ -8,33 +8,32 @@
 
 <script>
   export default {
-    name: 'ShowComponentItem'
+    name: 'ShowComponentItem',
+    props: {
+      label: { type: String },
+      position: {
+        type: String,
+        default: 'horizontal',
+        validator (val) {
+          return ['horizontal', 'vertical '].includes(val);
+        }
+      }
+    }
   };
 </script>
 
 <style lang="scss" scoped>
   .show-component-item {
-    position: relative;
-    border: 2px solid #ddd;
-    background: #fff;
-    margin: 40px 0 40px 0;
-    padding: 40px 24px 16px;
-    &-content {
-      margin-top: 0;
-      margin-bottom: 24px;
-      &:first-child {
-        margin-top: 0;
-      }
+    margin-top: 10px;
+    h4 {
+      margin: 0 0 10px 0;
+      font-weight: 500;
     }
-    &-header {
-      position: absolute;
-      top: -2px;
-      left: -2px;
+    &.horizontal {
       display: inline-block;
-      padding: 4px 8px;
-      background-color: #bbb;
-      color: #fff;
-      font-size: 80%;
+    }
+    &.vertical {
+      display: block;
     }
   }
 </style>
