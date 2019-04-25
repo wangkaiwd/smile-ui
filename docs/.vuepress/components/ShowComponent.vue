@@ -74,12 +74,28 @@
       margin: 40px 0 40px 0;
       padding: 40px 24px 16px;
     }
-    &-code-wrapper {
+    /*通过设置max-height来实现过渡*/
+    /*&-code-wrapper {
+      opacity: 0;
       max-height: 0px;
-      overflow: auto;
       transition: all 1s;
+      overflow: hidden;
       &.expanded {
+        opacity: 1;
         max-height: 260px;
+      }
+    }*/
+    /*通过设置scaleY 和 transform-origin:top来实现过渡*/
+    &-code-wrapper {
+      opacity: 0;
+      max-height: 260px;
+      transform: scaleY(0);
+      overflow: auto;
+      transition: all .4s;
+      transform-origin: top;
+      &.expanded {
+        transform: scaleY(1);
+        opacity: 1;
       }
     }
     &-body-placeholder {
