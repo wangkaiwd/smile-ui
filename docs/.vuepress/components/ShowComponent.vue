@@ -59,10 +59,6 @@
       justify-content: space-between;
       border-bottom: 1px solid #a6a6a6;
     }
-    /*&-label {
-      font-size: 20px;
-      font-weight: bold;
-    }*/
     &-button {
       display: flex;
       align-items: center;
@@ -71,6 +67,7 @@
       border: 1px solid #a6a6a6;
       padding: 0.5em 1em;
       border-radius: 4px;
+      cursor: pointer;
     }
     &-icon {
       font-size: 16px;
@@ -95,7 +92,7 @@
       transition: max-height .6s;
       overflow: hidden;
       &.expanded {
-        max-height: 260px;
+        max-height: 400px;
         overflow: auto;
       }
     }
