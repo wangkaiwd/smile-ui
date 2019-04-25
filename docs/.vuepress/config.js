@@ -20,7 +20,6 @@ module.exports = {
         title: '通用组件',
         collapsable: false,
         children: [
-          '/common/icon',
           '/common/layout',
           '/common/grid',
           '/common/button',

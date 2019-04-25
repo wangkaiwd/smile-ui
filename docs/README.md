@@ -9,6 +9,6 @@ features:
 - title: Vue驱动
   details: 享受 Vue和Vue-Cli3.x 的开发体验，使用es6语法。
 - title: 简单易读
-  details: 代码通俗易读，并且在对应位置有自己的学习注释。
+  details: 代码通俗易读，并且在对应位置有自己的理解注释。
 footer: MIT Licensed | Copyright © 2019 wk
 ---
