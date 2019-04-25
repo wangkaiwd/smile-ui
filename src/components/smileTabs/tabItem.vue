@@ -20,6 +20,9 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "~styles/vars";
+  @import "~styles/mixins";
+
   .smile-tab-item {
     position: relative;
     padding: 1em;

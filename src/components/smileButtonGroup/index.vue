@@ -24,6 +24,9 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "~styles/vars";
+  @import "~styles/mixins";
+
   .smile-button-group {
     display: inline-flex;
     vertical-align: top;

@@ -74,6 +74,9 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "~styles/vars";
+  @import "~styles/mixins";
+
   .smile-col {
     display: inline-block;
     @for $i from 1 through 24 {

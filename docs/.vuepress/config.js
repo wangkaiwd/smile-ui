@@ -2,9 +2,10 @@
  * Created by wangkai on 2019/4/16
  */
 const path = require('path');
+const resolve = dir => path.resolve(__dirname, `../../src/${dir}/`);
 module.exports = {
   title: 'Smile UI',
-  description: 'Enjoy what you are doing',
+  description: '晨光过后，便是微笑。Enjoy what you are doing！',
   base: '/smile-ui/',
   head: [
     ['link', { rel: 'icon', href: '/icon.png' }]

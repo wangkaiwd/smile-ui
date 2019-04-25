@@ -61,6 +61,9 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "~styles/vars";
+  @import "~styles/mixins";
+
   .smile-message {
     position: fixed;
     display: flex;

@@ -53,6 +53,9 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "~styles/vars";
+  @import "~styles/mixins";
+
   @mixin btn-type($class,$color) {
     &.#{$class} {
       background-color: $color;

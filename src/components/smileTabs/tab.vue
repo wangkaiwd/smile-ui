@@ -75,6 +75,9 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "~styles/vars";
+  @import "~styles/mixins";
+
   .smile-tab {
     &-header {
       position: relative;
