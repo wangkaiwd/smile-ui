@@ -2,6 +2,12 @@
 
 <ClientOnly>
 <template>
-  <ShowComponent></ShowComponent>
+  <ShowComponent>
+    <template #component-body>
+      <ShowComponentItem>
+        <smile-button>按钮</smile-button>
+      </ShowComponentItem>
+    </template>
+  </ShowComponent>
 </template>
 </ClientOnly>

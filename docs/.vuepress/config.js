@@ -39,6 +39,18 @@ module.exports = {
   },
   chainWebpack: (config) => {
     // vuePress中的别名
-    config.resolve.alias.set('@', path.resolve(__dirname, '../../src'));
+    config.resolve
+      .alias
+      .set('@', resolve(''))
+      .set('utils', resolve('utils'))
+      .set('http', resolve('http'))
+      .set('components', resolve('components'))
+      .set('assets', resolve('assets'))
+      .set('styles', resolve('assets/styles'))
+      .set('img', resolve('assets/img'))
+      .end()
+      // 扩展名省略
+      .extensions
+      .add('.scss');
   }
 };
