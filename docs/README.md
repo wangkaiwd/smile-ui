@@ -2,7 +2,7 @@
 home: true
 heroImage: /images/background-docs.jpg
 actionText: 快速上手 →
-actionLink: /common/icon
+actionLink: /common/button
 features:
 - title: 简洁快速
   details: 除vue生态相关外，基本无其它第三方依赖，保证代码的体积。

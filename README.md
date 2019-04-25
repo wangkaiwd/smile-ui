@@ -22,7 +22,6 @@
 1. 优化现有代码
 ##### 中级组件
 * `collapse`组件
-* `tabs`组件
 * `popover`组件
 * `sticky`组件
 * `pagination`分页
@@ -45,3 +44,13 @@
 
 ##### 进阶
 尝试写测试覆盖率
+
+#### `vuePress`踩坑
+
+* `/`默认代表`/README.md`
+* `markdown`中使用`vue`语法，以及在`vue`语法中使用`markdown`代码块
+* 加载`favicon`图标
+* `code-block`组件过渡动画优化
+* 应用级配置：`enhanceApp.js`
+* `scss`全局导入在`vuePress`中如何配置
+* `icon`组件引入的`svg`: 在`main.js`中引入`svg`，打包成功

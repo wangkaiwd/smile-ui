@@ -9,7 +9,6 @@
 </template>
 
 <script>
-  import 'utils/svg';
 
   export default {
     name: 'SmileIcon',
