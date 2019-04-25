@@ -19,19 +19,22 @@
       </div>
       <footer class="show-component-body-footer">design by wangkaiwd</footer>
     </div>
-    <div class="show-component-code-wrapper">
+    <!--
+    css transition: height 0 to height auto
+    :https://stackoverflow.com/questions/3508605/how-can-i-transition-height-0-to-height-auto-using-css
+     -->
+    <div class="show-component-code-wrapper" :class="{expanded}">
       <slot name="component-code"></slot>
     </div>
   </div>
 </template>
 
 <script>
-
   export default {
     name: 'ShowComponent',
     data () {
       return {
-        expanded: false
+        expanded: false,
       };
     },
     methods: {
@@ -71,15 +74,21 @@
       margin: 40px 0 40px 0;
       padding: 40px 24px 16px;
     }
+    &-code-wrapper {
+      max-height: 0px;
+      overflow: auto;
+      transition: all 1s;
+      &.expanded {
+        max-height: 260px;
+      }
+    }
     &-body-placeholder {
       margin-top: -10px;
     }
     &-body-content {
       margin-top: 0;
       margin-bottom: 24px;
-      &:first-child {
-        margin-top: 0;
-      }
+      &:first-child {margin-top: 0;}
     }
     &-body-header {
       position: absolute;
