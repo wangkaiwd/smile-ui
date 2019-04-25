@@ -25,6 +25,7 @@
 <style lang="scss" scoped>
   .show-component-item {
     margin-top: 10px;
+    margin-left: 10px;
     h4 {
       margin: 0 0 10px 0;
       font-weight: 500;

@@ -1,7 +1,7 @@
 <template>
   <div class="show-component">
     <div class="show-component-title">
-      <h4>类型</h4>
+      <h4 class="show-component-label">{{label}}</h4>
       <button class="show-component-button" @click="onClick">
         <smile-icon
           class="show-component-icon"
@@ -32,6 +32,12 @@
 <script>
   export default {
     name: 'ShowComponent',
+    props: {
+      label: {
+        type: String,
+        required: true
+      }
+    },
     data () {
       return {
         expanded: false,
@@ -51,19 +57,25 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid #000;
+      border-bottom: 1px solid #a6a6a6;
     }
+    /*&-label {
+      font-size: 20px;
+      font-weight: bold;
+    }*/
     &-button {
       display: flex;
       align-items: center;
+      justify-content: center;
       background-color: #fff;
-      border: 1px solid #ccc;
+      border: 1px solid #a6a6a6;
       padding: 0.5em 1em;
       border-radius: 4px;
     }
     &-icon {
-      color: #42b983;font-size: 14px;
-      transition: all .2s;
+      font-size: 16px;
+      color: #42b983;
+      transition: all .4s;
       margin-right: 4px;
       &.expanded {transform: rotate(90deg);}
     }
@@ -71,35 +83,25 @@
       position: relative;
       border: 2px solid #ddd;
       background: #fff;
-      margin: 40px 0 40px 0;
-      padding: 40px 24px 16px;
+      margin: 32px 0 14px;
+      padding: 40px 24px 26px;
     }
-    /*通过设置max-height来实现过渡*/
-    /*&-code-wrapper {
-      opacity: 0;
-      max-height: 0px;
-      transition: all 1s;
+    /*
+    通过设置max-height来实现过渡
+    问题：会出现滚动条,所以只针对max-height来进行过渡
+    */
+    &-code-wrapper {
+      max-height: 0; // 这里要设置max-height,设置为height不会有过渡效果
+      transition: max-height .6s;
       overflow: hidden;
       &.expanded {
-        opacity: 1;
         max-height: 260px;
-      }
-    }*/
-    /*通过设置scaleY 和 transform-origin:top来实现过渡*/
-    &-code-wrapper {
-      opacity: 0;
-      max-height: 260px;
-      transform: scaleY(0);
-      overflow: auto;
-      transition: all .4s;
-      transform-origin: top;
-      &.expanded {
-        transform: scaleY(1);
-        opacity: 1;
+        overflow: auto;
       }
     }
     &-body-placeholder {
       margin-top: -10px;
+      margin-left: -10px;
     }
     &-body-content {
       margin-top: 0;
