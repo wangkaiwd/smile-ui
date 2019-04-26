@@ -29,7 +29,6 @@ const splitFilename = (filePath) => {
 /**
  * 自动注册全局Vue组件
  * @param Vue Vue构造函数
- * @param filterName 不需要注册的文件或目录名
  */
 const autoRegisterComponent = (Vue) => {
   const requireComponent = require.context(
