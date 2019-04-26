@@ -21,8 +21,13 @@
     }
   };
 </script>
-
+<style lang="scss">
+  .show-component-item {
+    @import "~styles/reset";
+  }
+</style>
 <style lang="scss" scoped>
+
   .show-component-item {
     margin-top: 10px;
     margin-left: 10px;

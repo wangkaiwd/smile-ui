@@ -4,15 +4,22 @@
       <smile-tab
         :select.sync="name"
         @on-change="onChange"
-        :is-open-animation="false"
       >
         <smile-tab-item title="tab1" name="tab1">内容1</smile-tab-item>
         <smile-tab-item title="tab2" name="tab2">内容2</smile-tab-item>
         <smile-tab-item title="tab3" name="tab3">内容3</smile-tab-item>
         <smile-tab-item title="tab4" name="tab4">内容4</smile-tab-item>
-        <smile-tab-item title="tab5" name="tab5">内容5</smile-tab-item>
-        <smile-tab-item title="tab6" name="tab6">内容6</smile-tab-item>
-        <smile-tab-item title="tab7" name="tab7">内容7</smile-tab-item>
+      </smile-tab>
+    </div>
+    <div class="component-wrapper">
+      <smile-tab
+        :select.sync="name1"
+        @on-change="onChange"
+      >
+        <smile-tab-item title="tab1" name="tab1">内容1</smile-tab-item>
+        <smile-tab-item title="tab2" name="tab2">内容2</smile-tab-item>
+        <smile-tab-item title="tab3" name="tab3">内容3</smile-tab-item>
+        <smile-tab-item title="tab4" name="tab4">内容4</smile-tab-item>
       </smile-tab>
     </div>
   </div>
@@ -23,7 +30,8 @@
     name: 'App',
     data () {
       return {
-        name: 'tab1'
+        name: 'tab1',
+        name1: 'tab2'
       };
     },
     mounted () {

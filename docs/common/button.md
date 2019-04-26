@@ -184,6 +184,90 @@
   ```
    </template>
   </ShowComponent>
+  <ShowComponent label="按钮组">
+    <template #component-body>
+      <ShowComponentItem>
+        <smile-button-group>
+          <smile-button 
+            icon="left"
+            type="secondary"
+          >
+            left
+          </smile-button>
+          <smile-button
+            type="secondary"
+          >
+            middle
+          </smile-button>
+          <smile-button
+            type="secondary"
+            icon="right"
+            icon-position="right"
+          >
+            right
+          </smile-button>
+        </smile-button-group>  
+      </ShowComponentItem>
+      <ShowComponentItem>
+        <smile-button-group>
+          <smile-button 
+            icon="left"
+          >
+            left
+          </smile-button>
+          <smile-button>
+            middle
+          </smile-button>
+          <smile-button
+            icon="right"
+            icon-position="right"
+          >
+            right
+          </smile-button>
+        </smile-button-group>  
+      </ShowComponentItem>
+    </template>
+    <template #component-code>
+    
+  ```vue
+<smile-button-group>
+  <smile-button 
+    icon="s-left"
+    type="secondary"
+  >
+    left
+  </smile-button>
+  <smile-button
+    type="secondary"
+  >
+    middle
+  </smile-button>
+  <smile-button
+    type="secondary"
+    icon="s-right"
+  >
+    right
+  </smile-button>
+</smile-button-group>
+<smile-button-group>
+ <smile-button 
+   icon="left"
+ >
+   left
+ </smile-button>
+ <smile-button>
+   middle
+ </smile-button>
+ <smile-button
+   icon="right"
+   icon-position="right"
+ >
+   right
+ </smile-button>
+</smile-button-group>  
+  ```
+   </template>
+  </ShowComponent>
 </template>
 </ClientOnly>
 
@@ -209,3 +293,12 @@ export default {
   }
 };
 </script>
+
+### `API`
+|    参数      | 说明 | 类型 | 默认值 |
+| ----------   | ---  | ---- | ------ | 
+| type         | 设置按钮类型  |string| primary|
+| icon         | 按钮图标  | string | - |
+| iconPosition | 按钮图标位置  | string | left |
+| loading      | 设置按钮载入状态  | boolean | false |
+| disabled     | 按钮禁用状态  | boolean | false|

@@ -1,9 +1,9 @@
 <template>
-  <transition name="slide" :css="$parent.isOpenAnimation" mode="out-in">
-    <div class="smile-tab-item" v-if="$parent.select === name">
-      <slot></slot>
-    </div>
-  </transition>
+  <!--  <transition name="slide" :css="$parent.isOpenAnimation">-->
+  <div class="smile-tab-item" v-if="$parent.select === name" ref="item">
+    <slot></slot>
+  </div>
+  <!--  </transition>-->
 </template>
 
 <script>
@@ -13,6 +13,7 @@
       title: { type: String, required: true },
       name: { type: String, required: true }
     },
+    watch: {},
     computed: {},
     mounted () {
     }
@@ -24,20 +25,8 @@
   @import "~styles/mixins";
 
   .smile-tab-item {
-    position: relative;
+    width: 100%;
+    flex-shrink: 0;
     padding: 1em;
-    &.slide-enter {
-      opacity: 0;
-      transform: translateX(100%);
-    }
-    &.slide-leave-to {
-      transform: translateX(-100%);
-      opacity: 0;
-    }
-    &.slide-enter-active,
-    &.slide-leave-active {
-      position: absolute;
-      transition: all .4s;
-    }
   }
 </style>

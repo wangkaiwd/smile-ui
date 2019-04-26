@@ -50,7 +50,6 @@ const autoRegisterComponent = (Vue) => {
     } else {
       componentName = `Smile${firstLetterToUp(fileName)}`;
     }
-    console.log('name', componentName, componentConfig);
     Vue.component(componentName, componentConfig.default || componentConfig);
   });
 };

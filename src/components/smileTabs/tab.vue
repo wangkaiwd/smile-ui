@@ -13,7 +13,9 @@
       </li>
       <span class="smile-tab-header-line" ref="headerLine"></span>
     </ul>
-    <slot></slot>
+    <div class="smile-tab-content">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
@@ -22,10 +24,10 @@
     name: 'tab',
     props: {
       select: { type: String },
-      isOpenAnimation: {
-        type: Boolean,
-        default: true
-      }
+      // isOpenAnimation: {
+      //   type: Boolean,
+      //   default: true
+      // }
     },
     watch: {
       select (newVal) {
@@ -91,6 +93,10 @@
       height: 2px;
       background-color: $primary;
       transition: all 0.4s;
+    }
+    &-content {
+      display: flex;
+      overflow: hidden;
     }
     &-header-item {
       &.active {

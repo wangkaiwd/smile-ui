@@ -51,7 +51,27 @@
     }
   };
 </script>
+<style>
+  /* 设置滚动条的样式 */
 
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* 滚动槽 */
+  ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset006pxrgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+  }
+
+  /* 滚动条滑块 */
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: inset006pxrgba(0, 0, 0, 0.5);
+  }
+</style>
 <style lang="scss" scoped>
   .show-component {
     &-title {
