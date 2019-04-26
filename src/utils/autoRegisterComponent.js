@@ -31,7 +31,7 @@ const splitFilename = (filePath) => {
  * @param Vue Vue构造函数
  * @param filterName 不需要注册的文件或目录名
  */
-const autoRegisterComponent = (Vue, filterName) => {
+const autoRegisterComponent = (Vue) => {
   const requireComponent = require.context(
     // 其组件目录的相对路径
     '../components',
@@ -47,14 +47,8 @@ const autoRegisterComponent = (Vue, filterName) => {
     let componentName;
     if (fileName === 'message') {return;}
     if (fileName === 'index') {
-      if (dirName === filterName) {
-        return;
-      }
       componentName = firstLetterToUp(dirName);
     } else {
-      if (fileName === filterName) {
-        return;
-      }
       componentName = `Smile${firstLetterToUp(fileName)}`;
     }
     console.log('name', componentName, componentConfig);
