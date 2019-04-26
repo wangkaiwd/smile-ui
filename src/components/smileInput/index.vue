@@ -31,7 +31,7 @@
 </template>
 
 <script>
-  import SmileIcon from '../smileIcon';
+  // import SmileIcon from '../smileIcon';
 
   /**
    * 封装组件使用：
@@ -53,7 +53,7 @@
     name: 'SmileInput',
     // 开启之后仅仅会将子组件根元素上的属性和事件删除，并结合$attrs和$listener绑定到子组件中需要的元素上
     inheritAttrs: false,
-    components: { SmileIcon },
+    // components: { SmileIcon },
     props: {
       prefix: String,
       value: {

@@ -5,7 +5,6 @@ import 'styles/base';
 import './registerServiceWorker';
 import autoRegisterComponent from 'utils/autoRegisterComponent';
 import message from './components/smileMessage';
-import 'utils/svg';
 
 Vue.config.productionTip = false;
 Vue.use(message);

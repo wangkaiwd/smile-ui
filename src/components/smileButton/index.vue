@@ -13,11 +13,11 @@
 </template>
 
 <script>
-  import SmileIcon from '../smileIcon';
+  // import SmileIcon from '../smileIcon';
 
   export default {
     name: 'SmileButton',
-    components: { SmileIcon },
+    // components: { SmileIcon },
     props: {
       type: {
         type: String,

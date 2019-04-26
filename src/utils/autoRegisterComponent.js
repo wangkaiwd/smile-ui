@@ -29,8 +29,9 @@ const splitFilename = (filePath) => {
 /**
  * 自动注册全局Vue组件
  * @param Vue Vue构造函数
+ * @param filterName 不需要注册的文件或目录名
  */
-const autoRegisterComponent = (Vue) => {
+const autoRegisterComponent = (Vue, filterName) => {
   const requireComponent = require.context(
     // 其组件目录的相对路径
     '../components',
@@ -46,8 +47,17 @@ const autoRegisterComponent = (Vue) => {
     let componentName;
     if (fileName === 'message') {return;}
     if (fileName === 'index') {
+      if (dirName === filterName) {
+        return;
+      }
       componentName = firstLetterToUp(dirName);
-    } else {componentName = `Smile${firstLetterToUp(fileName)}`;}
+    } else {
+      if (fileName === filterName) {
+        return;
+      }
+      componentName = `Smile${firstLetterToUp(fileName)}`;
+    }
+    console.log('name', componentName, componentConfig);
     Vue.component(componentName, componentConfig.default || componentConfig);
   });
 };
