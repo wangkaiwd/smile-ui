@@ -2,80 +2,267 @@
 
 <ClientOnly>
 <template>
-  <ShowComponent label="例子1">
+  <ShowComponent label="基础栅格">
     <template #component-body>
       <ShowComponentItem position="vertical">
-        <smile-layout>
-          <smile-header class="demo-header">Header</smile-header>
-          <smile-content class="demo-content">Content</smile-content>
-          <smile-footer class="demo-footer">Footer</smile-footer>
-        </smile-layout>
+        <smile-row class="demo-row">
+          <smile-col :span="12" class="demo-col">col-12</smile-col>
+          <smile-col :span="12" class="demo-col">col-12</smile-col>
+        </smile-row>
+        <smile-row class="demo-row">
+          <smile-col :span="6" class="demo-col">col-6</smile-col>
+          <smile-col :span="6" class="demo-col">col-6</smile-col>
+          <smile-col :span="6" class="demo-col">col-6</smile-col>
+          <smile-col :span="6" class="demo-col">col-6</smile-col>
+        </smile-row>
       </ShowComponentItem>
     </template>
   <template #component-code>
 
   ```vue
-  <smile-layout>
-    <smile-header class="header">Header</smile-header>
-    <smile-content class="content">Content</smile-content>
-    <smile-footer class="footer">Footer</smile-footer>
-  </smile-layout>
+  <template>
+    <smile-row class="demo-row">
+      <smile-col :span="12" class="demo-col">col-12</smile-col>
+      <smile-col :span="12" class="demo-col">col-12</smile-col>
+    </smile-row>
+    <smile-row class="demo-row">
+      <smile-col :span="6" class="demo-col">col-6</smile-col>
+      <smile-col :span="6" class="demo-col">col-6</smile-col>
+      <smile-col :span="6" class="demo-col">col-6</smile-col>
+      <smile-col :span="6" class="demo-col">col-6</smile-col>
+    </smile-row>
+  </template>
+  <style lang="scss" scoped>
+  .demo-row {
+    &:not(:first-child) {
+      margin-top: 20px;
+    }
+    .demo-col {
+      text-align: center;
+      line-height: 40px;
+      height: 40px;
+      color: #fff;
+    }
+    .demo-col:nth-child(even) {
+      background-color: rgba(0, 160, 233, 0.7);
+    }
+    .demo-col:nth-child(odd) {
+      background-color: #00a0e9;
+    }
+  }
+  </style>
   ```
   </template>
   </ShowComponent>
-  <ShowComponent label="例子2">
+  <ShowComponent label="区块间隔">
     <template #component-body>
       <ShowComponentItem position="vertical">
-        <smile-layout>
-          <smile-header class="demo-header">Header</smile-header>
-          <smile-layout>
-            <smile-aside class="demo-aside">Aside</smile-aside>
-            <smile-content class="demo-content">Content</smile-content>
-          </smile-layout>
-          <smile-footer class="demo-footer">Footer</smile-footer>
-        </smile-layout>
+        <smile-row class="demo-row" :gutter="16">
+          <smile-col :span="6">
+            <div class="demo-col">
+              col-6
+            </div>
+          </smile-col>
+          <smile-col :span="6">
+            <div class="demo-col">
+              col-6
+            </div>
+          </smile-col>
+          <smile-col :span="6">
+            <div class="demo-col">
+              col-6
+            </div>
+          </smile-col>
+          <smile-col :span="6">
+            <div class="demo-col">
+              col-6
+            </div>
+          </smile-col>
+        </smile-row>
       </ShowComponentItem>
     </template>
   <template #component-code>
 
   ```vue
   
-  <smile-layout>
-    <smile-header class="demo-header">Header</smile-header>
-    <smile-layout>
-      <smile-aside class="demo-aside">Aside</smile-aside>
-      <smile-content class="demo-content">Content</smile-content>
-    </smile-layout>
-    <smile-footer class="demo-footer">Footer</smile-footer>
-  </smile-layout>
+    <template>
+      <smile-row class="demo-row" :gutter="16">
+        <smile-col :span="6">
+          <div class="demo-col">
+            col-6
+          </div>
+        </smile-col>
+        <smile-col :span="6">
+          <div class="demo-col">
+            col-6
+          </div>
+        </smile-col>
+        <smile-col :span="6">
+          <div class="demo-col">
+            col-6
+          </div>
+        </smile-col>
+        <smile-col :span="6">
+          <div class="demo-col">
+            col-6
+          </div>
+        </smile-col>
+      </smile-row>
+    </template>
+    <style lang="scss" scoped>
+    .demo-row {
+      &:not(:first-child) {
+        margin-top: 20px;
+      }
+      .demo-col {
+        text-align: center;
+        line-height: 40px;
+        height: 40px;
+        color: #fff;
+      }
+      .demo-col:nth-child(even) {
+        background-color: rgba(0, 160, 233, 0.7);
+      }
+      .demo-col:nth-child(odd) {
+        background-color: #00a0e9;
+      }
+    }
+    </style>
   ```
   </template>
   </ShowComponent>
-  <ShowComponent label="例子3">
+  <ShowComponent label="列偏移">
     <template #component-body>
       <ShowComponentItem position="vertical">
-        <smile-layout>
-          <smile-aside class="demo-aside">Aside</smile-aside>
-          <smile-layout>
-            <smile-header class="demo-header">Header</smile-header>
-            <smile-content class="demo-content">Content</smile-content>
-            <smile-footer class="demo-footer">Footer</smile-footer>
-          </smile-layout>
-        </smile-layout>
+        <smile-row class="demo-row">
+          <smile-col :offset="4" :span="6" class="demo-col">col-6</smile-col>
+          <smile-col :span="6" class="demo-col">col-6</smile-col>
+          <smile-col :span="6" class="demo-col">col-6</smile-col>
+        </smile-row>
       </ShowComponentItem>
     </template>
   <template #component-code>
 
   ```vue
   
-  <smile-layout>
-    <smile-aside class="demo-aside">Aside</smile-aside>
-    <smile-layout>
-      <smile-header class="demo-header">Header</smile-header>
-      <smile-content class="demo-content">Content</smile-content>
-      <smile-footer class="demo-footer">Footer</smile-footer>
-    </smile-layout>
-  </smile-layout>
+    <template>
+      <smile-row class="demo-row">
+        <smile-col :offset="4" :span="6" class="demo-col">col-6</smile-col>
+        <smile-col :span="6" class="demo-col">col-6</smile-col>
+        <smile-col :span="6" class="demo-col">col-6</smile-col>
+      </smile-row>
+    </template>
+    <style lang="scss" scoped>
+    .demo-row {
+      &:not(:first-child) {
+        margin-top: 20px;
+      }
+      .demo-col {
+        text-align: center;
+        line-height: 40px;
+        height: 40px;
+        color: #fff;
+      }
+      .demo-col:nth-child(even) {
+        background-color: rgba(0, 160, 233, 0.7);
+      }
+      .demo-col:nth-child(odd) {
+        background-color: #00a0e9;
+      }
+    }
+    </style>
+  ```
+  </template>
+  </ShowComponent>
+  <ShowComponent label="flex布局">
+    <template #component-body>
+      <ShowComponentItem position="vertical">
+        <smile-row type="flex" justify="between" class="demo-row">
+          <smile-col :span="6" class="demo-col">col-6</smile-col>
+          <smile-col :span="6" class="demo-col">col-6</smile-col>
+        </smile-row>
+        <smile-row type="flex" justify="between" align="center" class="demo-row">
+          <smile-col :span="8" class="demo-col" style="height:80px">col-8</smile-col>
+          <smile-col :span="8" class="demo-col">col-8</smile-col>
+        </smile-row>
+      </ShowComponentItem>
+    </template>
+  <template #component-code>
+  
+   ```vue
+    
+    <template>
+      <smile-row type="flex" justify="between" class="demo-row">
+        <smile-col :span="6" class="demo-col">col-6</smile-col>
+        <smile-col :span="6" class="demo-col">col-6</smile-col>
+      </smile-row>
+      <smile-row type="flex" justify="between" align="center" class="demo-row">
+        <smile-col :span="8" class="demo-col" style="height:80px">col-8</smile-col>
+        <smile-col :span="8" class="demo-col">col-8</smile-col>
+      </smile-row>
+    </template>
+    <style lang="scss" scoped>
+    .demo-row {
+      &:not(:first-child) {
+        margin-top: 20px;
+      }
+      .demo-col {
+        text-align: center;
+        line-height: 40px;
+        height: 40px;
+        color: #fff;
+      }
+      .demo-col:nth-child(even) {
+        background-color: rgba(0, 160, 233, 0.7);
+      }
+      .demo-col:nth-child(odd) {
+        background-color: #00a0e9;
+      }
+    }
+    </style>
+  ```
+  </template>
+  </ShowComponent>
+  <ShowComponent label="响应式">
+    <template #component-body>
+      <ShowComponentItem position="vertical">
+        <smile-row class="demo-row">
+          <smile-col :phone="{span:12}" :pc="{span:6}" class="demo-col">col-6</smile-col>
+          <smile-col :phone="{span:12}" :pc="{span:6}" class="demo-col">col-6</smile-col>
+          <smile-col :phone="{span:12}" :pc="{span:6}" class="demo-col">col-6</smile-col>
+        </smile-row>
+      </ShowComponentItem>
+    </template>
+  <template #component-code>
+
+  ```vue
+  
+    <template>
+      <smile-row class="demo-row">
+        <smile-col :phone="{span:12}" :pc="{span:6}" class="demo-col">col-6</smile-col>
+        <smile-col :phone="{span:12}" :pc="{span:6}" class="demo-col">col-6</smile-col>
+        <smile-col :phone="{span:12}" :pc="{span:6}" class="demo-col">col-6</smile-col>
+      </smile-row>
+    </template>
+    <style lang="scss" scoped>
+    .demo-row {
+      &:not(:first-child) {
+        margin-top: 20px;
+      }
+      .demo-col {
+        text-align: center;
+        line-height: 40px;
+        height: 40px;
+        color: #fff;
+      }
+      .demo-col:nth-child(even) {
+        background-color: rgba(0, 160, 233, 0.7);
+      }
+      .demo-col:nth-child(odd) {
+        background-color: #00a0e9;
+      }
+    }
+    </style>
   ```
   </template>
   </ShowComponent>
@@ -83,24 +270,25 @@
 </ClientOnly>
 
 <style lang="scss" scoped>
-.demo-header,
-.demo-footer {
-  background-color: #7dbcea;
-  color: #fff;
-  text-align: center;
-  line-height: 60px;
-}
-.demo-content {
-  background-color: rgba(16, 142, 233, 1);
-  color: #fff;
-  text-align: center;
-  line-height: 120px;
-}
-.demo-aside {
-  color: #fff;
-  text-align: center;
-  line-height: 120px;
-  background-color: #3ba0e9;
+.demo-row {
+  display: flex;
+  flex-wrap: wrap;
+  &:not(:first-child) {
+    margin-top: 20px;
+  }
+  .demo-col {
+    flex-shrink: 0;
+    text-align: center;
+    line-height: 40px;
+    height: 40px;
+    color: #fff;
+  }
+  .demo-col:nth-child(even) {
+    background-color: rgba(0, 160, 233, 0.7);
+  }
+  .demo-col:nth-child(odd) {
+    background-color: #00a0e9;
+  }
 }
 </style>
 

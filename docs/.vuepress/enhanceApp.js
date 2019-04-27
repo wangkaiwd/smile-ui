@@ -13,6 +13,8 @@ import SmileHeader from 'components/smileLayout/header';
 import SmileFooter from 'components/smileLayout/footer';
 import SmileContent from 'components/smileLayout/content';
 import SmileAside from 'components/smileLayout/aside';
+import SmileRow from 'components/smileGrid/row';
+import SmileCol from 'components/smileGrid/col';
 
 export default ({ Vue }) => {
   Vue.component('SmileButton', SmileButton);
@@ -25,5 +27,7 @@ export default ({ Vue }) => {
   Vue.component('SmileHeader', SmileHeader);
   Vue.component('SmileAside', SmileAside);
   Vue.component('SmileContent', SmileContent);
+  Vue.component('SmileRow', SmileRow);
+  Vue.component('SmileCol', SmileCol);
   Vue.use(message);
 }
