@@ -297,15 +297,19 @@
 #### `SmileRow`
 |    参数      | 说明 | 类型 | 默认值 |
 | ----------   | ---  | ---- | ------ | 
-| align | 输入框头部图标 |string| _ |
-| gutter | 绑定值 | string/number | _ |
-| allowClear | 是否可清空  | boolean | false |
-| errorMsg   | 错误提示信息  | string/number | _ |
+| gutter | 输入框头部图标 |string| _ |
+| type | 绑定值 | string/number | _ |
+| justify | 是否可清空  | boolean | false |
+| align   | 错误提示信息  | string/number | _ |
 
 #### `SmileCow`
 |    参数      | 说明 | 类型 | 默认值 |
 | ----------   | ---  | ---- | ------ | 
-| prefix | 输入框头部图标 |string| _ |
-| value/v-model | 绑定值 | string/number | _ |
-| allowClear | 是否可清空  | boolean | false |
-| errorMsg   | 错误提示信息  | string/number | _ |
+| span | 输入框头部图标 |string| _ |
+| offset | 绑定值 | string/number | _ |
+| iphone | 是否可清空  | boolean | false |
+| ipad   | 错误提示信息  | string/number | _ |
+| narrowPc   | 错误提示信息  | string/number | _ |
+| pc   | 错误提示信息  | string/number | _ |
+| widePc   | 错误提示信息  | string/number | _ |
+| largePc   | 错误提示信息  | string/number | _ |
