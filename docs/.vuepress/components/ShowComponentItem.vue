@@ -15,7 +15,7 @@
         type: String,
         default: 'horizontal',
         validator (val) {
-          return ['horizontal', 'vertical '].includes(val);
+          return ['horizontal', 'vertical'].includes(val);
         }
       }
     }
