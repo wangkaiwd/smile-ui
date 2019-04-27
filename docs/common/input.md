@@ -136,7 +136,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.password {
+.smile-input.password {
   display: block;
   margin-top: 10px;
 }
