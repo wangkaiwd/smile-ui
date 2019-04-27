@@ -24,13 +24,11 @@
           return ['top', 'middle', 'bottom'].includes(val);
         }
       },
-      duration: { type: Number, default: 3000 },
-      showClose: { type: Boolean, default: false },
+      duration: { type: Number, default: 2000 },
       confirmClose: {
         type: Function,
         default: () => {}
       },
-      // enableHtml: { type: Boolean, default: false } // 此功能谨慎开启
     },
     data () {
       return {
@@ -73,6 +71,7 @@
     padding: 15px 15px 15px 20px;
     border-radius: $border-radius-md;
     min-width: 380px;
+    z-index: 99999;
     &-wrapper {display: flex;}
     &-content {
       line-height: 1.2;

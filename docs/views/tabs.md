@@ -21,11 +21,9 @@
   <template>
     <smile-tab
       :select.sync="name"
-      @on-change="onChange"
-      :is-open-animation="false"
     >
       <smile-tab-item title="tab1" name="tab1">内容1</smile-tab-item>
-       <smile-tab-item title="tab2" name="tab2">内容2</smile-tab-item>
+      <smile-tab-item title="tab2" name="tab2">内容2</smile-tab-item>
       <smile-tab-item title="tab3" name="tab3">内容3</smile-tab-item>
       <smile-tab-item title="tab4" name="tab4">内容4</smile-tab-item>
     </smile-tab>
@@ -65,7 +63,7 @@
       @on-change="onChange"
     >
       <smile-tab-item title="tab1" name="tab1">内容1</smile-tab-item>
-       <smile-tab-item title="tab2" name="tab2">内容2</smile-tab-item>
+      <smile-tab-item title="tab2" name="tab2">内容2</smile-tab-item>
       <smile-tab-item title="tab3" name="tab3">内容3</smile-tab-item>
       <smile-tab-item title="tab4" name="tab4">内容4</smile-tab-item>
     </smile-tab>

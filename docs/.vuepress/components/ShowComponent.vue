@@ -103,6 +103,7 @@
       background: #fff;
       margin: 32px 0 14px;
       padding: 40px 24px 26px;
+      font-size: 14px;
     }
     /*
     通过设置max-height来实现过渡
