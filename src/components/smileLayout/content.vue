@@ -19,5 +19,6 @@
 
   .smile-content {
     flex: 1;
+    min-height: 120px;
   }
 </style>

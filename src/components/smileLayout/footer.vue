@@ -15,6 +15,6 @@
   @import "~styles/mixins";
 
   .smile-footer {
-    height: 60px;
+    min-height: 60px;
   }
 </style>

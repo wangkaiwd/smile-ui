@@ -71,6 +71,9 @@
     background: rgba(0, 0, 0, 0.2);
     -webkit-box-shadow: inset006pxrgba(0, 0, 0, 0.5);
   }
+  thead tr {
+    text-align: left;
+  }
 </style>
 <style lang="scss" scoped>
   .show-component {

@@ -15,6 +15,6 @@
   @import "~styles/mixins";
 
   .smile-header {
-    height: 60px;
+    min-height: 60px;
   }
 </style>

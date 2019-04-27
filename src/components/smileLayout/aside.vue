@@ -15,6 +15,6 @@
   @import "~styles/mixins";
 
   .smile-aside {
-    width: 200px;
+    min-width: 200px;
   }
 </style>
