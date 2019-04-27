@@ -22,6 +22,9 @@
       <ShowComponentItem>
         <smile-button type="info">Info</smile-button>
       </ShowComponentItem>
+      <ShowComponentItem>
+        <smile-button disabled type="info">Disabled</smile-button>
+      </ShowComponentItem>
     </template>
   <template #component-code>
 
@@ -32,6 +35,7 @@
   <smile-button type="warning">Warning</smile-button>
   <smile-button type="danger">Danger</smile-button>
   <smile-button type="info">Info</smile-button>
+  <smile-button disabled type="info">Disabled</smile-button>
   ```
   </template>
   </ShowComponent>
@@ -297,7 +301,7 @@ export default {
 ### `API`
 |    参数      | 说明 | 类型 | 默认值 |
 | ----------   | ---  | ---- | ------ | 
-| type         | 设置按钮类型  |string| primary|
+| type         | 设置按钮类型，可选值：primary,secondary,info,warning,danger |string| primary|
 | icon         | 按钮图标  | string | - |
 | iconPosition | 按钮图标位置  | string | left |
 | loading      | 设置按钮载入状态  | boolean | false |

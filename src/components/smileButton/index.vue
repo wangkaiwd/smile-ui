@@ -1,7 +1,7 @@
 <template>
   <div class="smile-button" @click="onClick">
     <button :class="buttonClasses" :disabled="disabled||loading">
-      <div class="smile-button-wrapper" :class="`icon-${iconPosition}`">
+      <div class="smile-button-wrapper" :class="`icon-${iconPosition}`" v-if="loading || icon">
         <smile-icon class="smile-button-loading" icon="loading" v-if="loading"></smile-icon>
         <smile-icon class="smile-button-icon" :icon="icon" v-if="icon && !loading"></smile-icon>
       </div>
@@ -67,10 +67,10 @@
       &:focus {box-shadow: 0 0 0 4px lighten($color, 30%);}
     }
     &.#{$class}.disabled {
-      cursor: default;
       border: 1px solid lighten($color, 15%);
       background-color: lighten($color, 15%);
       &:hover {background-color: lighten($color, 15%);}
+      cursor: not-allowed;
     }
   }
 

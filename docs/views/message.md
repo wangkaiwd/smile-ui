@@ -150,7 +150,7 @@
   ```
    </template>
    </ShowComponent>
-   <ShowComponent label="位置">
+   <ShowComponent label="手动关闭">
      <template #component-body>
        <ShowComponentItem>
         <smile-button
@@ -219,10 +219,11 @@
 </ClientOnly>
 
 ### `API`
-|    参数      | 说明 | 类型 | 默认值 |
+|    参数      | 说明 | 类型(或参数) | 默认值 |
 | ----------   | ---  | ---- | ------ | 
-| type         | 设置按钮类型  |string| primary|
-| icon         | 按钮图标  | string | - |
-| iconPosition | 按钮图标位置  | string | left |
-| loading      | 设置按钮载入状态  | boolean | false |
-| disabled     | 按钮禁用状态  | boolean | false|
+| type         | 设置提示信息类型 | string | info |
+| text         | 消息文字 | string | - |
+| autoClose | 是否自动关闭，如果设置为false,将会出现关闭按钮 | boolean | false |
+| position     |  设置消息的弹出位置 | string | top |
+| duration     | 动画的持续时间  | number | 2000(单位:ms) |
+| confirm-close| 点击关闭后触发 | _ | _ |
