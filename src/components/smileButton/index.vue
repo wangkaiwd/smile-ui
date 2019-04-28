@@ -64,7 +64,7 @@
         color: $dark;
       }
       &:hover {background-color: darken($color, 10%);}
-      &:focus {box-shadow: 0 0 0 4px lighten($color, 30%);}
+      &:focus {box-shadow: 0 0 0 3px lighten($color, 30%);}
     }
     &.#{$class}.disabled {
       border: 1px solid lighten($color, 15%);

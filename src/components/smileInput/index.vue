@@ -123,7 +123,7 @@
       border: 1px solid lighten($gray, 30%);
       color: $gray;
       &::placeholder {color: lighten($gray, 14%);}
-      &:focus {box-shadow: 0 0 0 4px lighten($primary, 30%);}
+      &:focus {box-shadow: 0 0 0 2px lighten($primary, 30%);}
       &.smile-input-prefix {
         padding-left: 22px;
       }
