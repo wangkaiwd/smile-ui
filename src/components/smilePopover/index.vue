@@ -1,10 +1,10 @@
 <template>
   <div class="smile-popover" :class="position">
-    <div class="smile-popover-trigger" ref="trigger" @click="onClick">
+    <div class="smile-popover-trigger" ref="trigger" @click.stop="onClick">
       <slot name="trigger">
       </slot>
     </div>
-    <div class="smile-popover-body" ref="body" :class="position" v-if="visible">
+    <div class="smile-popover-body" ref="body" :class="position" v-if="visible" @click.stop>
       <h3 class="smile-popover-body-title">
         {{title}}
       </h3>
@@ -39,6 +39,9 @@
     },
     computed: {},
     mounted () {
+      document.addEventListener('click', () => {
+        this.visible = false;
+      });
     },
     methods: {
       /**
