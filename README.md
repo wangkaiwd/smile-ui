@@ -17,7 +17,19 @@
 3. 对应的`flex`属性开启后`css`写法优化：
     ![row-flex](./shotscreen/row-flex.png)
 
+#### `vuePress`踩坑
+* `/`默认代表`/README.md`
+* `markdown`中使用`vue`语法，以及在`vue`语法中使用`markdown`代码块
+* 加载`favicon`图标
+* `code-block`组件过渡动画优化
+* 应用级配置：`enhanceApp.js`
+* `scss`全局导入在`vuePress`中如何配置
+* `icon`组件引入的`svg`由于用到了`BOM`和`DOM`会导致`vuePress`打包失败,使用项目中的`icon`组件不会有问题
+* `css`初始化样式引发的问题：盒模型
 
+#### 需要优化的地方
+1. input组件 disabled状态
+2. tab组件：a. 动画 b. 插槽 c. 整体功能梳理
 #### 之后计划
 1. 优化现有代码
 ##### 中级组件
@@ -43,14 +55,6 @@
 * 刮刮卡
 
 ##### 进阶
-尝试写测试覆盖率
+尝试写测试用例
 
-#### `vuePress`踩坑
 
-* `/`默认代表`/README.md`
-* `markdown`中使用`vue`语法，以及在`vue`语法中使用`markdown`代码块
-* 加载`favicon`图标
-* `code-block`组件过渡动画优化
-* 应用级配置：`enhanceApp.js`
-* `scss`全局导入在`vuePress`中如何配置
-* `icon`组件引入的`svg`: 在`main.js`中引入`svg`，打包成功
