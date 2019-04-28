@@ -57,7 +57,7 @@
   <ShowComponent label="区块间隔">
     <template #component-body>
       <ShowComponentItem position="vertical">
-        <smile-row class="demo-row" :gutter="16">
+        <smile-row class="demo-row" :gutter="8">
           <smile-col :span="6">
             <div class="demo-col">
               col-6
@@ -293,10 +293,9 @@
 </style>
 
 ### `API`
-
 #### `SmileRow`
 |  参数 | 说明 | 类型 | 默认值 |
-| ----------   | ---  | ---- |
+| ----- | ---  | ---- | ------ |
 | gutter | 栅格间隔 | number | 0 |
 | type | 布局模式，可选flex,现代浏览器下有效 | string | _ |
 | justify | flex布局下的水平排列方式,可选值：start,end,center,around,between  | string | _ |
@@ -304,7 +303,7 @@
 
 #### `SmileCow`
 |    参数      | 说明 | 类型 | 默认值 |
-| ----------   | ---  | ---- | ------ | 
+| ----------   | ---  | ---- | ------ |
 | span | 栅格占位格数 |number| _ |
 | offset | 栅格左侧的间隔格数 | number | _ |
 | iphone | `<576` 响应式栅格  | object | _ |

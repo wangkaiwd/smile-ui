@@ -29,6 +29,7 @@
 <style lang="scss" scoped>
 
   .show-component-item {
+    box-sizing: border-box;
     margin-top: 10px;
     margin-left: 10px;
     h4 {
