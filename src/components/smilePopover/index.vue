@@ -1,17 +1,17 @@
 <template>
-  <div class="smile-popover">
+  <div class="smile-popover" :class="position">
     <div class="smile-popover-trigger" ref="trigger" @click="onClick">
       <slot name="trigger">
       </slot>
     </div>
-    <div class="smile-popover-body" ref="body" v-if="visible">
+    <div class="smile-popover-body" ref="body" :class="position" v-if="visible">
       <h3 class="smile-popover-body-title">
         {{title}}
       </h3>
       <div class="smile-popover-body-content">
         {{content}}
       </div>
-      <div class="arrow" ref="arrow"></div>
+      <div class="arrow" ref="arrow" :class="position"></div>
     </div>
   </div>
 </template>
@@ -23,7 +23,14 @@
       title: {
         type: String
       },
-      content: String
+      content: String,
+      position: {
+        type: String,
+        default: 'bottom',
+        validator (val) {
+          return ['top', 'left', 'bottom', 'right'].includes(val);
+        }
+      }
     },
     data () {
       return {
@@ -52,23 +59,28 @@
       onClick () {
         this.visible = !this.visible;
         if (this.visible) {
-          this.$nextTick(() => {
-            this.setArrowPosition;
-            document.addEventListener('click', () => {
-              console.log('document listen click');
-              this.visible = false;
-            });
-          });
+          this.$nextTick(this.setArrowPosition);
         }
       },
       setArrowPosition () {
-        console.log('setPosition');
         const { trigger, arrow, body } = this.$refs;
-        const { width: triggerWidth, height: triggerHeight } = trigger.getBoundingClientRect();
-        const { width: arrowWidth, height: arrowHeight } = arrow.getBoundingClientRect();
-        arrow.style.left = `${triggerWidth / 2 - arrowWidth / 2}px`;
-        body.style.top = `${triggerHeight}px`;
-      }
+        const {
+          width: triggerWidth,
+          height: triggerHeight,
+          left: triggerLeft,
+          top: triggerTop
+        } = trigger.getBoundingClientRect();
+        const { width: arrowWidth } = arrow.getBoundingClientRect();
+        if (this.position === 'top') {
+          arrow.style.left = `${triggerWidth / 2 - arrowWidth / 2}px`;
+          body.style.left = `${triggerLeft}px`;
+          body.style.top = `${triggerTop}px`;
+        } else if (this.position === 'bottom') {
+          arrow.style.left = `${triggerWidth / 2 - arrowWidth / 2}px`;
+          body.style.left = `${triggerLeft}px`;
+          body.style.top = `${triggerTop + triggerHeight}px`;
+        }
+      },
     }
   };
 </script>
@@ -81,10 +93,14 @@
     position: relative;
     display: inline-block;
     &-body {
-      top: 0;
-      left: 0;
-      margin-top: 8px;
-      position: absolute;
+      position: fixed;
+      &.bottom {
+        margin-top: 8px;
+      }
+      &.top {
+        transform: translateY(-100%);
+        margin-top: -8px;
+      }
       min-width: 200px;
       max-width: 400px;
       background-color: #fff;
@@ -103,12 +119,21 @@
     }
     .arrow {
       position: absolute;
-      left: 0;
-      top: -8px;
+      &.bottom {
+        top: 0;
+        transform: translateY(-100%);
+        border-bottom: 8px solid #fff;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+      }
+      &.top {
+        bottom: 0;
+        transform: translateY(100%);
+        border-top: 8px solid #fff;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+      }
       width: 0;
-      border-bottom: 8px solid #fff;
-      border-left: 8px solid transparent;
-      border-right: 8px solid transparent;
     }
   }
 </style>
