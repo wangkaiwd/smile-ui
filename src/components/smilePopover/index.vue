@@ -70,7 +70,7 @@
           left: triggerLeft,
           top: triggerTop
         } = trigger.getBoundingClientRect();
-        const { width: arrowWidth } = arrow.getBoundingClientRect();
+        const { width: arrowWidth, height: arrowHeight } = arrow.getBoundingClientRect();
         if (this.position === 'top') {
           arrow.style.left = `${triggerWidth / 2 - arrowWidth / 2}px`;
           body.style.left = `${triggerLeft}px`;
@@ -79,6 +79,14 @@
           arrow.style.left = `${triggerWidth / 2 - arrowWidth / 2}px`;
           body.style.left = `${triggerLeft}px`;
           body.style.top = `${triggerTop + triggerHeight}px`;
+        } else if (this.position === 'left') {
+          arrow.style.top = `${triggerHeight / 2 - arrowHeight / 2}px`;
+          body.style.top = `${triggerTop}px`;
+          body.style.left = `${triggerLeft}px`;
+        } else if (this.position === 'right') {
+          arrow.style.top = `${triggerHeight / 2 - arrowHeight / 2}px`;
+          body.style.top = `${triggerTop}px`;
+          body.style.left = `${triggerLeft + triggerWidth}px`;
         }
       },
     }
@@ -100,6 +108,15 @@
       &.top {
         transform: translateY(-100%);
         margin-top: -8px;
+      }
+      &.left {
+        top: 0;
+        transform: translateX(-100%);
+        margin-left: -8px;
+      }
+      &.right {
+        top: 0;
+        margin-left: 8px;
       }
       min-width: 200px;
       max-width: 400px;
@@ -132,6 +149,20 @@
         border-top: 8px solid #fff;
         border-left: 8px solid transparent;
         border-right: 8px solid transparent;
+      }
+      &.left {
+        right: 0;
+        transform: translateX(100%);
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
+        border-left: 8px solid #fff;
+      }
+      &.right {
+        left: 0;
+        transform: translateX(-100%);
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
+        border-right: 8px solid #fff;
       }
       width: 0;
     }
