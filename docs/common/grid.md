@@ -296,20 +296,20 @@
 
 #### `SmileRow`
 |  参数 | 说明 | 类型 | 默认值 |
-| ----------   | ---  | ---- | ------ | 
-| gutter | 输入框头部图标 |string| _ |
-| type | 绑定值 | string/number | _ |
-| justify | 是否可清空  | boolean | false |
-| align   | 错误提示信息  | string/number | _ |
+| ----------   | ---  | ---- |
+| gutter | 栅格间隔 | number | 0 |
+| type | 布局模式，可选flex,现代浏览器下有效 | string | _ |
+| justify | flex布局下的水平排列方式,可选值：start,end,center,around,between  | string | _ |
+| align   | flex布局下的垂直布局方式，可选值：start,end,center  | string | _ |
 
 #### `SmileCow`
 |    参数      | 说明 | 类型 | 默认值 |
 | ----------   | ---  | ---- | ------ | 
-| span | 输入框头部图标 |string| _ |
-| offset | 绑定值 | string/number | _ |
-| iphone | 是否可清空  | boolean | false |
-| ipad   | 错误提示信息  | string/number | _ |
-| narrowPc   | 错误提示信息  | string/number | _ |
-| pc   | 错误提示信息  | string/number | _ |
-| widePc   | 错误提示信息  | string/number | _ |
-| largePc   | 错误提示信息  | string/number | _ |
+| span | 栅格占位格数 |number| _ |
+| offset | 栅格左侧的间隔格数 | number | _ |
+| iphone | `<576` 响应式栅格  | object | _ |
+| ipad   | `>=576` 响应式栅格   | object | _ |
+| narrowPc   | `>=768` 响应式栅格  | object | _ |
+| pc   | `>=992` 响应式栅格  | object | _ |
+| widePc   | `>=1200` 响应式栅格  | object | _ |
+| largePc   | `>=1600` 响应式栅格  | object | _ |
