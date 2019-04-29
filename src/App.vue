@@ -3,44 +3,10 @@
     <div class="component-wrapper">
       <smile-popover
         title="Title"
-        position="top"
-        content="这是内容，这是内容，"
       >
-        <template #trigger>
-          <smile-button>click</smile-button>
-        </template>
-      </smile-popover>
-    </div>
-    <div class="component-wrapper">
-      <smile-popover
-        title="Title"
-        position="bottom"
-        content="这是内容，这是内容，"
-      >
-        <template #trigger>
-          <smile-button>click</smile-button>
-        </template>
-      </smile-popover>
-    </div>
-    <div class="component-wrapper">
-      <smile-popover
-        title="Title"
-        position="right"
-        content="这是内容，这是内容，"
-      >
-        <template #trigger>
-          <smile-button>click</smile-button>
-        </template>
-      </smile-popover>
-    </div>
-    <div class="component-wrapper">
-      <smile-popover
-        title="Title"
-        position="left"
-        content="这是内容，这是内容，"
-      >
-        <template #trigger>
-          <smile-button>click</smile-button>
+        <smile-button>click</smile-button>
+        <template #content>
+          this is content one, this is content two
         </template>
       </smile-popover>
     </div>
@@ -61,7 +27,7 @@
 <style lang="scss" scoped>
   .app {
     .component-wrapper {
-      margin: 200px 400px 200px;
+      margin: 80px;
     }
   }
 </style>

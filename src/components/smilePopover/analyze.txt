@@ -1,14 +1,15 @@
 需求分析：
 1. 使用方式
     <smile-popover>
-      <template #trigger>
+      <template>
         <button>Click</button>
       </template>
-      <div>
+      <template #content>
         content
-      </div>
+      </template>
     </smile-popover>
-2. 触发方式： a. click  b. hover
+2. 触发方式： a. click  b. mouseenter
 3. 标题
 4. 位置： top bottom left right
-5. content:  a.传入文字  b.传入html
+5. content:  插槽
+6. 可以自己通过点击来关闭content
