@@ -10,8 +10,12 @@
 <script>
   /**
    * Popover组件的几个难点：
-   *  1. 父元素设置overflow:hidden;时该怎么办？
+   *  1. 父元素设置overflow:hidden;时会将popover弹出的内容隐藏掉
+   *      为了避免这种情况发生，我们通常将元素放入body之中，这样只会在给body设置overflow:hidden;的时候才会隐藏元素。
+   *      而由于body会占据页面中比较大的内容，而且用户很少为body设置overflow:hidden;，所以一般不会出现被overflow:hidden;属性
+   *      隐藏的情况。而不放入body中，popover的父元素只要设置overflow:hidden,那么在高度没有满足的情况，很有可能会隐藏弹出层。
    *  2. 不能阻止事件冒泡
+   *      阻断事件链会影响到用户的事件绑定
    *  3. 不让事件进行多余的监听
    *  4. 绑定document的click事件的时机：
    *      a. 为什么不在mounted钩子函数即组件挂载完毕进行事件监听？
