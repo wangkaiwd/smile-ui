@@ -44,6 +44,14 @@
           </div>
         </template>
       </smile-popover1>
+      <smile-popover1 style="">
+        <smile-button>click</smile-button>
+        <template #content>
+          <div>
+            this is popover content
+          </div>
+        </template>
+      </smile-popover1>
     </div>
   </div>
 </template>
@@ -59,6 +67,11 @@
     methods: {}
   };
 </script>
+<style>
+  body {
+    border: 4px solid green;
+  }
+</style>
 <style lang="scss" scoped>
   .app {
     .component-wrapper {
