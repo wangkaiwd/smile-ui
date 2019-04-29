@@ -3,7 +3,7 @@
     <div class="smile-popover-trigger" ref="trigger" @click="onClick">
       <slot></slot>
     </div>
-    <div class="smile-popover-content" ref="content" v-if="visible">
+    <div class="smile-popover-content" :class="`position-${position}`" ref="content" v-if="visible">
       <h3 class="smile-popover-content-header" v-if="title">{{title}}</h3>
       <div class="smile-popover-content-wrapper">
         <slot name="content"></slot>
@@ -30,16 +30,31 @@
    *    3:  冒泡阶段
    *
    *  要将content放入到body中，防止被overflow: hidden; 干掉
+   *
+   *  为什么不阻止事件冒泡？
+   *
+   *  获取页面中元素的位置：https://stackoverflow.com/questions/442404/retrieve-the-position-x-y-of-an-html-element
+   *    元素在视口的位置+屏幕滚动的位置
    */
   export default {
     name: 'SmilePopover',
     props: {
-      title: { type: String }
+      title: { type: String },
+      position: {
+        type: String,
+        default: 'bottom',
+        validator (value) {
+          return ['top', 'bottom', 'left', 'right'].includes(value);
+        }
+      }
     },
     data () {
       return {
         visible: false
       };
+    },
+    mounted () {
+      document.addEventListener('click', this.listenToDocument);
     },
     methods: {
       onClick () {
@@ -49,17 +64,48 @@
         }
       },
       contentPosition () {
-        const { trigger, content } = this.$refs;
+        const { content } = this.$refs;
+        const { positionConfig, position } = this;
         // 为什么要放到body里边？防止被其它元素的overflow:hidden;干掉
         document.body.appendChild(content);
+        content.style.left = positionConfig()[position].left + 'px';
+        content.style.top = positionConfig()[position].top + 'px';
+      },
+      positionConfig () {
+        const { trigger } = this.$refs;
         const {
           width: triggerWidth,
           height: triggerHeight,
           top: triggerTop,
           left: triggerLeft
         } = trigger.getBoundingClientRect();
-        content.style.left = `${triggerWidth / 2 + triggerLeft}px`;
-        content.style.top = `${triggerHeight + triggerTop}px`;
+        return {
+          top: {
+            left: triggerWidth / 2 + triggerLeft + window.scrollX,
+            top: triggerTop + window.scrollY
+          },
+          bottom: {
+            left: triggerWidth / 2 + triggerLeft + window.scrollX,
+            top: triggerHeight + triggerTop + window.scrollY
+          },
+          left: {
+            left: triggerLeft + window.scrollX,
+            top: triggerTop + triggerHeight / 2 + window.scrollY
+          },
+          right: {
+            left: triggerLeft + triggerWidth + window.scrollX,
+            top: triggerTop + triggerHeight / 2 + window.scrollY
+          }
+        };
+      },
+      listenToDocument (e) {
+        console.log('document click');
+        //  点击trigger和content 及 它们的后代节点都不会关闭
+        const { trigger, content } = this.$refs;
+        const isTriggerChild = trigger ? trigger.contains(e.target) : false;
+        const isContentChild = content ? content.contains(e.target) : false;
+        if (isTriggerChild || isContentChild) return;
+        this.visible = false;
       }
     }
   };
