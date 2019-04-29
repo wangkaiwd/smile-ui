@@ -132,10 +132,18 @@
     }
     &-content {
       position: absolute;
-      top: 0;
-      left: 0;
-      margin-top: 8px; // 空出三角形的位置
-      transform: translateX(-50%);
+      &.position-bottom {
+        margin-top: 8px; // 空出三角形的位置
+        transform: translateX(-50%);
+        .smile-popover-content-arrow {
+          top: -8px;
+          left: 50%;
+          transform: translateX(-50%);
+          border-bottom: 8px solid #fff;
+          border-left: 8px solid transparent;
+          border-right: 8px solid transparent;
+        }
+      }
       max-width: 200px;
       background-color: #fff;
       /*文章推荐：https://www.zhangxinxu.com/wordpress/2016/05/css3-filter-drop-shadow-vs-box-shadow/*/
@@ -156,14 +164,8 @@
     /*宽高为0，用border来设置三角形*/
     &-content-arrow {
       position: absolute;
-      top: -8px;
-      left: 50%;
-      transform: translateX(-50%);
       height: 0;
       width: 0;
-      border-bottom: 8px solid #fff;
-      border-left: 8px solid transparent;
-      border-right: 8px solid transparent;
     }
   }
 </style>
