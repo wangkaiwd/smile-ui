@@ -151,7 +151,9 @@
     display: inline-block;
     &-content {
       position: absolute;
-      max-width: 200px;
+      max-width: 300px;
+      line-height: 1.4;
+      word-break: break-all;
       background-color: #fff;
       filter: drop-shadow($box-shadow); // 阴影滤镜，实现content的阴影包含箭头
       border-radius: $border-radius-md;
