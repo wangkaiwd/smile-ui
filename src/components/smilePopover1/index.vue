@@ -1,8 +1,20 @@
 <template>
   <div class="smile-popover1" @click="onClick">
-    <slot></slot>
-    <div class="smile-popover1-content" v-if="visible">
-      <slot name="content"></slot>
+    <div class="smile-popover1-trigger" ref="trigger">
+      <slot></slot>
+    </div>
+    <!--    为什么第一回出现会闪？-->
+    <div
+      class="smile-popover1-content"
+      :class="`position-${position}`"
+      ref="content"
+      v-if="visible"
+    >
+      <div class="smile-popover1-content-header" v-if="title">{{title}}</div>
+      <div class="smile-popover1-content-wrapper">
+        <slot name="content"></slot>
+      </div>
+      <div class="smile-popover1-content-arrow"></div>
     </div>
   </div>
 </template>
@@ -17,57 +29,167 @@
    *  2. 不能阻止事件冒泡
    *      阻断事件链会影响到用户的事件绑定
    *  3. 不让事件进行多余的监听
-   *  4. 绑定document的click事件的时机：
-   *      a. 为什么不在mounted钩子函数即组件挂载完毕进行事件监听？
-   *          这样会在页面一开始的时候就会绑定事件，如果我们的popover组件在当前页面用到的比较多，那么每有一个就会绑定一个事件，在性能
-   *          上不怎么友好
-   *      b. 为什么不在切换content显示隐藏时，content为显示状态时进行事件监听？
-   *          这样会在前一个事件还未结束的时候就为document添加click事件，而在content的click的事件结束后，由于事件的冒泡机制，
-   *          就会触发document的click事件
-   *      比较好的绑定时机：在前content click 事件结束后马上进行绑定 document的click事件,将visible置为false,然后再将document
-   *                      的click事件移除,这样基本不会有多余的事件绑定
+   *      绑定document的click事件的时机：
+   *        a. 为什么不在mounted钩子函数即组件挂载完毕进行事件监听？
+   *           这样会在页面一开始的时候就会绑定事件，如果我们的popover组件在当前页面用到的比较多，那么每有一个就会绑定一个事件，在性能
+   *           上不怎么友好
+   *        b. 为什么不在切换content显示隐藏时，content为显示状态时进行事件监听？
+   *           这样会在前一个事件还未结束的时候就为document添加click事件，而在content的click的事件结束后，由于事件的冒泡机制，
+   *           就会触发document的click事件
+   *        比较好的绑定时机：在content click 事件结束后马上进行绑定 document的click事件,将visible置为false,然后再将document
+   *                          的click事件移除,这样基本不会有多余的事件绑定
    *
    * popover的难点并不是说控制弹出层的显示和隐藏，而是要帮用户写好弹出层的样式，控制弹出层的位置，以及不要有多余的事件监听。
    * 所以我们要做的最重要的功能就是帮用户写好css样式
    */
   export default {
     name: 'SmilePopover1',
+    props: {
+      title: {
+        props: String
+      },
+      position: {
+        type: String,
+        default: 'bottom',
+        validator (value) {
+          return ['top', 'bottom', 'left', 'right'].includes(value);
+        }
+      }
+    },
     data () {
       return {
         visible: false
       };
     },
     methods: {
-      onClick () {
-        this.visible = !this.visible;
+      onClick (e) {
         if (this.visible) {
-          console.log('show');
-          setTimeout(() => {
-            console.log('listen document click');
-            document.addEventListener('click', this.listenToDocument);
-          }, 10);
-        } else {
-          console.log('hide');
+          return this.close(e);
+        }
+        this.open();
+      },
+      open () {
+        this.visible = true;
+        setTimeout(() => {
+          this.positionContent();
+          document.addEventListener('click', this.listenToDocument);
+        });
+      },
+      close (e) {
+        const { content } = this.$refs;
+        // 如果点击content及它的后代元素，不会关闭visible
+        const isContentChild = content ? content.contains(e.target) : false;
+        if (!isContentChild) {
+          this.visible = false;
+          document.removeEventListener('click', this.listenToDocument);
         }
       },
-      listenToDocument () {
-        this.visible = false;
-        console.log('remove document click');
-        document.removeEventListener('click', this.listenToDocument);
+      positionContent () {
+        const { trigger, content } = this.$refs;
+        const { top, left, height, width } = trigger.getBoundingClientRect();
+        document.body.appendChild(content);
+        const config = {
+          top: {
+            left: left + width / 2 + window.scrollX,
+            top: top + window.scrollY
+          },
+          left: {
+            left: left + window.scrollX,
+            top: top + height / 2 + window.scrollY
+          },
+          right: {
+            left: left + width + window.scrollX,
+            top: top + height / 2 + window.scrollY
+          },
+          bottom: {
+            left: left + width / 2 + window.scrollX,
+            top: top + height + window.scrollY
+          }
+        };
+        content.style.left = `${config[this.position].left}px`;
+        content.style.top = `${config[this.position].top}px`;
+      },
+      listenToDocument (e) {
+        this.close(e);
       }
     }
   };
 </script>
 
 <style lang="scss" scoped>
+  @import "~styles/vars";
+  @import "~styles/mixins";
+
   .smile-popover1 {
     display: inline-block;
-    position: relative;
     &-content {
-      border: 2px solid red;
       position: absolute;
-      top: 100%;
-      left: 0;
+      max-width: 200px;
+      background-color: #fff;
+      filter: drop-shadow($box-shadow); // 阴影滤镜，实现content的阴影包含箭头
+      border-radius: $border-radius-md;
+      &.position-bottom {
+        transform: translateX(-50%);
+        margin-top: 8px;
+        .smile-popover1-content-arrow {
+          border-bottom: 8px solid #fff;
+          border-left: 8px solid transparent;
+          border-right: 8px solid transparent;
+          top: -8px;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+      }
+      &.position-top {
+        transform: translate(-50%, -100%);
+        margin-top: -8px;
+        .smile-popover1-content-arrow {
+          border-top: 8px solid #fff;
+          border-left: 8px solid transparent;
+          border-right: 8px solid transparent;
+          bottom: -8px;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+      }
+      &.position-left {
+        transform: translate(-100%, -50%);
+        margin-left: -8px;
+        .smile-popover1-content-arrow {
+          border-left: 8px solid #fff;
+          border-top: 8px solid transparent;
+          border-bottom: 8px solid transparent;
+          top: 50%;
+          right: -8px;
+          transform: translateY(-50%);
+        }
+      }
+      &.position-right {
+        margin-left: 8px;
+        transform: translateY(-50%);
+        .smile-popover1-content-arrow {
+          border-right: 8px solid #fff;
+          border-bottom: 8px solid transparent;
+          border-top: 8px solid transparent;
+          top: 50%;
+          left: -8px;
+          transform: translateY(-50%);
+        }
+      }
+    }
+    &-content-header {
+      font-size: 16px;
+      padding: 8px 16px;
+      border-bottom: $border-gray;
+      font-weight: 500;
+    }
+    &-content-wrapper {
+      padding: 12px 16px;
+    }
+    &-content-arrow {
+      position: absolute;
+      width: 0;
+      height: 0;
     }
   }
 </style>

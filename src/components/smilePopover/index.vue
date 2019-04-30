@@ -159,7 +159,7 @@
       font-weight: 500;
     }
     &-content-wrapper {
-      padding: 12px 16px
+      padding: 12px 16px;
     }
     /*宽高为0，用border来设置三角形*/
     &-content-arrow {

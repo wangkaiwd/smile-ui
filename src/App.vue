@@ -1,42 +1,7 @@
 <template>
   <div class="app">
     <div class="component-wrapper">
-      <!--<smile-popover
-        title="Title"
-      >
-        <smile-button>click</smile-button>
-        <template #content>
-          this is content one, this is content two
-        </template>
-      </smile-popover>
-      <smile-popover
-        title="Title"
-        position="left"
-      >
-        <smile-button>click</smile-button>
-        <template #content>
-          this is content one, this is content two
-        </template>
-      </smile-popover>
-      <smile-popover
-        title="Title"
-        position="top"
-      >
-        <smile-button>click</smile-button>
-        <template #content>
-          this is content one, this is content two
-        </template>
-      </smile-popover>
-      <smile-popover
-        title="Title"
-        position="right"
-      >
-        <smile-button>click</smile-button>
-        <template #content>
-          this is content one, this is content two
-        </template>
-      </smile-popover>-->
-      <smile-popover1 style="">
+      <smile-popover1 title="Title">
         <smile-button>click</smile-button>
         <template #content>
           <div>
@@ -44,10 +9,44 @@
           </div>
         </template>
       </smile-popover1>
-      <smile-popover1 style="">
+    </div>
+    <div class="component-wrapper">
+      <smile-popover1 title="Title1" position="top">
         <smile-button>click</smile-button>
         <template #content>
           <div>
+            this is popover content
+            this is popover content
+            this is popover content
+            this is popover content
+            this is popover content
+          </div>
+        </template>
+      </smile-popover1>
+    </div>
+    <div class="component-wrapper">
+      <smile-popover1 title="Title1" position="left">
+        <smile-button>click</smile-button>
+        <template #content>
+          <div>
+            this is popover content
+            this is popover content
+            this is popover content
+            this is popover content
+            this is popover content
+          </div>
+        </template>
+      </smile-popover1>
+    </div>
+    <div class="component-wrapper">
+      <smile-popover1 title="Title1" position="right">
+        <smile-button>click</smile-button>
+        <template #content>
+          <div>
+            this is popover content
+            this is popover content
+            this is popover content
+            this is popover content
             this is popover content
           </div>
         </template>
@@ -75,7 +74,7 @@
 <style lang="scss" scoped>
   .app {
     .component-wrapper {
-      margin: 80px;
+      margin: 220px;
     }
   }
 </style>
