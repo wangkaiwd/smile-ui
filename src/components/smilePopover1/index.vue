@@ -1,6 +1,6 @@
 <template>
   <div class="smile-popover1">
-    <div class="smile-popover1-trigger" ref="trigger">
+    <div class="smile-popover1-trigger" ref="trigger" @click="onClick">
       <slot></slot>
     </div>
     <!--  这里存在一个问题：为什么第一回出现会闪？-->
@@ -71,12 +71,12 @@
       };
     },
     mounted () {
-      if (this.trigger === 'click') {
-        this.$refs.trigger.addEventListener('click', this.onClick);
-      } else if (this.trigger === 'hover') {
-        this.$refs.trigger.addEventListener('mouseenter', this.open);
-        this.$refs.trigger.addEventListener('mouseleave', this.close);
-      }
+      // if (this.trigger === 'click') {
+      //   this.$refs.trigger.addEventListener('click', this.onClick);
+      // } else if (this.trigger === 'hover') {
+      //   this.$refs.trigger.addEventListener('mouseenter', this.open);
+      //   this.$refs.trigger.addEventListener('mouseleave', this.close);
+      // }
     },
     methods: {
       onClick (e) {
@@ -89,9 +89,9 @@
         this.visible = true;
         setTimeout(() => {
           this.positionContent();
-          if (this.trigger === 'click') {
-            document.addEventListener('click', this.listenToDocument);
-          }
+          // if (this.trigger === 'click') {
+          document.addEventListener('click', this.listenToDocument);
+          // }
         });
       },
       close (e) {
@@ -101,9 +101,9 @@
         console.log('isContentChild', isContentChild);
         if (!isContentChild) {
           this.visible = false;
-          if (this.trigger === 'click') {
-            document.removeEventListener('click', this.listenToDocument);
-          }
+          // if (this.trigger === 'click') {
+          document.removeEventListener('click', this.listenToDocument);
+          // }
         }
       },
       positionContent () {
@@ -136,9 +136,9 @@
       }
     },
     beforeDestroy () {
-      document.removeEventListener('click', this.listenToDocument);
-      document.removeEventListener('mouseenter', this.open);
-      document.removeEventListener('mouseleave', this.close);
+      // document.removeEventListener('click', this.listenToDocument);
+      // document.removeEventListener('mouseenter', this.open);
+      // document.removeEventListener('mouseleave', this.close);
     }
   };
 </script>
@@ -157,49 +157,49 @@
       border-radius: $border-radius-md;
       &.position-bottom {
         transform: translateX(-50%);
-        margin-top: 8px;
+        margin-top: 10px;
         .smile-popover1-content-arrow {
           border-bottom: 8px solid #fff;
           border-left: 8px solid transparent;
           border-right: 8px solid transparent;
-          top: -8px;
+          bottom: 100%;
           left: 50%;
           transform: translateX(-50%);
         }
       }
       &.position-top {
         transform: translate(-50%, -100%);
-        margin-top: -8px;
+        margin-top: -10px;
         .smile-popover1-content-arrow {
           border-top: 8px solid #fff;
           border-left: 8px solid transparent;
           border-right: 8px solid transparent;
-          bottom: -8px;
+          top: 100%;
           left: 50%;
           transform: translateX(-50%);
         }
       }
       &.position-left {
         transform: translate(-100%, -50%);
-        margin-left: -8px;
+        margin-left: -10px;
         .smile-popover1-content-arrow {
           border-left: 8px solid #fff;
           border-top: 8px solid transparent;
           border-bottom: 8px solid transparent;
           top: 50%;
-          right: -8px;
+          left: 100%;
           transform: translateY(-50%);
         }
       }
       &.position-right {
-        margin-left: 8px;
+        margin-left: 10px;
         transform: translateY(-50%);
         .smile-popover1-content-arrow {
           border-right: 8px solid #fff;
           border-bottom: 8px solid transparent;
           border-top: 8px solid transparent;
           top: 50%;
-          left: -8px;
+          right: 100%;
           transform: translateY(-50%);
         }
       }
