@@ -1,9 +1,9 @@
 <template>
-  <div class="smile-popover1" @click="onClick">
+  <div class="smile-popover1">
     <div class="smile-popover1-trigger" ref="trigger">
       <slot></slot>
     </div>
-    <!--    为什么第一回出现会闪？-->
+    <!--  这里存在一个问题：为什么第一回出现会闪？-->
     <div
       class="smile-popover1-content"
       :class="`position-${position}`"
@@ -41,6 +41,8 @@
    *
    * popover的难点并不是说控制弹出层的显示和隐藏，而是要帮用户写好弹出层的样式，控制弹出层的位置，以及不要有多余的事件监听。
    * 所以我们要做的最重要的功能就是帮用户写好css样式
+   *
+   *  当加入了不同的触发方式的时候，又出现了问题
    */
   export default {
     name: 'SmilePopover1',
@@ -54,12 +56,27 @@
         validator (value) {
           return ['top', 'bottom', 'left', 'right'].includes(value);
         }
+      },
+      trigger: {
+        type: String,
+        default: 'click',
+        validator (value) {
+          return ['click', 'hover'].includes(value);
+        }
       }
     },
     data () {
       return {
         visible: false
       };
+    },
+    mounted () {
+      if (this.trigger === 'click') {
+        this.$refs.trigger.addEventListener('click', this.onClick);
+      } else if (this.trigger === 'hover') {
+        this.$refs.trigger.addEventListener('mouseenter', this.open);
+        this.$refs.trigger.addEventListener('mouseleave', this.close);
+      }
     },
     methods: {
       onClick (e) {
@@ -72,16 +89,21 @@
         this.visible = true;
         setTimeout(() => {
           this.positionContent();
-          document.addEventListener('click', this.listenToDocument);
+          if (this.trigger === 'click') {
+            document.addEventListener('click', this.listenToDocument);
+          }
         });
       },
       close (e) {
         const { content } = this.$refs;
         // 如果点击content及它的后代元素，不会关闭visible
         const isContentChild = content ? content.contains(e.target) : false;
+        console.log('isContentChild', isContentChild);
         if (!isContentChild) {
           this.visible = false;
-          document.removeEventListener('click', this.listenToDocument);
+          if (this.trigger === 'click') {
+            document.removeEventListener('click', this.listenToDocument);
+          }
         }
       },
       positionContent () {
@@ -112,6 +134,11 @@
       listenToDocument (e) {
         this.close(e);
       }
+    },
+    beforeDestroy () {
+      document.removeEventListener('click', this.listenToDocument);
+      document.removeEventListener('mouseenter', this.open);
+      document.removeEventListener('mouseleave', this.close);
     }
   };
 </script>

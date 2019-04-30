@@ -11,7 +11,7 @@
       </smile-popover1>
     </div>
     <div class="component-wrapper">
-      <smile-popover1 title="Title1" position="top">
+      <smile-popover1 title="Title1" position="top" trigger="hover">
         <smile-button>click</smile-button>
         <template #content>
           <div>
