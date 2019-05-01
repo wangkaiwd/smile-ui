@@ -11,46 +11,16 @@
       </smile-popover1>
     </div>
     <div class="component-wrapper">
-      <smile-popover1 title="Title1" position="top" trigger="hover">
-        <smile-button>click</smile-button>
+      <smile-button type="secondary" @click="visible=true">
+        show modal
+      </smile-button>
+      <smile-modal :visible.sync="visible" title="标题">
         <template #content>
-          <div>
-            this is popover content
-            this is popover content
-            this is popover content
-            this is popover content
-            this is popover content
-          </div>
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+          <p>Some contents...</p>
         </template>
-      </smile-popover1>
-    </div>
-    <div class="component-wrapper">
-      <smile-popover1 title="Title1" position="left">
-        <smile-button>click</smile-button>
-        <template #content>
-          <div>
-            this is popover content
-            this is popover content
-            this is popover content
-            this is popover content
-            this is popover content
-          </div>
-        </template>
-      </smile-popover1>
-    </div>
-    <div class="component-wrapper">
-      <smile-popover1 title="Title1" position="right">
-        <smile-button>click</smile-button>
-        <template #content>
-          <div>
-            this is popover content
-            this is popover content
-            this is popover content
-            this is popover content
-            this is popover content
-          </div>
-        </template>
-      </smile-popover1>
+      </smile-modal>
     </div>
   </div>
 </template>
@@ -59,7 +29,9 @@
   export default {
     name: 'App',
     data () {
-      return {};
+      return {
+        visible: false
+      };
     },
     mounted () {
     },
@@ -74,7 +46,7 @@
 <style lang="scss" scoped>
   .app {
     .component-wrapper {
-      margin: 220px;
+      margin: 20px;
     }
   }
 </style>

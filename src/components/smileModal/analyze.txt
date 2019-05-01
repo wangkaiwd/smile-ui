@@ -1,0 +1,22 @@
+模态框需求分析
+
+使用方式：
+  <smile-modal v-model="visible">
+    <div>
+      this is my content
+    </div>
+  </smile-modal>
+
+大概api:
+  title
+  content (slot)
+  width
+关闭回调
+确认回调
+是否可以点击蒙层关闭
+内容滚动
+出现/隐藏动画
+自定义footer
+
+
+
