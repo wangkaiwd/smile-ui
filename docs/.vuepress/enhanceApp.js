@@ -15,6 +15,7 @@ import SmileContent from 'components/smileLayout/content';
 import SmileAside from 'components/smileLayout/aside';
 import SmileRow from 'components/smileGrid/row';
 import SmileCol from 'components/smileGrid/col';
+import SmileModal from 'components/smileModal';
 
 export default ({ Vue }) => {
   Vue.component('SmileButton', SmileButton);
@@ -29,5 +30,6 @@ export default ({ Vue }) => {
   Vue.component('SmileContent', SmileContent);
   Vue.component('SmileRow', SmileRow);
   Vue.component('SmileCol', SmileCol);
+  Vue.component('SmileModal', SmileModal);
   Vue.use(message);
 }

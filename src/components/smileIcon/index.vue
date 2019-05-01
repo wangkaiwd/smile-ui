@@ -9,6 +9,8 @@
 </template>
 
 <script>
+  import 'utils/svg';
+
   export default {
     name: 'SmileIcon',
     props: {
@@ -18,6 +20,7 @@
 </script>
 
 <style lang="scss" scoped>
+
   @import "~styles/vars";
   @import "~styles/mixins";
 

@@ -31,7 +31,9 @@ module.exports = {
         collapsable: false,
         children: [
           '/views/message',
-          '/views/tabs'
+          '/views/tabs',
+          '/views/modal',
+          '/views/popover',
         ]
       }
     ]

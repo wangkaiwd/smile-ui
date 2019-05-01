@@ -53,8 +53,18 @@
       width: { type: String },
       customFooter: { type: Boolean, default: false },
     },
+    watch: {
+      // 模态框出现后阻止浏览器滚动
+      visible (newVal) {
+        if (newVal) {
+          document.body.classList.add('modal-open');
+        } else {
+          document.body.classList.remove('modal-open');
+        }
+      }
+    },
     mounted () {
-      document.body.appendChild(this.$el);
+      this.initModal();
     },
     methods: {
       onClickMask (e) {
@@ -63,13 +73,24 @@
         if (modalWrapper && !modalWrapper.contains(e.target)) {
           this.$emit('update:visible', false);
         }
+      },
+      initModal () {
+        document.body.appendChild(this.$el);
       }
-    }
+    },
   };
 </script>
-
+<style lang="scss">
+  .modal-open {
+    overflow: hidden;
+  }
+</style>
 <style lang="scss" scoped>
+  @import "~styles/vars";
+  @import "~styles/mixins";
   .smile-modal {
+    z-index: 10000;
+    overflow: hidden;
     &.fade-scale-enter,
     &.fade-scale-leave-to {
       opacity: 0;
