@@ -60,7 +60,7 @@
       onClickMask (e) {
         const { modalWrapper } = this.$refs;
         // 只有在点击蒙层时才会关闭模态框
-        if (!modalWrapper.contains(e.target)) {
+        if (modalWrapper && !modalWrapper.contains(e.target)) {
           this.$emit('update:visible', false);
         }
       }
@@ -102,6 +102,7 @@
       min-width: 400px;
       transform: translate(-50%, -50%);
       border-radius: $border-radius-md;
+      overflow: hidden;
     }
     &-title {
       position: relative;
@@ -117,6 +118,8 @@
       }
     }
     &-content {
+      max-height: 70vh;
+      overflow: auto;
       padding: $space-xl $space-lg;
       line-height: 1.5;
     }

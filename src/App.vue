@@ -7,35 +7,50 @@
       <smile-modal
         :visible.sync="visible"
         title="标题"
+        @on-cancel="visible=false"
+        @on-ok="visible=false"
       >
         <template #content>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
+          <p v-for="k in 300" :key="k">Some contents...</p>
         </template>
       </smile-modal>
     </div>
     <div class="component-wrapper">
       <smile-button type="secondary" @click="visible1=true">
-        custom footer
+        custom text
       </smile-button>
       <smile-modal
         :visible.sync="visible1"
+        title="标题"
+        cancel-text="自定义取消"
+        ok-text="自定义确认"
+        @on-cancel="visible1=false"
+        @on-ok="visible1=false"
+      >
+        <template #content>
+          <p v-for="k in 3" :key="k">Some contents...</p>
+        </template>
+      </smile-modal>
+    </div>
+    <div class="component-wrapper">
+      <smile-button type="secondary" @click="visible2=true">
+        custom footer
+      </smile-button>
+      <smile-modal
+        :visible.sync="visible2"
         title="标题"
         custom-footer
         class="modal-demo"
       >
         <template #content>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
+          <p v-for="k in 3" :key="k">Some contents...</p>
         </template>
         <template #footer>
           <div class="modal-footer">
             <h3>I am custom footer</h3>
             <div class="modal-tools">
-              <smile-button class="button-left" type="secondary" @click="visible1=false">return</smile-button>
-              <smile-button @click="visible1=false">submit</smile-button>
+              <smile-button class="button-left" type="secondary" @click="visible2=false">return</smile-button>
+              <smile-button @click="visible2=false">submit</smile-button>
             </div>
           </div>
         </template>
@@ -51,6 +66,7 @@
       return {
         visible: false,
         visible1: false,
+        visible2: false,
       };
     },
     mounted () {
