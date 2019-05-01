@@ -1,5 +1,5 @@
 <template>
-  <transition name="fade">
+  <transition name="fade-scale">
     <div class="smile-modal" v-if="visible">
       <div class="smile-modal-wrapper">
         <div class="smile-modal-title">
@@ -51,16 +51,16 @@
 
 <style lang="scss" scoped>
   .smile-modal {
-    &.fade-enter,
-    &.fade-leave-to {
+    &.fade-scale-enter,
+    &.fade-scale-leave-to {
       opacity: 0;
       .smile-modal-wrapper {
         opacity: 0;
         transform: translate(-50%, -50%) scale(0);
       }
     }
-    &.fade-enter-active,
-    &.fade-leave-active {
+    &.fade-scale-enter-active,
+    &.fade-scale-leave-active {
       .smile-modal-wrapper {
         transition: all 0.4s;
       }
