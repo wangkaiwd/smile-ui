@@ -10,15 +10,15 @@
 大概api:
   title ok
   content (slot) ok
-  width
-关闭回调
-确认回调
-关闭文字
-确认文字
-是否可以点击蒙层关闭
+  width ok
+关闭回调 ok
+确认回调 ok
+关闭文字 ok
+确认文字 ok
+可以点击蒙层关闭
 内容滚动
 出现/隐藏动画 ok
-自定义footer
+自定义footer ok
 
 
 

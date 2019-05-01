@@ -1,7 +1,7 @@
 <template>
   <transition name="fade-scale">
-    <div class="smile-modal" v-if="visible">
-      <div class="smile-modal-wrapper" :style="{width}">
+    <div class="smile-modal" v-if="visible" @click="onClickMask">
+      <div class="smile-modal-wrapper" ref="modalWrapper" :style="{width}">
         <div class="smile-modal-title">
           <h3>{{title}}</h3>
           <span class="smile-modal-close-icon" @click="$emit('update:visible',false)">
@@ -55,6 +55,15 @@
     },
     mounted () {
       document.body.appendChild(this.$el);
+    },
+    methods: {
+      onClickMask (e) {
+        const { modalWrapper } = this.$refs;
+        // 只有在点击蒙层时才会关闭模态框
+        if (!modalWrapper.contains(e.target)) {
+          this.$emit('update:visible', false);
+        }
+      }
     }
   };
 </script>
@@ -74,6 +83,7 @@
       .smile-modal-wrapper {
         transition: all 0.4s;
       }
+      /*必须要加这个过渡时间，动画效果才会生效*/
       transition: all 0.6s;
     }
     position: fixed;
