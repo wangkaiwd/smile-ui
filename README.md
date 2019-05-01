@@ -16,6 +16,9 @@
 2. `slot`父子组件通信： 1. 通过`$children`操作子元素 2. 通过`$parent`操作父元素
 3. 对应的`flex`属性开启后`css`写法优化：
     ![row-flex](./shotscreen/row-flex.png)
+    
+##### `popover`组件
+这个组件相对之前的组件来说是比较复杂的，难点重点在于`css`样式的书写，元素的位置获取，以及`js`事件机制的理解
 
 #### `vuePress`踩坑
 * `/`默认代表`/README.md`
@@ -25,14 +28,17 @@
 * 应用级配置：`enhanceApp.js`
 * `scss`全局导入在`vuePress`中如何配置
 * `icon`组件引入的`svg`由于用到了`BOM`和`DOM`会导致`vuePress`打包失败,使用项目中的`icon`组件不会有问题
-* `css`初始化样式引发的问题：盒模型
+* `css`初始化样式引发的问题：css盒模型
 
 #### 需要优化的地方
-1. input组件 disabled状态
+1. input组件 a. disabled状态 b. 增加双向数据绑定demo
 2. tab组件：a. 动画 b. 插槽 c. 整体功能梳理
+3. vuePress： 代码块滚动样式有问题
 #### 之后计划
 1. 优化现有代码
+2. 重新审视完成组件的样式问题
 ##### 中级组件
+* `carousel`组件
 * `collapse`组件
 * `popover`组件
 * `sticky`组件
@@ -53,6 +59,9 @@
 * `splitPanel`组件
 * 抽奖
 * 刮刮卡
+
+##### 使用`demo`
+先想一个比较好的样式风格，最好是国外的设计
 
 ##### 进阶
 尝试写测试用例
