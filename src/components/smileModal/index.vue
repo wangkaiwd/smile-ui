@@ -1,29 +1,32 @@
 <template>
   <transition name="fade-scale">
     <div class="smile-modal" v-if="visible">
-      <div class="smile-modal-wrapper">
+      <div class="smile-modal-wrapper" :style="{width}">
         <div class="smile-modal-title">
           <h3>{{title}}</h3>
           <span class="smile-modal-close-icon" @click="$emit('update:visible',false)">
-          <smile-icon
-            class="smile-modal-close-icon-delete"
-            icon="close-bold"
-          >
-          </smile-icon>
-        </span>
+            <smile-icon
+              class="smile-modal-close-icon-delete"
+              icon="close-bold"
+            >
+            </smile-icon>
+          </span>
         </div>
         <div class="smile-modal-content">
           <slot name="content"></slot>
         </div>
-        <div class="smile-modal-footer">
+        <div class="smile-modal-custom-footer" v-if="customFooter">
+          <slot name="footer"></slot>
+        </div>
+        <div class="smile-modal-footer" v-else="customFooter">
           <smile-button
             type="secondary"
             class="smile-modal-footer-cancel"
-            @click="$emit('update:visible',false)"
+            @click="$emit('on-cancel')"
           >
-            Cancel
+            {{cancelText}}
           </smile-button>
-          <smile-button>OK</smile-button>
+          <smile-button @click="$emit('on-ok')">{{okText}}</smile-button>
         </div>
       </div>
     </div>
@@ -38,10 +41,17 @@
         type: Boolean,
         default: false
       },
-      title: {
+      title: { type: String, required: true },
+      cancelText: {
         type: String,
-        required: true
+        default: '取消'
       },
+      okText: {
+        type: String,
+        default: '确认'
+      },
+      width: { type: String },
+      customFooter: { type: Boolean, default: false },
     },
     mounted () {
       document.body.appendChild(this.$el);
@@ -78,7 +88,8 @@
       background-color: #fff;
       top: 50%;
       left: 50%;
-      width: 40vw;
+      width: 50vw;
+      min-width: 400px;
       transform: translate(-50%, -50%);
       border-radius: $border-radius-md;
     }
@@ -103,6 +114,10 @@
       display: flex;
       justify-content: flex-end;
       align-items: center;
+      height: 52px;
+      padding: 0 $space-lg;
+    }
+    &-custom-footer {
       height: 52px;
       padding: 0 $space-lg;
     }
