@@ -155,7 +155,13 @@
         <div class="modal-footer">
           <h3>I am custom footer</h3>
           <div class="modal-tools">
-            <smile-button class="button-left" type="secondary" @click="visible2=false">return</smile-button>
+            <smile-button 
+              class="button-left" 
+              type="secondary" 
+              @click="visible2=false"
+            >
+              return
+            </smile-button>
             <smile-button @click="visible2=false">submit</smile-button>
           </div>
         </div>
@@ -215,15 +221,16 @@ export default {
   }
 </style>
 ### `API`
+> 点击模态框的蒙层和右上角关闭图标时会关闭对话框，即会更改传入的`visible`。所以这里的`visible`要用`.sync`修饰符来绑定
 
-#### `SmileTab`
 |    参数      | 说明 | 类型(参数) | 默认值 |
 | ----------   | ---  | ---- | ------ | 
-| select       | 绑定值，选中选项卡的name，支持`.sync` |string| 必传 |
-| on-change    | `tab`切换时触发 | 被选中标签的name | _ |
+| visible       | 对话框是否可见，需要使用`.sync`修饰符 |boolean| false |
+| title    | 对话框标题 | string | _ |
+| width    | 对话框宽度 | string | 50% |
+| cancelText    | 取消按钮文字 | string | 取消 |
+| okText    | 确认按钮文字 | string | 确认 |
+| customFooter  | 是否自定义页脚 | boolean | false |
+| on-cancel  | 点击取消按钮时触发 | _ | _ |
+| on-ok  | 点击确认按钮时触发 | _ | _ |
 
-#### `SmileItem`
-|    参数      | 说明 | 类型 | 默认值 |
-| ----------   | ---  | ---- | ------ | 
-| title    | 选项卡标题  |string| _ |
-| name     | 与选项卡绑定的value对应的标识符，表示选项卡别名  | string | _ |

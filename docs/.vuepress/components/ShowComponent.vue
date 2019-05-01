@@ -104,7 +104,7 @@
       position: relative;
       border: 2px solid #ddd;
       background: #fff;
-      margin: 32px 0 14px;
+      margin: 32px 0 24px;
       padding: 40px 24px 26px;
       font-size: 14px;
     }
@@ -116,9 +116,13 @@
       max-height: 0; // 这里要设置max-height,设置为height不会有过渡效果
       transition: max-height .6s;
       overflow: hidden;
+      border-radius: 6px;
       &.expanded {
         max-height: 400px;
         overflow: auto;
+      }
+      div[class*="language-"] pre, div[class*="language-"] pre[class*="language-"] {
+        margin: 0;
       }
     }
     &-body-placeholder {
