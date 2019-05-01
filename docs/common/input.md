@@ -23,6 +23,48 @@
   ```
   </template>
   </ShowComponent>
+  <ShowComponent label="双向绑定">
+    <template #component-body>
+      <ShowComponentItem>
+        <smile-input placeholder="输入内容" v-model="value"></smile-input>
+        <h2 class="input-value">{{value}}</h2>
+      </ShowComponentItem>
+    </template>
+  <template #component-code>
+
+  ```vue
+  <template>
+    <div class="app">
+      <smile-input placeholder="输入内容" v-model="value"></smile-input>
+      <h2 class="input-value">{{value}}</h2>
+    </div>
+  </template>
+  
+  <script>
+    export default {
+      name: 'App',
+      data () {
+        return {
+          value: ''
+        };
+      },
+      mounted () {
+      },
+      methods: {}
+    };
+  </script>
+  <style lang="scss" scoped>
+    .app {
+      .input-value {
+        padding: 10px;
+        font-size: 16px;
+        font-weight: 500;
+      }
+    }
+  </style>
+  ```
+  </template>
+  </ShowComponent>
   <ShowComponent label="可清空">
      <template #component-body>
        <ShowComponentItem>
@@ -120,6 +162,7 @@
 export default {
   data() {
     return {
+      value: '双向绑定',
       inputValue1: '',
       inputValue2: '',
       username: '',
@@ -140,8 +183,15 @@ export default {
   display: block;
   margin-top: 10px;
 }
+.input-value {
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 500;
+}
 </style>
 ### `API`
+> 支持所有`input`的原生属性
+
 |    参数      | 说明 | 类型 | 默认值 |
 | ----------   | ---  | ---- | ------ | 
 | prefix | 输入框头部图标 |string| _ |

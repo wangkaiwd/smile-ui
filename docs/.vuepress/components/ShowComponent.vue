@@ -114,7 +114,7 @@
     */
     &-code-wrapper {
       max-height: 0; // 这里要设置max-height,设置为height不会有过渡效果
-      transition: max-height .6s;
+      transition: all .6s;
       overflow: hidden;
       border-radius: 6px;
       &.expanded {

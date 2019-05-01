@@ -1,60 +1,8 @@
 <template>
   <div class="app">
     <div class="component-wrapper">
-      <smile-button type="secondary" @click="visible=true">
-        basic modal
-      </smile-button>
-      <smile-modal
-        :visible.sync="visible"
-        title="标题"
-        @on-cancel="visible=false"
-        @on-ok="visible=false"
-      >
-        <template #content>
-          <p v-for="k in 300" :key="k">Some contents...</p>
-        </template>
-      </smile-modal>
-    </div>
-    <div class="component-wrapper">
-      <smile-button type="secondary" @click="visible1=true">
-        custom text
-      </smile-button>
-      <smile-modal
-        :visible.sync="visible1"
-        title="标题"
-        cancel-text="自定义取消"
-        ok-text="自定义确认"
-        @on-cancel="visible1=false"
-        @on-ok="visible1=false"
-      >
-        <template #content>
-          <p v-for="k in 3" :key="k">Some contents...</p>
-        </template>
-      </smile-modal>
-    </div>
-    <div class="component-wrapper">
-      <smile-button type="secondary" @click="visible2=true">
-        custom footer
-      </smile-button>
-      <smile-modal
-        :visible.sync="visible2"
-        title="标题"
-        custom-footer
-        class="modal-demo"
-      >
-        <template #content>
-          <p v-for="k in 3" :key="k">Some contents...</p>
-        </template>
-        <template #footer>
-          <div class="modal-footer">
-            <h3>I am custom footer</h3>
-            <div class="modal-tools">
-              <smile-button class="button-left" type="secondary" @click="visible2=false">return</smile-button>
-              <smile-button @click="visible2=false">submit</smile-button>
-            </div>
-          </div>
-        </template>
-      </smile-modal>
+      <smile-input placeholder="输入内容" v-model="value"></smile-input>
+      <h2 class="input-value">{{value}}</h2>
     </div>
   </div>
 </template>
@@ -64,9 +12,7 @@
     name: 'App',
     data () {
       return {
-        visible: false,
-        visible1: false,
-        visible2: false,
+        value: ''
       };
     },
     mounted () {
@@ -74,31 +20,15 @@
     methods: {}
   };
 </script>
-<style>
-  body {
-    border: 4px solid green;
-  }
-</style>
 <style lang="scss" scoped>
   .app {
     .component-wrapper {
       margin: 20px;
     }
-  }
-</style>
-<style lang="scss">
-  .modal-demo {
-    .modal-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      h3 {
-        font-size: 18px;
-        font-weight: bold;
-      }
-    }
-    .button-left {
-      margin-right: 8px;
+    .input-value {
+      padding: 10px;
+      font-size: 16px;
+      font-weight: 500;
     }
   }
 </style>
