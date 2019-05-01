@@ -1,12 +1,18 @@
 <template>
-  <div class="smile-aside">
+  <div class="smile-aside" :class="{collapsed}">
     <slot></slot>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'SmileAside'
+    name: 'SmileAside',
+    props: {
+      collapsed: {
+        type: Boolean,
+        default: false
+      }
+    }
   };
 </script>
 
@@ -15,6 +21,10 @@
   @import "~styles/mixins";
 
   .smile-aside {
-    min-width: 200px;
+    width: 200px;
+    transition: all .4s;
+    &.collapsed {
+      width: 0;
+    }
   }
 </style>
