@@ -4,18 +4,20 @@
       <slot></slot>
     </div>
     <!--  为什么在popover第一次出现的时候会有轻微的闪动情况  -->
-    <div
-      class="smile-popover1-content"
-      :class="`position-${position}`"
-      ref="content"
-      v-if="visible"
-    >
-      <div class="smile-popover1-content-header" v-if="title">{{title}}</div>
-      <div class="smile-popover1-content-wrapper">
-        <slot name="content"></slot>
+    <transition name="fade">
+      <div
+        class="smile-popover1-content"
+        :class="`position-${position}`"
+        ref="content"
+        v-if="visible"
+      >
+        <div class="smile-popover1-content-header" v-if="title">{{title}}</div>
+        <div class="smile-popover1-content-wrapper">
+          <slot name="content"></slot>
+        </div>
+        <div class="smile-popover1-content-arrow"></div>
       </div>
-      <div class="smile-popover1-content-arrow"></div>
-    </div>
+    </transition>
   </div>
 </template>
 
@@ -94,13 +96,20 @@
     mounted () {
       const { trigger } = this.$refs;
       if (this.trigger === 'click') {
-        trigger.addEventListener('click', this.clickOpen);
+        trigger.addEventListener('click', this.onClick);
       } else if (this.trigger === 'hover') {
         trigger.addEventListener('mouseenter', this.hoverOpen);
         trigger.addEventListener('mouseleave', this.hoverClose);
       }
     },
     methods: {
+      onClick (e) {
+        if (this.visible) {
+          this.clickClose(e);
+        } else {
+          this.clickOpen();
+        }
+      },
       hoverOpen () {
         if (this.timerId) {
           clearTimeout(this.timerId);
@@ -203,6 +212,14 @@
   .smile-popover1 {
     display: inline-block;
     &-content {
+      &.fade-enter,
+      &.fade-leave-to {
+        opacity: 0;
+      }
+      &.fade-enter-active,
+      &.fade-leave-active {
+        transition: all 0.2s;
+      }
       position: absolute;
       max-width: 300px;
       line-height: 1.4;
