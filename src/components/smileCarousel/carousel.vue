@@ -1,5 +1,7 @@
 <template>
-  <div class="smile-carousel"></div>
+  <div class="smile-carousel">
+    <slot></slot>
+  </div>
 </template>
 
 <script>

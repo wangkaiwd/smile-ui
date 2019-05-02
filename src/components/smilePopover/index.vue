@@ -1,15 +1,23 @@
 <template>
   <div class="smile-popover">
-    <div class="smile-popover-trigger" ref="trigger" @click="onClick">
+    <div class="smile-popover-trigger" ref="trigger">
       <slot></slot>
     </div>
-    <div class="smile-popover-content" :class="`position-${position}`" ref="content" v-if="visible">
-      <h3 class="smile-popover-content-header" v-if="title">{{title}}</h3>
-      <div class="smile-popover-content-wrapper">
-        <slot name="content"></slot>
+    <!--  为什么在popover第一次出现的时候会有轻微的闪动情况  -->
+    <transition name="fade">
+      <div
+        class="smile-popover-content"
+        :class="`position-${position}`"
+        ref="content"
+        v-if="visible"
+      >
+        <div class="smile-popover-content-header" v-if="title">{{title}}</div>
+        <div class="smile-popover-content-wrapper">
+          <slot name="content"></slot>
+        </div>
+        <div class="smile-popover-content-arrow"></div>
       </div>
-      <div class="smile-popover-content-arrow"></div>
-    </div>
+    </transition>
   </div>
 </template>
 
@@ -29,128 +37,247 @@
    *    2： 目标阶段
    *    3:  冒泡阶段
    *
-   *  要将content放入到body中，防止被overflow: hidden; 干掉
+   * Popover组件的几个难点：
+   *  1. 父元素设置overflow:hidden;时会将popover弹出的内容隐藏掉
+   *      为了避免这种情况发生，我们通常将元素放入body之中，这样只会在给body设置overflow:hidden;的时候才会隐藏元素。
+   *      而由于body会占据页面中比较大的内容，而且用户很少为body设置overflow:hidden;，所以一般不会出现被overflow:hidden;属性
+   *      隐藏的情况。而不放入body中，popover的父元素只要设置overflow:hidden,那么在高度没有满足的情况，很有可能会隐藏弹出层。
+   *  2. 不能阻止事件冒泡
+   *      阻断事件链会影响到用户的事件绑定
+   *  3. 不让事件进行多余的监听
+   *      绑定document的click事件的时机：
+   *        a. 为什么不在mounted钩子函数即组件挂载完毕进行事件监听？
+   *           这样会在页面一开始的时候就会绑定事件，如果我们的popover组件在当前页面用到的比较多，那么每有一个就会绑定一个事件，在性能
+   *           上不怎么友好
+   *        b. 为什么不在切换content显示隐藏时，content为显示状态时进行事件监听？
+   *           这样会在前一个事件还未结束的时候就为document添加click事件，而在content的click的事件结束后，由于事件的冒泡机制，
+   *           就会触发document的click事件
+   *        比较好的绑定时机：在content click 事件结束后马上进行绑定 document的click事件,将visible置为false,然后再将document
+   *                          的click事件移除,这样基本不会有多余的事件绑定
+   *      绑定mouseenter和mouseleave事件的时机：
+   *        a. 在组件加载完毕后给触发器绑定mouseenter和mouseleave事件
+   *        b. 在content内容区出现的时候，为内容区绑定mouseenter和mouseleave事件，在content内容区消失的时候移除对应的事件
    *
-   *  为什么不阻止事件冒泡？
+   * popover的难点并不是说控制弹出层的显示和隐藏，而是要帮用户写好弹出层的样式，控制弹出层的位置，以及不要有多余的事件监听。
+   * 所以我们要做的最重要的功能就是帮用户写好css样式
    *
-   *  获取页面中元素的位置：https://stackoverflow.com/questions/442404/retrieve-the-position-x-y-of-an-html-element
-   *    元素在视口的位置+屏幕滚动的位置
+   * 由于click和hover俩种情况需要绑定的事件执行的逻辑不通，所以最好分开处理
+   *
+   * 这里存在一个问题：在hover情况下，当鼠标处于button 和 content 的交界处时 content会抖动？
+   * 闪烁问题：箭头和button的距离过进，导致元素重叠，然后button的mouseenter和mouseleave事件反复触发
    */
   export default {
-    name: 'SmilePopover',
+    name: 'SmilePopover1',
     props: {
-      title: { type: String },
+      title: {
+        props: String
+      },
       position: {
         type: String,
         default: 'bottom',
         validator (value) {
           return ['top', 'bottom', 'left', 'right'].includes(value);
         }
+      },
+      trigger: {
+        type: String,
+        default: 'click',
+        validator (value) {
+          return ['click', 'hover'].includes(value);
+        }
       }
     },
     data () {
       return {
-        visible: false
+        visible: false,
+        timerId: null
       };
     },
     mounted () {
-      document.addEventListener('click', this.listenToDocument);
+      const { trigger } = this.$refs;
+      if (this.trigger === 'click') {
+        trigger.addEventListener('click', this.onClick);
+      } else if (this.trigger === 'hover') {
+        trigger.addEventListener('mouseenter', this.hoverOpen);
+        trigger.addEventListener('mouseleave', this.hoverClose);
+      }
     },
     methods: {
-      onClick () {
-        this.visible = !this.visible;
+      onClick (e) {
         if (this.visible) {
-          this.$nextTick(this.contentPosition);
+          this.clickClose(e);
+        } else {
+          this.clickOpen();
         }
       },
-      contentPosition () {
-        const { content } = this.$refs;
-        const { positionConfig, position } = this;
-        // 为什么要放到body里边？防止被其它元素的overflow:hidden;干掉
-        document.body.appendChild(content);
-        content.style.left = positionConfig()[position].left + 'px';
-        content.style.top = positionConfig()[position].top + 'px';
+      hoverOpen () {
+        if (this.timerId) {
+          clearTimeout(this.timerId);
+          this.timerId = null;
+        }
+        this.visible = true;
+        setTimeout(() => {
+          const { content } = this.$refs;
+          this.positionContent();
+          content.addEventListener('mouseenter', this.hoverOpen);
+          content.addEventListener('mouseleave', this.hoverClose);
+        });
       },
-      positionConfig () {
-        const { trigger } = this.$refs;
-        const {
-          width: triggerWidth,
-          height: triggerHeight,
-          top: triggerTop,
-          left: triggerLeft
-        } = trigger.getBoundingClientRect();
-        return {
+      clickOpen () {
+        this.visible = true;
+        setTimeout(() => {
+          this.positionContent();
+          document.addEventListener('click', this.listenToDocument);
+        });
+      },
+      isContentChild (e) {
+        const { content } = this.$refs;
+        // 如果点击content及它的后代元素，不会关闭visible
+        return content ? content.contains(e.target) : false;
+      },
+      hoverClose () {
+        const { content } = this.$refs;
+        this.timerId = setTimeout(() => {
+          this.visible = false;
+          this.timerId = null;
+          content.removeEventListener('mouseenter', this.open);
+          content.removeEventListener('mouseleave', this.close);
+        }, 200);
+      },
+      clickClose (e) {
+        if (!this.isContentChild(e)) {
+          this.visible = false;
+          document.removeEventListener('click', this.listenToDocument);
+        }
+      },
+      positionContent () {
+        const { trigger, content } = this.$refs;
+        const { top, left, height, width } = trigger.getBoundingClientRect();
+        document.body.appendChild(content);
+        const config = {
           top: {
-            left: triggerWidth / 2 + triggerLeft + window.scrollX,
-            top: triggerTop + window.scrollY
-          },
-          bottom: {
-            left: triggerWidth / 2 + triggerLeft + window.scrollX,
-            top: triggerHeight + triggerTop + window.scrollY
+            left: left + width / 2 + window.scrollX,
+            top: top + window.scrollY
           },
           left: {
-            left: triggerLeft + window.scrollX,
-            top: triggerTop + triggerHeight / 2 + window.scrollY
+            left: left + window.scrollX,
+            top: top + height / 2 + window.scrollY
           },
           right: {
-            left: triggerLeft + triggerWidth + window.scrollX,
-            top: triggerTop + triggerHeight / 2 + window.scrollY
+            left: left + width + window.scrollX,
+            top: top + height / 2 + window.scrollY
+          },
+          bottom: {
+            left: left + width / 2 + window.scrollX,
+            top: top + height + window.scrollY
           }
         };
+        content.style.left = `${config[this.position].left}px`;
+        content.style.top = `${config[this.position].top}px`;
       },
       listenToDocument (e) {
-        console.log('document click');
-        //  点击trigger和content 及 它们的后代节点都不会关闭
-        const { trigger, content } = this.$refs;
-        const isTriggerChild = trigger ? trigger.contains(e.target) : false;
-        const isContentChild = content ? content.contains(e.target) : false;
-        if (isTriggerChild || isContentChild) return;
-        this.visible = false;
+        this.clickClose(e);
+      },
+      removeEvent () {
+        const { content, trigger } = this.$refs;
+        document.removeEventListener('click', this.listenToDocument);
+        trigger.removeEventListener('mouseenter', this.open);
+        trigger.removeEventListener('mouseleave', this.close);
+        if (content) {
+          content.removeEventListener('mouseenter', this.open);
+          content.removeEventListener('mouseleave', this.close);
+        }
       }
+    },
+    beforeDestroy () {
+      this.removeEvent();
     }
   };
 </script>
 
 <style lang="scss" scoped>
   /**
-    css 常用百分比介绍：
-      top: 100%; 定位
-        定位元素的上外边距边界与其包含快上边界之间的偏移
-        设置为百分比(percentage): 元素包含块的高度的百分比
-      margin-left/padding-left: 100%; 间距
-        父元素width的百分比(这里是100%)
-      translateX: 100%; 平移
-        相对于元素自身向右平移自己宽度的100%
-   */
+  css 常用百分比介绍：
+    top: 100%; 定位
+      定位元素的上外边距边界与其包含快上边界之间的偏移
+      设置为百分比(percentage): 元素包含块的高度的百分比
+    margin-left/padding-left: 100%; 间距
+      父元素width的百分比(这里是100%)
+    translateX: 100%; 平移
+      相对于元素自身向右平移自己宽度的100%
+ */
   @import "~styles/vars";
   @import "~styles/mixins";
 
   .smile-popover {
-    position: relative;
-    &-trigger {
-      display: inline-block;
-    }
+    display: inline-block;
     &-content {
+      &.fade-enter,
+      &.fade-leave-to {
+        opacity: 0;
+      }
+      &.fade-enter-active,
+      &.fade-leave-active {
+        transition: all 0.2s;
+      }
       position: absolute;
+      max-width: 300px;
+      line-height: 1.4;
+      word-break: break-all;
+      background-color: #fff;
+      font-size: 14px;
+      filter: drop-shadow($box-shadow); // 阴影滤镜，实现content的阴影包含箭头
+      border-radius: $border-radius-md;
+      z-index: 10000;
       &.position-bottom {
-        margin-top: 8px; // 空出三角形的位置
         transform: translateX(-50%);
+        margin-top: 10px;
         .smile-popover-content-arrow {
-          top: -8px;
-          left: 50%;
-          transform: translateX(-50%);
           border-bottom: 8px solid #fff;
           border-left: 8px solid transparent;
           border-right: 8px solid transparent;
+          bottom: 100%;
+          left: 50%;
+          transform: translateX(-50%);
         }
       }
-      max-width: 200px;
-      background-color: #fff;
-      /*文章推荐：https://www.zhangxinxu.com/wordpress/2016/05/css3-filter-drop-shadow-vs-box-shadow/*/
-      /*box-shadow: $box-shadow;*/
-      // 这样的阴影不会覆盖到箭头，导致箭头的阴影不好和content融合
-      filter: drop-shadow($box-shadow); // 阴影滤镜，实现content的阴影包含箭头
-      border-radius: $border-radius-md;
+      &.position-top {
+        transform: translate(-50%, -100%);
+        /* 这里多偏移1px，防止弹出层闪烁，只有在top时才会出现这种情况 */
+        margin-top: -11px;
+        .smile-popover-content-arrow {
+          border-top: 8px solid #fff;
+          border-left: 8px solid transparent;
+          border-right: 8px solid transparent;
+          top: 100%;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+      }
+      &.position-left {
+        transform: translate(-100%, -50%);
+        margin-left: -10px;
+        .smile-popover-content-arrow {
+          border-left: 8px solid #fff;
+          border-top: 8px solid transparent;
+          border-bottom: 8px solid transparent;
+          top: 50%;
+          left: 100%;
+          transform: translateY(-50%);
+        }
+      }
+      &.position-right {
+        margin-left: 10px;
+        transform: translateY(-50%);
+        .smile-popover-content-arrow {
+          border-right: 8px solid #fff;
+          border-bottom: 8px solid transparent;
+          border-top: 8px solid transparent;
+          top: 50%;
+          right: 100%;
+          transform: translateY(-50%);
+        }
+      }
     }
     &-content-header {
       font-size: 16px;
@@ -161,11 +288,10 @@
     &-content-wrapper {
       padding: 12px 16px;
     }
-    /*宽高为0，用border来设置三角形*/
     &-content-arrow {
       position: absolute;
-      height: 0;
       width: 0;
+      height: 0;
     }
   }
 </style>
