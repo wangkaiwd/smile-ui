@@ -1,9 +1,9 @@
 <template>
   <div class="smile-popover1">
-    <div class="smile-popover1-trigger" ref="trigger" @click="onClick">
+    <div class="smile-popover1-trigger" ref="trigger">
       <slot></slot>
     </div>
-    <!--  这里存在一个问题：为什么第一回出现会闪？-->
+    <!--  为什么在popover第一次出现的时候会有轻微的闪动情况  -->
     <div
       class="smile-popover1-content"
       :class="`position-${position}`"
@@ -21,6 +21,20 @@
 
 <script>
   /**
+   * 事件的传播：
+   *    一个事件发生后，会在子元素和父元素之间传播(propagation)。这种传播分成3个阶段:
+   *        第一阶段：从window对象传导到目标节点（上层传到底层），称为"捕获阶段"（capture phase）
+   *        第二阶段：从目标节点上触发，称为"目标阶段"。
+   *        第三阶段：从目标节点传导回window对象（从底层传回上层），称为"冒泡阶段"(bubbling phase)
+   *    这三种阶段的传播模型，使得同一个事件会在多个节点上触发
+   *
+   *  eventPhase:表示事件流当前处于哪一个阶段
+   *  事件阶段常量：
+   *    0： 这个时间没有事件正在被处理
+   *    1： 捕获阶段
+   *    2： 目标阶段
+   *    3:  冒泡阶段
+   *
    * Popover组件的几个难点：
    *  1. 父元素设置overflow:hidden;时会将popover弹出的内容隐藏掉
    *      为了避免这种情况发生，我们通常将元素放入body之中，这样只会在给body设置overflow:hidden;的时候才会隐藏元素。
@@ -38,11 +52,17 @@
    *           就会触发document的click事件
    *        比较好的绑定时机：在content click 事件结束后马上进行绑定 document的click事件,将visible置为false,然后再将document
    *                          的click事件移除,这样基本不会有多余的事件绑定
+   *      绑定mouseenter和mouseleave事件的时机：
+   *        a. 在组件加载完毕后给触发器绑定mouseenter和mouseleave事件
+   *        b. 在content内容区出现的时候，为内容区绑定mouseenter和mouseleave事件，在content内容区消失的时候移除对应的事件
    *
    * popover的难点并不是说控制弹出层的显示和隐藏，而是要帮用户写好弹出层的样式，控制弹出层的位置，以及不要有多余的事件监听。
    * 所以我们要做的最重要的功能就是帮用户写好css样式
    *
-   *  当加入了不同的触发方式的时候，又出现了问题
+   * 由于click和hover俩种情况需要绑定的事件执行的逻辑不通，所以最好分开处理
+   *
+   * 这里存在一个问题：在hover情况下，当鼠标处于button 和 content 的交界处时 content会抖动？
+   * 闪烁问题：箭头和button的距离过进，导致元素重叠，然后button的mouseenter和mouseleave事件反复触发
    */
   export default {
     name: 'SmilePopover1',
@@ -67,43 +87,58 @@
     },
     data () {
       return {
-        visible: false
+        visible: false,
+        timerId: null
       };
     },
     mounted () {
-      // if (this.trigger === 'click') {
-      //   this.$refs.trigger.addEventListener('click', this.onClick);
-      // } else if (this.trigger === 'hover') {
-      //   this.$refs.trigger.addEventListener('mouseenter', this.open);
-      //   this.$refs.trigger.addEventListener('mouseleave', this.close);
-      // }
+      const { trigger } = this.$refs;
+      if (this.trigger === 'click') {
+        trigger.addEventListener('click', this.clickOpen);
+      } else if (this.trigger === 'hover') {
+        trigger.addEventListener('mouseenter', this.hoverOpen);
+        trigger.addEventListener('mouseleave', this.hoverClose);
+      }
     },
     methods: {
-      onClick (e) {
-        if (this.visible) {
-          return this.close(e);
+      hoverOpen () {
+        if (this.timerId) {
+          clearTimeout(this.timerId);
+          this.timerId = null;
         }
-        this.open();
+        this.visible = true;
+        setTimeout(() => {
+          const { content } = this.$refs;
+          this.positionContent();
+          content.addEventListener('mouseenter', this.hoverOpen);
+          content.addEventListener('mouseleave', this.hoverClose);
+        });
       },
-      open () {
+      clickOpen () {
         this.visible = true;
         setTimeout(() => {
           this.positionContent();
-          // if (this.trigger === 'click') {
           document.addEventListener('click', this.listenToDocument);
-          // }
         });
       },
-      close (e) {
+      isContentChild (e) {
         const { content } = this.$refs;
         // 如果点击content及它的后代元素，不会关闭visible
-        const isContentChild = content ? content.contains(e.target) : false;
-        console.log('isContentChild', isContentChild);
-        if (!isContentChild) {
+        return content ? content.contains(e.target) : false;
+      },
+      hoverClose () {
+        const { content } = this.$refs;
+        this.timerId = setTimeout(() => {
           this.visible = false;
-          // if (this.trigger === 'click') {
+          this.timerId = null;
+          content.removeEventListener('mouseenter', this.open);
+          content.removeEventListener('mouseleave', this.close);
+        }, 200);
+      },
+      clickClose (e) {
+        if (!this.isContentChild(e)) {
+          this.visible = false;
           document.removeEventListener('click', this.listenToDocument);
-          // }
         }
       },
       positionContent () {
@@ -132,18 +167,36 @@
         content.style.top = `${config[this.position].top}px`;
       },
       listenToDocument (e) {
-        this.close(e);
+        this.clickClose(e);
+      },
+      removeEvent () {
+        const { content, trigger } = this.$refs;
+        document.removeEventListener('click', this.listenToDocument);
+        trigger.removeEventListener('mouseenter', this.open);
+        trigger.removeEventListener('mouseleave', this.close);
+        if (content) {
+          content.removeEventListener('mouseenter', this.open);
+          content.removeEventListener('mouseleave', this.close);
+        }
       }
     },
     beforeDestroy () {
-      // document.removeEventListener('click', this.listenToDocument);
-      // document.removeEventListener('mouseenter', this.open);
-      // document.removeEventListener('mouseleave', this.close);
+      this.removeEvent();
     }
   };
 </script>
 
 <style lang="scss" scoped>
+  /**
+  css 常用百分比介绍：
+    top: 100%; 定位
+      定位元素的上外边距边界与其包含快上边界之间的偏移
+      设置为百分比(percentage): 元素包含块的高度的百分比
+    margin-left/padding-left: 100%; 间距
+      父元素width的百分比(这里是100%)
+    translateX: 100%; 平移
+      相对于元素自身向右平移自己宽度的100%
+ */
   @import "~styles/vars";
   @import "~styles/mixins";
 
@@ -171,7 +224,8 @@
       }
       &.position-top {
         transform: translate(-50%, -100%);
-        margin-top: -10px;
+        /* 这里多偏移1px，防止弹出层闪烁，只有在top时才会出现这种情况 */
+        margin-top: -11px;
         .smile-popover1-content-arrow {
           border-top: 8px solid #fff;
           border-left: 8px solid transparent;
