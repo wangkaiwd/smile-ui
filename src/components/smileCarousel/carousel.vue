@@ -7,41 +7,46 @@
 <script>
   export default {
     name: 'SmileCarousel',
+    props: {
+      select: {
+        type: String,
+        required: true
+      },
+      autoPlay: {
+        type: Boolean,
+        default: true
+      }
+    },
     data () {
-      return {
-        activeIndex: 0
-      };
+      return {};
     },
     mounted () {
-      this.setChildStatus();
-      this.autoplay();
+      if (this.autoPlay) {
+        this.doAutoPlay();
+      }
     },
     methods: {
-      setChildStatus () {
-        this.$children.map((vm, i) => {
-          if (i === this.activeIndex) {
-            vm.visible = true;
-          } else {
-            vm.visible = false;
-          }
-        });
-      },
-      autoplay () {
+      doAutoPlay () {
+        const names = this.$children.map(vm => vm.name);
+        let index = names.indexOf(this.select);
         setInterval(() => {
-          this.activeIndex++;
-          if (this.activeIndex > 2) {
-            this.activeIndex = 0;
+          // index++;
+          // if (index > names.length - 1) {
+          //   index = 0;
+          // }
+          index--;
+          if (index < 0) {
+            index = names.length - 1;
           }
-          this.setChildStatus();
-        }, 3000);
-      }
+          this.$emit('update:select', names[index]);
+        }, 2000);
+      },
     }
   };
 </script>
 
 <style lang="scss" scoped>
   .smile-carousel {
-    /*border: 10px solid #000;*/
     position: relative;
     display: inline-block;
     overflow: hidden;

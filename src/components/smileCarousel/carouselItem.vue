@@ -9,10 +9,19 @@
 <script>
   export default {
     name: 'SmileCarouselItem',
+    props: {
+      name: {
+        type: String,
+        required: true
+      }
+    },
     data () {
-      return {
-        visible: false
-      };
+      return {};
+    },
+    computed: {
+      visible () {
+        return this.$parent.select === this.name;
+      }
     }
   };
 </script>
@@ -23,19 +32,14 @@
   */
   .smile-carousel-item {
     &.slide-enter {
-      transform: translateX(100%);
+      transform: translateX(98%);
     }
     &.slide-leave-to {
       transform: translateX(-100%);
     }
     &.slide-enter-active,
     &.slide-leave-active {
-      transition: all 1s;
-    }
-    &.slide-leave {
-      position: absolute;
-      top: 0;
-      left: 0;
+      transition: transform 2s;
     }
     &.slide-leave-active {
       position: absolute;

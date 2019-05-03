@@ -1,12 +1,13 @@
 <template>
   <div class="app">
     <div class="component-wrapper">
-      <smile-carousel>
+      <smile-carousel :select.sync="select">
         <smile-carousel-item
           v-for="list in carouseList"
+          :name="list.name"
           :key="list.id"
         >
-          <img :src="list.url" alt="">
+          <div class="item">{{list.name}}</div>
         </smile-carousel-item>
       </smile-carousel>
     </div>
@@ -20,7 +21,8 @@
     name: 'App',
     data () {
       return {
-        carouseList: carouseList.imgList
+        carouseList: carouseList.imgList,
+        select: 'name1'
       };
     },
     mounted () {
@@ -35,6 +37,16 @@
       align-items: center;
       justify-content: center;
       margin: 20px;
+    }
+    .item {
+      width: 600px;
+      height: 400px;
+      background-color: pink;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+      color: red;
     }
   }
 </style>
