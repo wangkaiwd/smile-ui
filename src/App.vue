@@ -22,7 +22,7 @@
     data () {
       return {
         carouseList: carouseList.imgList,
-        select: 'name1'
+        select: '1'
       };
     },
     mounted () {
@@ -39,14 +39,13 @@
       margin: 20px;
     }
     .item {
-      width: 600px;
       height: 400px;
-      background-color: pink;
+      background-color: $dark;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 60px;
-      color: red;
+      font-size: 80px;
+      color: #fff;
     }
   }
 </style>

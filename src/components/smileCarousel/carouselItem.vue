@@ -1,6 +1,6 @@
 <template>
   <transition name="slide">
-    <div class="smile-carousel-item" v-if="visible">
+    <div class="smile-carousel-item" :class="{reverse}" v-if="visible">
       <slot></slot>
     </div>
   </transition>
@@ -16,7 +16,9 @@
       }
     },
     data () {
-      return {};
+      return {
+        reverse: false
+      };
     },
     computed: {
       visible () {
@@ -31,15 +33,22 @@
     为什么动画的位置和自己想的有很大的出入：
   */
   .smile-carousel-item {
+    width: 100%;
     &.slide-enter {
       transform: translateX(98%);
     }
     &.slide-leave-to {
       transform: translateX(-100%);
     }
+    &.slide-enter.reverse {
+      transform: translateX(-100%);
+    }
+    &.slide-leave-to.reverse {
+      transform: translateX(98%);
+    }
     &.slide-enter-active,
     &.slide-leave-active {
-      transition: transform 2s;
+      transition: all 1s;
     }
     &.slide-leave-active {
       position: absolute;
