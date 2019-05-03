@@ -40,6 +40,7 @@ module.exports = {
       .set('assets', resolve('assets'))
       .set('styles', resolve('assets/styles'))
       .set('img', resolve('assets/img'))
+      .set('mock', resolve('mock'))
       .end()
       // 扩展名省略
       .extensions
