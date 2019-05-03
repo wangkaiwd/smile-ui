@@ -13,17 +13,38 @@
       };
     },
     mounted () {
-      this.$children.map((vm, i) => {
-        if (i === this.activeIndex) {
-          vm.visible = true;
-        }
-      });
+      this.setChildStatus();
+      this.autoplay();
+    },
+    methods: {
+      setChildStatus () {
+        this.$children.map((vm, i) => {
+          if (i === this.activeIndex) {
+            vm.visible = true;
+          } else {
+            vm.visible = false;
+          }
+        });
+      },
+      autoplay () {
+        setInterval(() => {
+          this.activeIndex++;
+          if (this.activeIndex > 2) {
+            this.activeIndex = 0;
+          }
+          this.setChildStatus();
+        }, 2000);
+      }
     }
   };
 </script>
 
 <style lang="scss" scoped>
   .smile-carousel {
+    position: relative;
+    width: 600px;
+    height: 400px;
     display: inline-flex;
+    overflow: hidden;
   }
 </style>

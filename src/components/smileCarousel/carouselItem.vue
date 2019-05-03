@@ -1,7 +1,9 @@
 <template>
-  <div class="smile-carousel-item" v-if="visible">
-    <slot></slot>
-  </div>
+  <transition name="slide">
+    <div class="smile-carousel-item" v-if="visible">
+      <slot></slot>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -16,7 +18,26 @@
 </script>
 
 <style lang="scss" scoped>
+  /*
+    为什么动画的位置和自己想的有很大的出入：
+      布局：
+  */
   .smile-carousel-item {
-
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 600px;
+    height: 400px;
+    flex-shrink: 0;
+    &.slide-enter {
+      transform: translateX(100%);
+    }
+    &.slide-leave-to {
+      transform: translateX(-100%);
+    }
+    &.slide-enter-active,
+    &.slide-leave-active {
+      transition: all 2s;
+    }
   }
 </style>
