@@ -20,15 +20,8 @@
 <style lang="scss" scoped>
   /*
     为什么动画的位置和自己想的有很大的出入：
-      布局：
   */
   .smile-carousel-item {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 600px;
-    height: 400px;
-    flex-shrink: 0;
     &.slide-enter {
       transform: translateX(100%);
     }
@@ -37,7 +30,17 @@
     }
     &.slide-enter-active,
     &.slide-leave-active {
-      transition: all 2s;
+      transition: all 1s;
+    }
+    &.slide-leave {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    &.slide-leave-active {
+      position: absolute;
+      top: 0;
+      left: 0;
     }
   }
 </style>

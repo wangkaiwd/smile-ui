@@ -33,7 +33,7 @@
             this.activeIndex = 0;
           }
           this.setChildStatus();
-        }, 2000);
+        }, 3000);
       }
     }
   };
@@ -41,10 +41,9 @@
 
 <style lang="scss" scoped>
   .smile-carousel {
+    /*border: 10px solid #000;*/
     position: relative;
-    width: 600px;
-    height: 400px;
-    display: inline-flex;
+    display: inline-block;
     overflow: hidden;
   }
 </style>
