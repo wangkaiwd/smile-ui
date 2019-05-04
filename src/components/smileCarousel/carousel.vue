@@ -1,5 +1,9 @@
 <template>
-  <div class="smile-carousel">
+  <div
+    class="smile-carousel"
+    @mouseenter="pause"
+    @mouseleave="doAutoPlay"
+  >
     <slot></slot>
     <div class="smile-carousel-arrow">
       <span
@@ -42,7 +46,8 @@
     data () {
       return {
         childLength: 0,
-        timerId: null
+        timerId: null,
+        index: 0
       };
     },
     computed: {
@@ -64,8 +69,9 @@
     methods: {
       doAutoPlay () {
         if (!this.autoPlay) return;
-        let index = this.activeChildIndex;
         this.timerId = setInterval(() => {
+          // 每次都要重新获取当前的索引
+          let index = this.activeChildIndex;
           index++;
           this.updateSelect(index);
         }, 3000);
@@ -91,6 +97,12 @@
         this.$nextTick(() => {
           this.$emit('update:select', this.names[index]);
         });
+      },
+      pause () {
+        if (this.timerId) {
+          clearInterval(this.timerId);
+          this.timerId = null;
+        }
       }
     }
   };
