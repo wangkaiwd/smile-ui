@@ -3,6 +3,9 @@
     class="smile-carousel"
     @mouseenter="pause"
     @mouseleave="doAutoPlay"
+    @touchstart="onTouchStart"
+    @touchend="onTouchEnd"
+    @touchmove="onTouchMove"
   >
     <slot></slot>
     <div class="smile-carousel-arrow">
@@ -64,7 +67,9 @@
       return {
         childLength: 0,
         timerId: null,
-        index: 0
+        index: 0,
+        startX: 0,
+        startY: 0
       };
     },
     computed: {
@@ -122,7 +127,37 @@
           clearInterval(this.timerId);
           this.timerId = null;
         }
-      }
+      },
+      /**
+       * 移动端的轮播处理：
+       *    判断滑动方向：a.左滑 b.右滑
+       *
+       * TouchEvent.changedTouches: 这个touchList对象列出了和这个触摸事件对应的Touch对象
+       * touchstart:列出在此次事件中新增加的触电
+       * touchend: 已经从触摸面的离开的触点的集合
+       * touchmove: 列出和上一次事件相比较，发生了变化的触点
+       */
+      onTouchStart (e) {
+        const touch = e.changedTouches[0];
+        this.startX = touch.clientX;
+        this.startY = touch.clientY;
+      },
+      onTouchEnd (e) {
+        const touch = e.changedTouches[0];
+        const endX = touch.clientX;
+        const endY = touch.clientY;
+        const rate = Math.abs(endY - this.startY) / Math.abs(endX - this.startX);
+        if (rate < 1) {
+          if (endX > this.startX) {
+            console.log('右划');
+          } else {
+            console.log('左划');
+          }
+        }
+      },
+      onTouchMove () {
+        // console.log('move');
+      },
     }
   };
 </script>
