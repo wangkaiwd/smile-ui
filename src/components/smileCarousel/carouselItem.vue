@@ -48,7 +48,7 @@
     }
     &.slide-enter-active,
     &.slide-leave-active {
-      transition: all 0.8s;
+      transition: all 0.6s;
     }
     &.slide-leave-active {
       position: absolute;

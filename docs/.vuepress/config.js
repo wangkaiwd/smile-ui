@@ -34,6 +34,7 @@ module.exports = {
           '/views/tabs',
           '/views/modal',
           '/views/popover',
+          '/views/carousel',
         ]
       }
     ]

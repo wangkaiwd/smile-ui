@@ -5,7 +5,6 @@
     @mouseleave="doAutoPlay"
     @touchstart="onTouchStart"
     @touchend="onTouchEnd"
-    @touchmove="onTouchMove"
   >
     <slot></slot>
     <div class="smile-carousel-arrow">
@@ -67,9 +66,8 @@
       return {
         childLength: 0,
         timerId: null,
-        index: 0,
-        startX: 0,
-        startY: 0
+        startX: null,
+        startY: null
       };
     },
     computed: {
@@ -138,6 +136,7 @@
        * touchmove: 列出和上一次事件相比较，发生了变化的触点
        */
       onTouchStart (e) {
+        this.pause();
         const touch = e.changedTouches[0];
         this.startX = touch.clientX;
         this.startY = touch.clientY;
@@ -149,20 +148,20 @@
         const rate = Math.abs(endY - this.startY) / Math.abs(endX - this.startX);
         if (rate < 1) {
           if (endX > this.startX) {
-            console.log('右划');
+            this.updateSelect(this.activeChildIndex - 1);
           } else {
-            console.log('左划');
+            this.updateSelect(this.activeChildIndex + 1);
           }
         }
-      },
-      onTouchMove () {
-        // console.log('move');
+        this.doAutoPlay();
       },
     }
   };
 </script>
 
 <style lang="scss" scoped>
+  @import "~styles/vars";
+  @import "~styles/mixins";
   .smile-carousel {
     position: relative;
     display: inline-block;

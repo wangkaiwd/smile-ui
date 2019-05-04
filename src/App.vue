@@ -15,13 +15,17 @@
 </template>
 
 <script>
-  import { carouseList } from 'mock';
 
   export default {
     name: 'App',
     data () {
       return {
-        carouseList: carouseList.imgList,
+        carouseList: [
+          { id: 1, name: '1' },
+          { id: 2, name: '2' },
+          { id: 3, name: '3' },
+          { id: 4, name: '4' }
+        ],
         select: '1'
       };
     },
@@ -40,7 +44,7 @@
     }
     .item {
       height: 400px;
-      background-color: $dark;
+      background-color: #343a40;
       display: flex;
       align-items: center;
       justify-content: center;

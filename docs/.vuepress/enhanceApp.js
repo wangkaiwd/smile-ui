@@ -17,6 +17,8 @@ import SmileRow from 'components/smileGrid/row';
 import SmileCol from 'components/smileGrid/col';
 import SmileModal from 'components/smileModal';
 import SmilePopover from 'components/smilePopover';
+import SmileCarousel from 'components/smileCarousel/carousel';
+import SmileCarouselItem from 'components/smileCarousel/carouselItem';
 
 export default ({ Vue }) => {
   Vue.component('SmileButton', SmileButton);
@@ -33,5 +35,7 @@ export default ({ Vue }) => {
   Vue.component('SmileCol', SmileCol);
   Vue.component('SmileModal', SmileModal);
   Vue.component('SmilePopover', SmilePopover);
+  Vue.component('SmileCarousel', SmileCarousel);
+  Vue.component('SmileCarouselItem', SmileCarouselItem);
   Vue.use(message);
 }
