@@ -60,7 +60,10 @@
         type: Boolean,
         default: true
       },
-
+      interval: {
+        type: Number,
+        default: 2000
+      }
     },
     data () {
       return {
@@ -96,7 +99,7 @@
           let index = this.activeChildIndex;
           index++;
           this.updateSelect(index);
-        }, 3000);
+        }, this.interval);
       },
       /**
        * 动画方向分析：

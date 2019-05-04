@@ -225,12 +225,14 @@ export default {
 
 |    参数      | 说明 | 类型(参数) | 默认值 |
 | ----------   | ---  | ---- | ------ | 
-| select       | 标题 | string | _(当没有title时不会展示) |
-| autoPlay       | 标题 | string | _(当没有title时不会展示) |
-| controls    | 出现位置，可选内容：top,bottom,left,right | string | bottom |
+| select       | 当前选中幻灯片的name | string(必填) | _ |
+| autoPlay       | 是否自动切换 | boolean | true |
+| controls    | 是否显示指示器 | boolean | true |
+| controls    | 是否显示指示器 | boolean | true |
+| interval    | 自动切换的时间间隔，单位为毫秒，设置时不能小于600,否则可能会出现问题 | number | 2000 |
 
 #### `carouselItem`
 
 |    参数      | 说明 | 类型(参数) | 默认值 |
 | ----------   | ---  | ---- | ------ | 
-| name      | 标题 | string | _(当没有title时不会展示) |
+| name      | 每张幻灯片的唯一标识 | string(必填) | _ |
