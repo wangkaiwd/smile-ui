@@ -1,15 +1,38 @@
 <template>
   <div class="app">
     <div class="component-wrapper">
-      <smile-carousel :select.sync="select" autoPlay>
-        <smile-carousel-item
-          v-for="list in carouseList"
-          :name="list.name"
-          :key="list.id"
+      <smile-tab :select.sync="select" :is-open-animation="true">
+        <smile-tab-item
+          name="1"
+          title="tab1"
         >
-          <div class="item">{{list.name}}</div>
-        </smile-carousel-item>
-      </smile-carousel>
+          content1
+        </smile-tab-item>
+        <smile-tab-item
+          name="2"
+          title="tab2"
+        >
+          content2
+        </smile-tab-item>
+        <smile-tab-item
+          name="3"
+          title="tab3"
+        >
+          content3
+        </smile-tab-item>
+        <smile-tab-item
+          name="4"
+          title="tab4"
+        >
+          content4
+        </smile-tab-item>
+        <smile-tab-item
+          name="5"
+          title="tab5"
+        >
+          content5
+        </smile-tab-item>
+      </smile-tab>
     </div>
   </div>
 </template>
@@ -41,15 +64,6 @@
       align-items: center;
       justify-content: center;
       margin: 20px;
-    }
-    .item {
-      height: 400px;
-      background-color: #343a40;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 100px;
-      color: #fff;
     }
   }
 </style>

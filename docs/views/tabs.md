@@ -88,6 +88,49 @@
   ```
   </template>
   </ShowComponent>
+   <ShowComponent label="开启动画">
+      <template #component-body>
+        <ShowComponentItem>
+          <smile-tab
+            :select.sync="name2"
+            :is-open-animation="true"
+          >
+            <smile-tab-item title="tab1" name="tab1">内容1</smile-tab-item>
+            <smile-tab-item title="tab2" name="tab2">内容2</smile-tab-item>
+            <smile-tab-item title="tab3" name="tab3">内容3</smile-tab-item>
+            <smile-tab-item title="tab4" name="tab4">内容4</smile-tab-item>
+          </smile-tab>
+        </ShowComponentItem>
+      </template>
+      <template #component-code>
+      
+  ```vue
+  <template>
+    <smile-tab
+      :select.sync="name2"
+      @on-change="onChange"
+    >
+      <smile-tab-item title="tab1" name="tab1">内容1</smile-tab-item>
+      <smile-tab-item title="tab2" name="tab2">内容2</smile-tab-item>
+      <smile-tab-item title="tab3" name="tab3">内容3</smile-tab-item>
+      <smile-tab-item title="tab4" name="tab4">内容4</smile-tab-item>
+    </smile-tab>
+  </template>
+  <script>
+    export default {
+      name: 'App',
+      data () {
+        return {
+          name2: 'tab3'
+        };
+      },
+      mounted () {
+      },
+    };
+  </script>
+  ```
+  </template>
+  </ShowComponent>
 </template>
 </ClientOnly>
 
@@ -97,7 +140,8 @@ export default {
   data () {
     return {
       name: 'tab1',
-      name1: 'tab2'
+      name1: 'tab2',
+      name2: 'tab3'
     };
   },
   mounted () {
@@ -116,6 +160,7 @@ export default {
 |    参数      | 说明 | 类型(参数) | 默认值 |
 | ----------   | ---  | ---- | ------ | 
 | select       | 绑定值，选中选项卡的name，支持`.sync` |string| 必传 |
+| is-open-animation | 是否开启动画 | boolean | false |
 | on-change    | `tab`切换时触发 | 被选中标签的name | _ |
 
 #### `SmileItem`

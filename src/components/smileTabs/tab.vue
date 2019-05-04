@@ -24,10 +24,10 @@
     name: 'tab',
     props: {
       select: { type: String },
-      // isOpenAnimation: {
-      //   type: Boolean,
-      //   default: true
-      // }
+      isOpenAnimation: {
+        type: Boolean,
+        default: false
+      }
     },
     watch: {
       select (newVal) {
@@ -48,8 +48,15 @@
         this.tabHeaders = this.$children.map(vm => ({ name: vm.name, title: vm.title }));
       },
       onClick (name) {
-        this.$emit('update:select', name);
-        this.$emit('on-change', name);
+        const names = this.$children.map(vm => vm.name);
+        const oldIndex = names.indexOf(this.select);
+        const newIndex = names.indexOf(name);
+        this.$children.map(vm => vm.reverse = oldIndex > newIndex);
+        // 等到dom的class都设置完成后再进行更新select,否则在dom更新的过程中就会更新select,导致动画的方向出现问题
+        this.$nextTick(() => {
+          this.$emit('update:select', name);
+          this.$emit('on-change', name);
+        });
       },
       getDOMInfo () {
         const { header, headerLine, headerItem } = this.$refs;
@@ -95,6 +102,7 @@
       transition: all 0.4s;
     }
     &-content {
+      position: relative;
       display: flex;
       overflow: hidden;
     }
