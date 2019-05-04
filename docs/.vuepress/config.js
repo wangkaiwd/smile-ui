@@ -13,7 +13,7 @@ module.exports = {
   themeConfig: {
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Github', link: 'https://github.com/wangkaiwd' },
+      { text: 'Github', link: 'https://github.com/wangkaiwd/smile-ui' },
     ],
     sidebar: [
       {
