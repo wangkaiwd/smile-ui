@@ -46,29 +46,52 @@
     },
     methods: {
       doAutoPlay () {
-        const { names } = this;
         let index = this.activeChildIndex;
         setInterval(() => {
+          const oldIndex = index;
           index++;
-          // if (index > names.length - 1) {
-          //   index = 0;
-          // }
           // index--;
           if (index < 0) {
-            index = names.length - 1;
+            index = this.names.length - 1;
           }
-          if (index > names.length - 1) {
+          if (index > this.names.length - 1) {
             index = 0;
           }
-          this.$emit('update:select', names[index]);
+          this.slideDirection(oldIndex, index);
+          // 切换动画在方向变化之前执行了，要在dom更新完之后再进行渲染更新select
+          this.$nextTick(() => {
+            this.$emit('update:select', this.names[index]);
+          });
         }, 3000);
       },
-      slideDirection () {
-        // this.$children.map(vm => {
-        //   const oldIndex = names.indexOf(this.select);
-        //   const newIndex = names.indexOf(vm.name);
-        //   vm.reverse = newIndex < oldIndex;
-        // });
+      /**
+       * 动画方向分析：
+       *  0-2: 逆向动画
+       *  2-0: 正向动画
+       *
+       *  newIndex: 每一个item对应的索引
+       *  oldIndex: 当前项的索引
+       *  具体例子：
+       *    当页面首次进入的时候
+       *    newIndex: 0 1 2
+       *    oldIndex: 0
+       *    如果是正向轮播：0-1
+       *      0: reverse: true  1: reverse=false  2: reverse=true
+       */
+      slideDirection (oldIndex, newIndex) {
+        const lastIndex = this.names.length - 1;
+        if (newIndex === 0 && oldIndex === lastIndex) {
+          this.setChildReverse(false);
+        } else if (newIndex === lastIndex && oldIndex === 0) {
+          this.setChildReverse(true);
+        } else if (newIndex > oldIndex) {
+          this.setChildReverse(false);
+        } else {
+          this.setChildReverse(true);
+        }
+      },
+      setChildReverse (reverse) {
+        this.$children.map(vm => vm.reverse = reverse);
       }
     }
   };

@@ -44,7 +44,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 80px;
+      font-size: 100px;
       color: #fff;
     }
   }
