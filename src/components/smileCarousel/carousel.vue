@@ -36,6 +36,13 @@
 </template>
 
 <script>
+  /**
+   * 用户操作的一种特殊情况：
+   *    1. 如果用户将鼠标移入到carousel中刷新页面，会导致移入事件直接触发，之后继续执行autoPlay
+   *    2. 此时当鼠标移出的时候，会继续执行autoPlay，而此时timerId是存在的
+   *    3. 所以为了免去一些不必要的问题，在每次autoPlay之前要判断一下timerId是否存在，防止重复触发定时器
+   *    4. 对应的也要在移除定时器的时候将timerId置为null
+   */
   export default {
     name: 'SmileCarousel',
     props: {
@@ -79,6 +86,8 @@
     methods: {
       doAutoPlay () {
         if (!this.autoPlay) return;
+        // 若果有timerId的话就不会再次进行自动播放
+        if (this.timerId) return;
         this.timerId = setInterval(() => {
           // 每次都要重新获取当前的索引
           let index = this.activeChildIndex;
