@@ -1,6 +1,20 @@
 <template>
   <div class="smile-carousel">
     <slot></slot>
+    <div class="smile-carousel-arrow">
+      <span
+        class="smile-carousel-arrow-left"
+        @click="updateSelect(activeChildIndex-1)"
+      >
+        <smile-icon icon="left"></smile-icon>
+      </span>
+      <span
+        class="smile-carousel-arrow-right"
+        @click="updateSelect(activeChildIndex+1)"
+      >
+        <smile-icon icon="right"></smile-icon>
+      </span>
+    </div>
     <ul class="smile-carousel-controls">
       <li
         v-for="i in childLength"
@@ -22,7 +36,7 @@
       },
       autoPlay: {
         type: Boolean,
-        default: true
+        default: false
       }
     },
     data () {
@@ -34,49 +48,33 @@
       activeChildIndex () {
         return this.names.indexOf(this.select);
       },
+      // this.$children: 当前实例的直接子组件。
+      // slot中的组件和非slot中的组件都会算入其中，比如这里使用到的icon组件，所以这里要只需要carouseItem组件
+      // 这里也体现了为一个组件添加name属性的用途
       names () {
-        return this.$children.map(vm => vm.name);
+        return this.$children.filter(vm => vm.$options.name === 'SmileCarouselItem')
+          .map(vm => vm.name);
       }
     },
     mounted () {
-      if (this.autoPlay) {
-        this.doAutoPlay();
-      }
+      this.doAutoPlay();
       this.childLength = this.$children.length;
     },
     methods: {
       doAutoPlay () {
+        if (!this.autoPlay) return;
         let index = this.activeChildIndex;
         setInterval(() => {
           const oldIndex = index;
           index++;
-          // index--;
-          if (index < 0) {
-            index = this.names.length - 1;
-          }
-          if (index > this.names.length - 1) {
-            index = 0;
-          }
-          this.slideDirection(oldIndex, index);
-          // 切换动画在方向变化之前执行了，要在dom更新完之后再进行渲染更新select
-          this.$nextTick(() => {
-            this.$emit('update:select', this.names[index]);
-          });
+          this.setChildReverse(index < oldIndex);
         }, 3000);
       },
       /**
        * 动画方向分析：
        *  0-2: 逆向动画
        *  2-0: 正向动画
-       *
-       *  newIndex: 每一个item对应的索引
-       *  oldIndex: 当前项的索引
-       *  具体例子：
-       *    当页面首次进入的时候
-       *    newIndex: 0 1 2
-       *    oldIndex: 0
-       *    如果是正向轮播：0-1
-       *      0: reverse: true  1: reverse=false  2: reverse=true
+       * 根据当前索引和下一个要进入item的索引，来确定所有的item的动画执行方向
        */
       slideDirection (oldIndex, newIndex) {
         const lastIndex = this.names.length - 1;
@@ -92,6 +90,18 @@
       },
       setChildReverse (reverse) {
         this.$children.map(vm => vm.reverse = reverse);
+      },
+      updateSelect (index) {
+        if (index < 0) {
+          index = this.names.length - 1;
+        }
+        if (index > this.names.length - 1) {
+          index = 0;
+        }
+        // 切换动画在方向变化之前执行了，要在dom更新完之后再进行渲染更新select
+        this.$nextTick(() => {
+          this.$emit('update:select', this.names[index]);
+        });
       }
     }
   };
@@ -118,6 +128,24 @@
           background-color: $white;
         }
       }
+    }
+    &-arrow-left,
+    &-arrow-right {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: $secondary;
+      font-size: 30px;
+      &:hover {
+        cursor: pointer;
+        color: $white;
+      }
+    }
+    &-arrow-left {
+      left: $space-lg;
+    }
+    &-arrow-right {
+      right: $space-md;
     }
   }
 </style>
