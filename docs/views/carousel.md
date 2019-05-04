@@ -264,7 +264,7 @@ export default {
 
 |    参数      | 说明 | 类型(参数) | 默认值 |
 | ----------   | ---  | ---- | ------ | 
-| select       | 当前选中幻灯片的name | string(必填) | _ |
+| select       | 当前选中幻灯片的name，要是用`.sync`进行绑定 | string(必填) | _ |
 | autoPlay       | 是否自动切换 | boolean | true |
 | controls    | 是否显示指示器 | boolean | true |
 | controls    | 是否显示指示器 | boolean | true |

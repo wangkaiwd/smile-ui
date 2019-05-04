@@ -108,7 +108,7 @@
   <template>
     <smile-tab
       :select.sync="name2"
-      @on-change="onChange"
+      :is-open-animation="true"
     >
       <smile-tab-item title="tab1" name="tab1">内容1</smile-tab-item>
       <smile-tab-item title="tab2" name="tab2">内容2</smile-tab-item>
