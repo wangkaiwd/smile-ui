@@ -19,7 +19,7 @@
         <smile-icon icon="right"></smile-icon>
       </span>
     </div>
-    <ul class="smile-carousel-controls">
+    <ul class="smile-carousel-controls" v-if="controls">
       <li
         v-for="i in childLength"
         :key="i"
@@ -46,7 +46,12 @@
       autoPlay: {
         type: Boolean,
         default: false
-      }
+      },
+      controls: {
+        type: Boolean,
+        default: true
+      },
+
     },
     data () {
       return {
