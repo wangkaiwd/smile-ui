@@ -7,7 +7,7 @@
   <ShowComponent label="基础">
     <template #component-body>
       <ShowComponentItem position="vertical">
-        <smile-carousel :select.sync="select">
+        <smile-carousel :select.sync="select1">
           <smile-carousel-item
             v-for="list in carouseList"
             :name="list.name"
@@ -21,6 +21,17 @@
     <template #component-code>
     
   ```vue
+  <template>
+      <smile-carousel :select.sync="select1">
+        <smile-carousel-item
+          v-for="list in carouseList"
+          :name="list.name"
+          :key="list.id"
+        >
+          <div class="demo-item">{{list.name}}</div>
+        </smile-carousel-item>
+      </smile-carousel>
+    </template>
   <script>
   
     export default {
@@ -33,7 +44,7 @@
             { id: 3, name: '3' },
             { id: 4, name: '4' }
           ],
-          select: '1'
+          select1: '1',
         };
       },
       mounted () {
@@ -49,7 +60,7 @@
         justify-content: center;
         margin: 20px;
       }
-      .item {
+      .demo-item {
         height: 400px;
         background-color: #343a40;
         display: flex;
@@ -63,10 +74,10 @@
   ```
    </template>
   </ShowComponent>
-  <ShowComponent label="禁用自动播放">
+  <ShowComponent label="自动播放">
     <template #component-body>
       <ShowComponentItem position="vertical">
-        <smile-carousel :select.sync="select" :autoPlay="false">
+        <smile-carousel :select.sync="select2" autoPlay>
           <smile-carousel-item
             v-for="list in carouseList"
             :name="list.name"
@@ -80,6 +91,17 @@
     <template #component-code>
     
   ```vue
+  <template>
+    <smile-carousel :select.sync="select2" autoPlay>
+      <smile-carousel-item
+        v-for="list in carouseList"
+        :name="list.name"
+        :key="list.id"
+      >
+        <div class="demo-item">{{list.name}}</div>
+      </smile-carousel-item>
+    </smile-carousel>
+  </template>
   <script>
   
     export default {
@@ -92,7 +114,7 @@
             { id: 3, name: '3' },
             { id: 4, name: '4' }
           ],
-          select: '1'
+          select2: '1'
         };
       },
       mounted () {
@@ -108,7 +130,7 @@
         justify-content: center;
         margin: 20px;
       }
-      .item {
+      .demo-item {
         height: 400px;
         background-color: #343a40;
         display: flex;
@@ -126,7 +148,7 @@
     <template #component-body>
       <ShowComponentItem position="vertical" :controls="false">
         <smile-carousel 
-          :select.sync="select"
+          :select.sync="select3"
           :controls="false"
           autoPlay
         >
@@ -143,6 +165,21 @@
     <template #component-code>
     
   ```vue
+  <template>
+    <smile-carousel 
+      :select.sync="select3"
+      :controls="false"
+      autoPlay
+    >
+      <smile-carousel-item
+        v-for="list in carouseList"
+        :name="list.name"
+        :key="list.id"
+      >
+        <div class="demo-item">{{list.name}}</div>
+      </smile-carousel-item>
+    </smile-carousel>
+  </template>
   <script>
   
     export default {
@@ -155,7 +192,7 @@
             { id: 3, name: '3' },
             { id: 4, name: '4' }
           ],
-          select: '1'
+          select3: '1'
         };
       },
       mounted () {
@@ -171,7 +208,7 @@
         justify-content: center;
         margin: 20px;
       }
-      .item {
+      .demo-item {
         height: 400px;
         background-color: #343a40;
         display: flex;
@@ -199,7 +236,9 @@ export default {
         { id: 3, name: '3' },
         { id: 4, name: '4' }
       ],
-      select: '1'
+      select1: '1',
+      select2: '1',
+      select3: '1',
     };
   },
   mounted () {
