@@ -1,3 +1,9 @@
+
+### 项目介绍
+这个项目是自己在学习过程中使用`vue`技术栈实现的一些组件，预览地址在这里：https://wangkaiwd.github.io/smile-ui/。这里只是单纯的用到`vue`的相关知识，并没有使用到`vue-router`、`vuex`等全家桶内容，如果想要了解这些知识的实践应用，可以参考我的另一个项目：https://github.com/wangkaiwd/vue-admin
+
+对应的预览文档用到的是`vuePress`，可以在`markdown`中使用`vue`组件，很方便的实现了组件预览和`api`文档的书写
+
 #### 目前问题总结
 ##### `button`
 1. 多种`type`类型的`css`如何优化？
@@ -19,6 +25,14 @@
     
 ##### `popover`组件
 这个组件相对之前的组件来说是比较复杂的，难点重点在于`css`样式的书写，元素的位置获取，以及`js`事件机制的理解
+![popover-1](shotscreen/popover-1.png)
+
+![popover-2](shotscreen/popover-2.png)
+
+![popover-3](shotscreen/popover-3.png)
+
+##### 动画
+`tabs`和`carousel`的动画实现思路很相似，需要梳理一下逻辑
 
 ##### `modal`组件
 在页面(`body`)出现滚动条的时候，弹出模态框要禁止页面的滚动，关闭模态框恢复页面滚动 
@@ -46,15 +60,11 @@ watch: {
 * `icon`组件引入的`svg`由于用到了`BOM`和`DOM`会导致`vuePress`打包失败,使用项目中的`icon`组件不会有问题
 * `css`初始化样式引发的问题：css盒模型
 
-#### 需要优化的地方
-2. tab组件：a. 动画 b. 插槽 c. 整体功能梳理
 #### 之后计划
-1. 优化现有代码
-2. 重新审视完成组件的样式问题
+1. 重新审视完成组件的样式问题
+2. 有时间的话完成中级组件
 ##### 中级组件
-* `carousel`组件
 * `collapse`组件
-* `popover`组件
 * `sticky`组件
 * `pagination`分页
 
@@ -63,21 +73,5 @@ watch: {
 * `table`组件(这里可能要先做好`checkbox`组件)
 * `cascader`组件
 * `menu`组件
-
-##### 实现困难的组件
-* `datePicker`组件
-* 高级`table`组件
-* `scroll`组件
-
-##### 娱乐组件
-* `splitPanel`组件
-* 抽奖
-* 刮刮卡
-
-##### 使用`demo`
-先想一个比较好的样式风格，最好是国外的设计
-
-##### 进阶
-尝试写测试用例
 
 

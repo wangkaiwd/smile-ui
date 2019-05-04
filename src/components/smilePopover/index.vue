@@ -55,13 +55,14 @@
    *        比较好的绑定时机：在content click 事件结束后马上进行绑定 document的click事件,将visible置为false,然后再将document
    *                          的click事件移除,这样基本不会有多余的事件绑定
    *      绑定mouseenter和mouseleave事件的时机：
-   *        a. 在组件加载完毕后给触发器绑定mouseenter和mouseleave事件
+   *        a. 在组件加载完毕后给触发器绑定mouseenter和mouseleave事件,并且mouseleave事件实在鼠标移出200ms后才执行
    *        b. 在content内容区出现的时候，为内容区绑定mouseenter和mouseleave事件，在content内容区消失的时候移除对应的事件
+   *           在content mouseenter事件触发后，将触发器的mouseleave的定时器清除，即不会再关闭content
    *
    * popover的难点并不是说控制弹出层的显示和隐藏，而是要帮用户写好弹出层的样式，控制弹出层的位置，以及不要有多余的事件监听。
    * 所以我们要做的最重要的功能就是帮用户写好css样式
    *
-   * 由于click和hover俩种情况需要绑定的事件执行的逻辑不通，所以最好分开处理
+   * 由于click和hover俩种情况需要绑定的事件执行的逻辑不同，所以最好分开处理
    *
    * 这里存在一个问题：在hover情况下，当鼠标处于button 和 content 的交界处时 content会抖动？
    * 闪烁问题：箭头和button的距离过进，导致元素重叠，然后button的mouseenter和mouseleave事件反复触发
