@@ -1,6 +1,6 @@
 
 ### 项目介绍
-这个项目是自己在学习过程中使用`vue`技术栈实现的一些组件，预览地址在这里：https://wangkaiwd.github.io/smile-ui/。这里只是单纯的用到`vue`的相关知识，并没有使用到`vue-router`、`vuex`等全家桶内容，如果想要了解这些知识的实践应用，可以参考我的另一个项目：https://github.com/wangkaiwd/vue-admin
+这个项目是自己在学习过程中使用`vue`技术栈实现的一些组件，预览地址在这里：https://wangkaiwd.github.io/smile-ui/。 这里只是单纯的用到`vue`的相关知识，并没有使用到`vue-router`、`vuex`等全家桶内容，如果想要了解这些知识的实践应用，可以参考我的另一个项目：https://github.com/wangkaiwd/vue-admin。
 
 对应的预览文档用到的是`vuePress`，可以在`markdown`中使用`vue`组件，很方便的实现了组件预览和`api`文档的书写
 
