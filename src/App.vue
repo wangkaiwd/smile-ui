@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <div class="component-wrapper">
-      <smile-carousel :select.sync="select" autoPlay>
+      <smile-carousel :select.sync="select">
         <smile-carousel-item
           v-for="list in carouseList"
           :name="list.name"

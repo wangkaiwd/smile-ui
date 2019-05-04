@@ -22,9 +22,14 @@
     <ul class="smile-carousel-controls">
       <li
         v-for="i in childLength"
-        :class="{active: i === activeChildIndex+1}"
         :key="i"
+        @click="updateSelect(i-1)"
       >
+        <span
+          class="smile-carousel-controls-inner"
+          :class="{active: i === activeChildIndex+1}"
+        >
+        </span>
       </li>
     </ul>
   </div>
@@ -120,10 +125,16 @@
       left: 50%;
       transform: translateX(-50%);
       display: flex;
+      align-items: center;
       li {
+        cursor: pointer;
+        padding: $space-xs 0;
+        margin: 0 $space-xs;
+      }
+      &-inner {
+        display: block;
         width: 30px;
         height: 3px;
-        margin: 0 $space-xs;
         background-color: $secondary;
         &.active {
           background-color: $white;
