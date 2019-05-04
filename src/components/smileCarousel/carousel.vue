@@ -41,7 +41,8 @@
     },
     data () {
       return {
-        childLength: 0
+        childLength: 0,
+        timerId: null
       };
     },
     computed: {
@@ -58,16 +59,15 @@
     },
     mounted () {
       this.doAutoPlay();
-      this.childLength = this.$children.length;
+      this.childLength = this.names.length;
     },
     methods: {
       doAutoPlay () {
         if (!this.autoPlay) return;
         let index = this.activeChildIndex;
-        setInterval(() => {
-          const oldIndex = index;
+        this.timerId = setInterval(() => {
           index++;
-          this.setChildReverse(index < oldIndex);
+          this.updateSelect(index);
         }, 3000);
       },
       /**
@@ -76,22 +76,11 @@
        *  2-0: 正向动画
        * 根据当前索引和下一个要进入item的索引，来确定所有的item的动画执行方向
        */
-      slideDirection (oldIndex, newIndex) {
-        const lastIndex = this.names.length - 1;
-        if (newIndex === 0 && oldIndex === lastIndex) {
-          this.setChildReverse(false);
-        } else if (newIndex === lastIndex && oldIndex === 0) {
-          this.setChildReverse(true);
-        } else if (newIndex > oldIndex) {
-          this.setChildReverse(false);
-        } else {
-          this.setChildReverse(true);
-        }
-      },
       setChildReverse (reverse) {
         this.$children.map(vm => vm.reverse = reverse);
       },
       updateSelect (index) {
+        this.setChildReverse(index < this.activeChildIndex);
         if (index < 0) {
           index = this.names.length - 1;
         }
