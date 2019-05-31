@@ -15,6 +15,11 @@
       single: {
         type: Boolean,
         default: false
+      },
+    },
+    methods: {
+      updateSelected (newSelected) {
+        this.$emit('update:selected', newSelected);
       }
     }
   };

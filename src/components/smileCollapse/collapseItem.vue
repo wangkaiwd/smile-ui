@@ -36,11 +36,15 @@
     },
     methods: {
       onClickTitle () {
-        const parentSelected = this.$parent.selected, index = parentSelected.indexOf(this.name);
+        let parentSelected = JSON.parse(JSON.stringify(this.$parent.selected)),
+          index = parentSelected.indexOf(this.name);
         if (this.selected) {
           parentSelected.splice(index, 1);
+          this.$parent.updateSelected(parentSelected);
         } else {
+          if (this.$parent.single) parentSelected = [];
           parentSelected.push(this.name);
+          this.$parent.updateSelected(parentSelected);
         }
       }
     }
@@ -65,7 +69,7 @@
         max-height: 0;
       }
       &.slide-enter-active, &.slide-leave-active {
-        transition: all .4s;
+        transition: all .4s linear;
       }
     }
     &-content {
@@ -76,7 +80,7 @@
     }
     &-icon {
       margin-left: auto;
-      transition: all .4s;
+      transition: all .4s linear;
       &.expand {
         transform: rotate(90deg);
       }
