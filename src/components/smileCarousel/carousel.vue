@@ -131,21 +131,28 @@
       },
       /**
        * 移动端的轮播处理：
-       *    判断滑动方向：a.左滑 b.右滑
+       *    判断滑动方向：a.左划 b.右划
+       *  常用的触摸事件
+       *    touchstart: 当用户在触摸平面上放置了一个触点时触发。事件的目标`element`将是触点位置上
+       *                的那个目标element
+       *    touchend: 当一个触点被用户从触摸平面上移除（当用户将一个手指离开）时触发。当触点移出
+       *              触摸平面的边界时也将触发。例如用户将手指划出屏幕边缘。已经被从触摸平面上移除的触点，
+       *              可以在changedTouches属性定义的TouchList中找到
+       *    touchmove: 当用户在触摸平面上移动触点时触发。
        *
-       * TouchEvent.changedTouches: 这个touchList对象列出了和这个触摸事件对应的Touch对象
-       * touchstart:列出在此次事件中新增加的触电
-       * touchend: 已经从触摸面的离开的触点的集合
-       * touchmove: 列出和上一次事件相比较，发生了变化的触点
+       *  触摸事件相关的3个属性：
+       *    touches: 包含了所有当前接触触摸平面的触点的Touch对象，无论它们起始于哪个element上，也无论它们状态是否发生了变化
+       *    targetTouches: 触摸事件起始于当前事件的目标element上，并且仍然没有离开触摸平面的触点
+       *    changedTouches: 包含了代表所有从上一次触摸事件到此次事件过程中，状态发生了变化的触点的Touch对象
        */
       onTouchStart (e) {
         this.pause();
-        const touch = e.changedTouches[0];
+        const touch = e.targetTouches[0]; // 获取触摸目标元素上的Touch对象
         this.startX = touch.clientX;
         this.startY = touch.clientY;
       },
       onTouchEnd (e) {
-        const touch = e.changedTouches[0];
+        const touch = e.changedTouches[0]; // 离开触摸平面的Touch对象
         const endX = touch.clientX;
         const endY = touch.clientY;
         const rate = Math.abs(endY - this.startY) / Math.abs(endX - this.startX);
@@ -165,6 +172,7 @@
 <style lang="scss" scoped>
   @import "~styles/vars";
   @import "~styles/mixins";
+
   .smile-carousel {
     position: relative;
     display: inline-block;
