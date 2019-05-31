@@ -56,6 +56,7 @@
       padding: 1em;
       border-bottom: $border-gray;
       cursor: pointer;
+      background-color: $light;
     }
     &-content-wrapper {
       max-height: 600px;
