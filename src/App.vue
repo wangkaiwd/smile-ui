@@ -2,7 +2,20 @@
   <div class="app">
     <div class="component-wrapper">
       <smile-collapse :selected="select">
-        <smile-collapse-item title="标题1" name="1">1</smile-collapse-item>
+        <smile-collapse-item title="标题1" name="1">
+          <ul>
+            <li>内容1</li>
+            <li>内容2</li>
+            <li>内容3</li>
+            <li>内容4</li>
+            <li>内容5</li>
+            <li>内容6</li>
+            <li>内容7</li>
+            <li>内容8</li>
+            <li>内容9</li>
+            <li>内容10</li>
+          </ul>
+        </smile-collapse-item>
         <smile-collapse-item title="标题2" name="2">2</smile-collapse-item>
         <smile-collapse-item title="标题3" name="3">3</smile-collapse-item>
       </smile-collapse>
