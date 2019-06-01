@@ -26,6 +26,8 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "~styles/vars";
+  @import "~styles/mixins";
   .smile-collapse {
     border: $border-gray;
     border-radius: $border-radius-md;

@@ -32,6 +32,7 @@ module.exports = {
         children: [
           '/views/message',
           '/views/tabs',
+          '/views/collapse',
           '/views/modal',
           '/views/popover',
           '/views/carousel',

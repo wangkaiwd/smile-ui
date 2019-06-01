@@ -20,6 +20,12 @@
 </template>
 
 <script>
+  /**
+   * 动画效果的不足：
+   *  1. 在content展开时滚动条可能会影响用户体验
+   *  2. 在content收缩时，感觉动画效果有一些迟缓，而代码中设置的是匀速
+   *  3. 在前一个收缩，后一个展开时，会有一个动画的前后关系，而我们想要的是同时进行
+   */
   export default {
     name: 'SmileCollapseItem',
     props: {
@@ -57,6 +63,8 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "~styles/vars";
+  @import "~styles/mixins";
   .smile-collapse-item {
     &.disabled {
       .smile-collapse-item-title {
@@ -80,7 +88,7 @@
         max-height: 0;
       }
       &.slide-enter-active, &.slide-leave-active {
-        transition: all .4s linear;
+        transition: all 0.4s linear;
       }
     }
     &-content {
