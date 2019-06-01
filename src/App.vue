@@ -30,7 +30,7 @@
             <li>内容10</li>
           </ul>
         </smile-collapse-item>
-        <smile-collapse-item title="标题3" name="3">
+        <smile-collapse-item disabled title="标题3" name="3">
           <ul>
             <li>内容1</li>
             <li>内容2</li>

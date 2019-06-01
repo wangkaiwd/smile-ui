@@ -1,5 +1,5 @@
 <template>
-  <div class="smile-collapse-item">
+  <div class="smile-collapse-item" :class="{disabled}">
     <div class="smile-collapse-item-title" @click="onClickTitle">
       <span>{{title}}</span>
       <smile-icon
@@ -28,6 +28,10 @@
         required: true
       },
       title: { type: String },
+      disabled: {
+        type: Boolean,
+        default: false
+      }
     },
     computed: {
       selected () {
@@ -36,6 +40,7 @@
     },
     methods: {
       onClickTitle () {
+        if (this.disabled) {return;}
         let parentSelected = JSON.parse(JSON.stringify(this.$parent.selected)),
           index = parentSelected.indexOf(this.name);
         if (this.selected) {
@@ -53,6 +58,12 @@
 
 <style lang="scss" scoped>
   .smile-collapse-item {
+    &.disabled {
+      .smile-collapse-item-title {
+        color: lighten($secondary, 10%);
+        cursor: not-allowed;
+      }
+    }
     &-title {
       display: flex;
       justify-content: space-between;
