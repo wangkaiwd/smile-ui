@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "yarn run serve",
+    "start": "yarn serve",
     "serve": "vue-cli-service serve --project-mode dev",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
